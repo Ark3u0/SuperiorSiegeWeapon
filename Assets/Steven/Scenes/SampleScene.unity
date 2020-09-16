@@ -3730,6 +3730,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 73.3, y: 132.319, z: 161.259}
+--- !u!1 &729575922 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5882679583729121119, guid: d0a5143a8f177ec4cb90156c2c2cbfa8, type: 3}
+  m_PrefabInstance: {fileID: 1422396297}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &777280186
 GameObject:
   m_ObjectHideFlags: 0
@@ -4138,6 +4143,7 @@ MonoBehaviour:
   sprites:
   - {fileID: 196072804}
   - {fileID: 1768943110}
+  - {fileID: 729575922}
 --- !u!43 &1102719918
 Mesh:
   m_ObjectHideFlags: 0
@@ -4744,7 +4750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19fc839fbdf3c8c41b8235018c8080e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 0}
+  controller: {fileID: 1491613347}
 --- !u!1 &1318628925
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
 
-    bool kicking = false;
+    bool aiming = false;
 
     Vector2 movement;
     Vector3 heading;
@@ -30,28 +30,38 @@ public class PlayerController : MonoBehaviour
 
         controls.Player.Move.performed += ctx => movement = ctx.ReadValue<Vector2>();
         controls.Player.Move.canceled += ctx => movement = ctx.ReadValue<Vector2>();
-        // controls.Player.Kick.performed += Kick;
+        controls.Player.Kick.started += AimKick;
+        controls.Player.Kick.canceled += Kick;
     }
 
-    // void Kick()
-    // {
-    //     if (CanKick())
-    //     {
-    //         this.kicking = true;
-    //         this.ball.Kick(heading);
-    //     }
-    // }
+    void AimKick(InputAction.CallbackContext context)
+    {
+        Debug.Log("Aim Kick");
+        
+        if (CanKick())
+        {
+            Debug.Log("KICKING");
+            this.aiming = true;
+            this.ball.PlaceForKick(transform);
+        }
+    }
+
+    void Kick(InputAction.CallbackContext context) 
+    {
+        if (this.aiming) {
+            this.aiming = false;
+        }
+    }
 
     void Update()
     {
-        if (CanKick()) 
-        {
-            // TODO: Trigger kick animation
+        if (this.aiming) {
+            
         }
 
-        // if (!kicking) {
+        if (!this.aiming) {
             HandleMovement();
-        // }
+        }
     }
 
     public void HandleMovement() {

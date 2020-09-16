@@ -26,26 +26,22 @@ public class RotateSprites : MonoBehaviour
             if (forwardAngleInDegrees < 45f) {
                 // Sprite face forward
 
-                Debug.Log("FORWARD");
                 spriteRenderer.sprite = spriteSheet.forward;
                 spriteRenderer.flipX = false;
             } else if (forwardAngleInDegrees > 135f) {
                 // Sprite face backward
 
-                Debug.Log("BACKWARD");
                 spriteRenderer.sprite = spriteSheet.backward;
                 spriteRenderer.flipX = false;
             } else {
                 if (rightAngleInDegrees < 45f) {
                     // Sprite face left
 
-                    Debug.Log("LEFT");
                     spriteRenderer.sprite = spriteSheet.right;
                     spriteRenderer.flipX = false;
                 } else {
                     // Sprite face right
 
-                    Debug.Log("RIGHT");
                     spriteRenderer.sprite = spriteSheet.right;
                     spriteRenderer.flipX = true;
                 }
