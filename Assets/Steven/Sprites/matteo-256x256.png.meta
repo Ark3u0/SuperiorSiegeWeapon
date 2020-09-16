@@ -16,13 +16,13 @@ TextureImporter:
     second: matteo-right
   - first:
       213: 335027373193090443
-    second: adult-south
+    second: adult-forward
   - first:
       213: -7922141670929053022
-    second: adult-east
+    second: adult-right
   - first:
       213: -211397417686918625
-    second: adult-north
+    second: adult-backward
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -173,7 +173,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: adult-south
+      name: adult-forward
       rect:
         serializedVersion: 2
         x: 844
@@ -194,7 +194,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: adult-east
+      name: adult-right
       rect:
         serializedVersion: 2
         x: 1096
@@ -215,7 +215,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: adult-north
+      name: adult-backward
       rect:
         serializedVersion: 2
         x: 1356
