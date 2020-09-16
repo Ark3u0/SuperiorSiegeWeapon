@@ -3860,6 +3860,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b69efc4e1410ae40a8c0e3422df42d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &840162895
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8404603842435267216, guid: 1c68a136de60ec343bc584fc58586d91, type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 0.45217595
+      objectReference: {fileID: 0}
+    - target: {fileID: 8404603842435267229, guid: 1c68a136de60ec343bc584fc58586d91, type: 3}
+      propertyPath: m_Name
+      value: KickTrajectory
+      objectReference: {fileID: 0}
+    - target: {fileID: 8404603842435267229, guid: 1c68a136de60ec343bc584fc58586d91, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8404603842435267230, guid: 1c68a136de60ec343bc584fc58586d91, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8404603842435267230, guid: 1c68a136de60ec343bc584fc58586d91, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8404603842435267230, guid: 1c68a136de60ec343bc584fc58586d91, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8404603842435267230, guid: 1c68a136de60ec343bc584fc58586d91, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8404603842435267230, guid: 1c68a136de60ec343bc584fc58586d91, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8404603842435267230, guid: 1c68a136de60ec343bc584fc58586d91, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8404603842435267230, guid: 1c68a136de60ec343bc584fc58586d91, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8404603842435267230, guid: 1c68a136de60ec343bc584fc58586d91, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8404603842435267230, guid: 1c68a136de60ec343bc584fc58586d91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8404603842435267230, guid: 1c68a136de60ec343bc584fc58586d91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8404603842435267230, guid: 1c68a136de60ec343bc584fc58586d91, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1c68a136de60ec343bc584fc58586d91, type: 3}
 --- !u!43 &918168926
 Mesh:
   m_ObjectHideFlags: 0
@@ -4702,8 +4767,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1231011682}
-  - component: {fileID: 1231011683}
   - component: {fileID: 1231011684}
+  - component: {fileID: 1231011685}
   m_Layer: 0
   m_Name: InteractableCollider
   m_TagString: Untagged
@@ -4719,25 +4784,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1231011681}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.991, z: 1.5}
+  m_LocalPosition: {x: 0, y: 1, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 567567732}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &1231011683
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1231011681}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.5
-  m_Center: {x: 0, y: -1, z: 0}
 --- !u!114 &1231011684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4751,6 +4803,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1491613347}
+--- !u!65 &1231011685
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1231011681}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7, y: 0.5, z: 1}
+  m_Center: {x: 0, y: -0.6, z: 0}
 --- !u!1 &1318628925
 GameObject:
   m_ObjectHideFlags: 0
@@ -5684,6 +5749,17 @@ Transform:
   m_Father: {fileID: 2014301863}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1397020472 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8404603842435267231, guid: 1c68a136de60ec343bc584fc58586d91, type: 3}
+  m_PrefabInstance: {fileID: 840162895}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa8795a745daf6d4f99e43fd6cc5d531, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1409853697
 GameObject:
   m_ObjectHideFlags: 0
@@ -5829,12 +5905,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0350bff2d83225044a34d266e9f6a829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kickTrajectoryRenderer: {fileID: 1397020472}
   controller: {fileID: 1491613347}
   ball: {fileID: 0}
   cam: {fileID: 963194228}
   speed: 6
   gravity: 9.81
   turnSmoothTime: 0.1
+  maxKickVelocity: 50
+  minKickVelocity: 1
+  maxKickAngle: 70
+  minKickAngle: 30
+  kickVelocitySensitivity: 1
+  kickAngleSensitivity: 1
+  kickRotationSensitivity: 1
 --- !u!54 &1491613346
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5864,7 +5948,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 2
   m_Radius: 0.25
-  m_SlopeLimit: 50
+  m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -14816,9 +14900,9 @@ SphereCollider:
   m_GameObject: {fileID: 1934705953}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!43 &1952212683
 Mesh:
