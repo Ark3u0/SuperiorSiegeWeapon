@@ -10,6 +10,9 @@ public class FollowPlayer : MonoBehaviour
 
     private Vector3 _cameraOffset;
 
+    [Range(0.01f, 5.0f)]
+    public float playerYOffset = 0.0f;
+
     [Range(0.01f, 1.0f)]
     public float smoothFactor = 0.5f;
 
@@ -58,7 +61,7 @@ public class FollowPlayer : MonoBehaviour
         transform.position = Vector3.Slerp(transform.position, newPosition, smoothFactor);
 
         if (LookAtPlayer) {
-            transform.LookAt(playerTransform);
+            transform.rotation = Quaternion.LookRotation(playerTransform.position + new Vector3(0, playerYOffset, 0) - transform.position);
         }
         
     }
