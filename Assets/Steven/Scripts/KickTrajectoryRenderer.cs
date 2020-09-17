@@ -6,14 +6,9 @@ using UnityEngine;
 public class KickTrajectoryRenderer : MonoBehaviour
 {
     public GameObject renderTarget;
-    public Vector3 start = new Vector3(0, 0, 0);
-    public Vector3 target = new Vector3(0, 0, 0);
-    public float velocity = 1f;
-    public float angle = 1f;
     public int resolution = 10;
     public bool rendering = false;
     float gravity = 1f;
-    float radianAngle = 1f;
 
     LineRenderer lineRenderer;
 
@@ -23,36 +18,30 @@ public class KickTrajectoryRenderer : MonoBehaviour
         gravity = Mathf.Abs(Physics2D.gravity.y);
     }
 
-    // Populating Line Renderer w/ appropriate settings:
-    // - point positions to draw lines between
-    // - # of points + 1
-    void RenderArc()
+    public void Render(Vector3 start, Vector3 target, float angle)
     {
         lineRenderer.positionCount = resolution + 1;
-        lineRenderer.SetPositions(CalculateArcArray());
+        lineRenderer.SetPositions(CalculateArcArray(start, target, angle));
     }
 
     // Create an array of Vector3 positions
-    Vector3[] CalculateArcArray()
+    Vector3[] CalculateArcArray(Vector3 start, Vector3 target, float angle)
     {
         Vector3[] arcArray = new Vector3[resolution + 1];
-        radianAngle = Mathf.Deg2Rad * angle;
+        float angleInRadians = Mathf.Deg2Rad * angle;
         
-        float distanceToTarget = (target - start).magnitude;
-        float velocity = Mathf.Sqrt(distanceToTarget * gravity / Mathf.Sin(2 * radianAngle));
+        float velocity = CalculateVelocityMagnitude(angleInRadians, start, target);
 
         for (int i = 0; i <= resolution; i++) {
-            float t = (float)i / (float)resolution;
-            Vector3 arcPoint = CalculateArcPoint(t, distanceToTarget, velocity);
+            Vector3 arcPoint = CalculateArcPoint(i, angleInRadians, velocity, start, target);
         
             if (i > 0) 
             {
                 RaycastHit hit;
                 Vector3 aToB = (arcPoint - arcArray[i - 1]);
-                Debug.Log("NOTHING");
+
                 if (Physics.Raycast(arcArray[i - 1], aToB.normalized, out hit, aToB.magnitude)) {
-                    Debug.Log("COLLISION!!");
-                    RenderTargetAt(hit);
+                    PlaceTargetAt(hit);
                     lineRenderer.positionCount = i;
                     return arcArray;
                 }
@@ -62,44 +51,51 @@ public class KickTrajectoryRenderer : MonoBehaviour
             arcArray[i] = arcPoint;
         }
 
-        RenderTargetAt(target);
+        PlaceTargetAt(target);
 
         return arcArray;
     }
 
-    void RenderTargetAt(Vector3 point) {
-        renderTarget.transform.position = point;
+    void PlaceTargetAt(Vector3 point) {
+        renderTarget.transform.position = new Vector3(point.x, Vector3.up.y * .02f, point.z);
         renderTarget.transform.LookAt(point + Vector3.up);
-        // renderTarget.transform.Translate(-Vector3.up * .23f, Space.World);
     }
 
-    void RenderTargetAt(RaycastHit hit) {
+    void PlaceTargetAt(RaycastHit hit) {
         renderTarget.transform.position = hit.point;
         renderTarget.transform.LookAt(hit.point + hit.normal);
         renderTarget.transform.Translate(hit.normal * .02f, Space.World);
     }
 
-    // Calculate posiiton in space of each vertex
-    Vector3 CalculateArcPoint(float t, float distanceToTarget, float velocity)
-    {
-        float r = t * distanceToTarget; // r is distance traveled in xz plane
+    public float CalculateVelocityMagnitude(float angleInRadians, Vector3 start, Vector3 target) {
+        Vector3 displacement = target - start;
 
-        float x = r * (target - start).normalized.x;
-        float z = r * (target - start).normalized.z;
-
-        float y = r * Mathf.Tan(radianAngle) - ((gravity * r * r) / (2 * velocity * velocity * Mathf.Cos(radianAngle) * Mathf.Cos(radianAngle)));
-
-        return new Vector3(start.x + x, start.y + y, start.z + z); 
+        return Mathf.Sqrt(displacement.magnitude * gravity / Mathf.Sin(2 * angleInRadians));
     }
 
-    // Update is called once per frame
-    void Update()
+    public Vector3 CalculateVelocityDirection(int step, float angleInRadians, float velocity, Vector3 start, Vector3 target)
     {
-        if (this.rendering) {
-            RenderArc();
-        } else {
-            lineRenderer.positionCount = 0;
-        }
+        Vector3 displacement = target - start;
+        float t = (float)step / (float)resolution;
         
+
+        float r = t * displacement.magnitude; // r is distance traveled in xz plane
+
+        float x = r * displacement.normalized.x;
+        float z = r * displacement.normalized.z;
+
+        float y = r * Mathf.Tan(angleInRadians) - ((gravity * r * r) / (2 * velocity * velocity * Mathf.Cos(angleInRadians) * Mathf.Cos(angleInRadians)));
+        
+        return new Vector3(x, y, z);
+    }
+
+    // Calculate posiiton in space of each vertex
+    Vector3 CalculateArcPoint(int step, float angleInRadians, float velocity, Vector3 start, Vector3 target)
+    {   
+        return start + CalculateVelocityDirection(step, angleInRadians, velocity, start, target);
+    }
+
+    public void StopRendering() {
+        lineRenderer.positionCount = 0;
     }
 }
