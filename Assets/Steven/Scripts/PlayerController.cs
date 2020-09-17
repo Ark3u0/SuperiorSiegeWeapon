@@ -89,20 +89,16 @@ public class PlayerController : MonoBehaviour
     }
 
     public void HandleAiming() {
-        Vector3 direction = new Vector3(movement.x, 0f, -movement.y).normalized;
-
-        GameObject testCube = GameObject.Find("TestCube");
+        Vector3 direction = new Vector3(movement.x, 0f, movement.y).normalized;
 
         if (direction.magnitude >= 0.1f) {
-            float targetAngle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
             
-            Debug.Log((Quaternion.Euler(0f, targetAngle, 0f) * transform.forward).normalized);
-
-            kickTarget = kickTarget + (Quaternion.Euler(0f, targetAngle, 0f) * transform.forward).normalized * kickTargetMoveSensitivity * Time.deltaTime;
+            kickTarget = kickTarget + (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward).normalized * kickTargetMoveSensitivity * Time.deltaTime;
         }
         
         if (Mathf.Abs(look.y) > 0.1f) {
-            kickAngle = Mathf.Max(minKickAngle, Mathf.Min(maxKickAngle, kickAngle + look.y * 100f * kickAngleSensitivity * Time.deltaTime));       
+            kickAngle = Mathf.Max(minKickAngle, Mathf.Min(maxKickAngle, kickAngle + look.y * 10f * kickAngleSensitivity * Time.deltaTime));       
         }
 
         kickTrajectoryRenderer.start = ball.transform.position;

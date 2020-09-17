@@ -5,6 +5,7 @@ using UnityEngine;
 // Reference: https://www.youtube.com/watch?v=iLlWirdxass
 public class KickTrajectoryRenderer : MonoBehaviour
 {
+    public GameObject renderTarget;
     public Vector3 start = new Vector3(0, 0, 0);
     public Vector3 target = new Vector3(0, 0, 0);
     public float velocity = 1f;
@@ -42,10 +43,40 @@ public class KickTrajectoryRenderer : MonoBehaviour
 
         for (int i = 0; i <= resolution; i++) {
             float t = (float)i / (float)resolution;
-            arcArray[i] = CalculateArcPoint(t, distanceToTarget, velocity);
+            Vector3 arcPoint = CalculateArcPoint(t, distanceToTarget, velocity);
+        
+            if (i > 0) 
+            {
+                RaycastHit hit;
+                Vector3 aToB = (arcPoint - arcArray[i - 1]);
+                Debug.Log("NOTHING");
+                if (Physics.Raycast(arcArray[i - 1], aToB.normalized, out hit, aToB.magnitude)) {
+                    Debug.Log("COLLISION!!");
+                    RenderTargetAt(hit);
+                    lineRenderer.positionCount = i;
+                    return arcArray;
+                }
+            }
+            
+
+            arcArray[i] = arcPoint;
         }
 
+        RenderTargetAt(target);
+
         return arcArray;
+    }
+
+    void RenderTargetAt(Vector3 point) {
+        renderTarget.transform.position = point;
+        renderTarget.transform.LookAt(point + Vector3.up);
+        // renderTarget.transform.Translate(-Vector3.up * .23f, Space.World);
+    }
+
+    void RenderTargetAt(RaycastHit hit) {
+        renderTarget.transform.position = hit.point;
+        renderTarget.transform.LookAt(hit.point + hit.normal);
+        renderTarget.transform.Translate(hit.normal * .02f, Space.World);
     }
 
     // Calculate posiiton in space of each vertex
