@@ -5,8 +5,8 @@ using UnityEngine;
 // Reference: https://www.youtube.com/watch?v=iLlWirdxass
 public class KickTrajectoryRenderer : MonoBehaviour
 {
-    public Vector3 position = new Vector3(0, 0, 0);
-    public Vector3 heading = new Vector3(0, 0, 0);
+    public Vector3 start = new Vector3(0, 0, 0);
+    public Vector3 target = new Vector3(0, 0, 0);
     public float velocity = 1f;
     public float angle = 1f;
     public int resolution = 10;
@@ -36,28 +36,29 @@ public class KickTrajectoryRenderer : MonoBehaviour
     {
         Vector3[] arcArray = new Vector3[resolution + 1];
         radianAngle = Mathf.Deg2Rad * angle;
-
-        float maxDistance = (velocity * velocity * Mathf.Sin(2 * radianAngle)) / gravity;
+        
+        float distanceToTarget = (target - start).magnitude;
+        float velocity = Mathf.Sqrt(distanceToTarget * gravity / Mathf.Sin(2 * radianAngle));
 
         for (int i = 0; i <= resolution; i++) {
             float t = (float)i / (float)resolution;
-            arcArray[i] = CalculateArcPoint(t, maxDistance);
+            arcArray[i] = CalculateArcPoint(t, distanceToTarget, velocity);
         }
 
         return arcArray;
     }
 
     // Calculate posiiton in space of each vertex
-    Vector3 CalculateArcPoint(float t, float maxDistance)
+    Vector3 CalculateArcPoint(float t, float distanceToTarget, float velocity)
     {
-        float r = t * maxDistance; // r is distance traveled in xz plane
+        float r = t * distanceToTarget; // r is distance traveled in xz plane
 
-        float x = r * heading.normalized.x;
-        float z = r * heading.normalized.z;
+        float x = r * (target - start).normalized.x;
+        float z = r * (target - start).normalized.z;
 
         float y = r * Mathf.Tan(radianAngle) - ((gravity * r * r) / (2 * velocity * velocity * Mathf.Cos(radianAngle) * Mathf.Cos(radianAngle)));
 
-        return new Vector3(position.x + x, position.y + y, position.z + z); 
+        return new Vector3(start.x + x, start.y + y, start.z + z); 
     }
 
     // Update is called once per frame

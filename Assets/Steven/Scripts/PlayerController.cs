@@ -22,27 +22,19 @@ public class PlayerController : MonoBehaviour
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
 
-    public float maxKickVelocity = 50f;
-    public float minKickVelocity = 25f;
-
     public float maxKickAngle = 70f;
 
     public float minKickAngle = 30f;
     
-    [Range(1f, 100f)]
-    public float kickVelocitySensitivity = 100f;
+    [Range(1f, 10f)]
+    public float kickTargetMoveSensitivity = 10f;
 
-     [Range(1f, 100f)]
-    public float kickAngleSensitivity = 100f;
-
-    [Range(1f, 100f)]
-    public float kickRotationSensitivity = 100f;   
-
-    float kickVelocity = 1f;
+     [Range(1f, 10f)]
+    public float kickAngleSensitivity = 10f;
 
     float kickAngle = 30f;
 
-    Vector3 kickHeading;
+    Vector3 kickTarget;
 
     bool aiming = false;
 
@@ -67,7 +59,7 @@ public class PlayerController : MonoBehaviour
         {
             this.aiming = true;
             this.ball.PlaceForKick(transform);
-            this.kickHeading = transform.forward;
+            this.kickTarget = this.ball.transform.position + 3 * transform.forward.normalized;
         }
     }
 
@@ -80,9 +72,8 @@ public class PlayerController : MonoBehaviour
             // Set velocity, angle, heading on ball to kick
             // unlock freeze constraints
 
-            kickVelocity = 1f;
-            kickAngle = 10f;
-            kickHeading = transform.forward;
+            kickAngle = 30f;
+            kickTarget = ball.transform.position + 3 * transform.forward.normalized;
         }
     }
 
@@ -98,21 +89,24 @@ public class PlayerController : MonoBehaviour
     }
 
     public void HandleAiming() {
-        if (Mathf.Abs(movement.y) > .5) {
-            kickVelocity = Mathf.Max(minKickVelocity, Mathf.Min(maxKickVelocity, kickVelocity + movement.y * 100f * kickVelocitySensitivity * Time.deltaTime));
+        Vector3 direction = new Vector3(movement.x, 0f, -movement.y).normalized;
+
+        GameObject testCube = GameObject.Find("TestCube");
+
+        if (direction.magnitude >= 0.1f) {
+            float targetAngle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            
+            Debug.Log((Quaternion.Euler(0f, targetAngle, 0f) * transform.forward).normalized);
+
+            kickTarget = kickTarget + (Quaternion.Euler(0f, targetAngle, 0f) * transform.forward).normalized * kickTargetMoveSensitivity * Time.deltaTime;
         }
         
-        if (Mathf.Abs(look.y) > .5) {
+        if (Mathf.Abs(look.y) > 0.1f) {
             kickAngle = Mathf.Max(minKickAngle, Mathf.Min(maxKickAngle, kickAngle + look.y * 100f * kickAngleSensitivity * Time.deltaTime));       
         }
 
-        Quaternion rotateKickHeading = Quaternion.AngleAxis(movement.x * 100f * kickRotationSensitivity * Time.deltaTime, Vector3.up);
-
-        kickHeading = (rotateKickHeading * kickHeading).normalized;
-
-        kickTrajectoryRenderer.position = ball.transform.position;
-        kickTrajectoryRenderer.heading = kickHeading;
-        kickTrajectoryRenderer.velocity = kickVelocity;
+        kickTrajectoryRenderer.start = ball.transform.position;
+        kickTrajectoryRenderer.target = kickTarget;
         kickTrajectoryRenderer.angle = kickAngle;
         kickTrajectoryRenderer.rendering = true;
     }
