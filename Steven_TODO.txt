@@ -5,7 +5,6 @@ Todo:
 - Handle camera obstruction
 
 - Show ball relative location when offscreen
-- Set constraints on where player can kick (i.e. not behind him, certain distance forward, etc.)
 - Show constraints on where player can kick
 - Show UI buttons of kick/interaction with NPCs, etc.
 - Dialog trees and text boxes
