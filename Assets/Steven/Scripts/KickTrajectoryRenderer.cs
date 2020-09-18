@@ -20,6 +20,7 @@ public class KickTrajectoryRenderer : MonoBehaviour
 
     public void Render(Vector3 start, Vector3 target, float angle)
     {
+        renderTarget.SetActive(true);
         lineRenderer.positionCount = resolution + 1;
         lineRenderer.SetPositions(CalculateArcArray(start, target, angle));
     }
@@ -96,6 +97,7 @@ public class KickTrajectoryRenderer : MonoBehaviour
     }
 
     public void StopRendering() {
+        renderTarget.SetActive(false);
         lineRenderer.positionCount = 0;
     }
 }
