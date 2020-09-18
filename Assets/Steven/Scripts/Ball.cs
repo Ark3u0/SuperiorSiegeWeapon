@@ -6,6 +6,10 @@ public class Ball : MonoBehaviour
 {
     public KickTrajectoryRenderer kickTrajectoryRenderer;
     public Vector3 kickTarget;
+
+    public float maxKickDistance = 12f;
+    public float minKickDistance = 2f;
+    public float maxDeviationFromForward = 60f;
     public float maxKickAngle = 70f;
 
     public float minKickAngle = 30f;
@@ -60,7 +64,22 @@ public class Ball : MonoBehaviour
             if (moveInput.magnitude > 0.1f) {
                 float targetAngle = Mathf.Atan2(moveInput.x, moveInput.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
                 
-                kickTarget = kickTarget + (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward).normalized * kickTargetMoveSensitivity * Time.deltaTime;
+                Vector3 newKickTarget = kickTarget + (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward).normalized * kickTargetMoveSensitivity * Time.deltaTime;
+                Vector3 displacement = newKickTarget - transform.position;
+
+                float signedAngle = Vector3.SignedAngle(transform.parent.forward, displacement, Vector3.up);
+               
+                float kickDistance = Mathf.Max(minKickDistance, Mathf.Min(maxKickDistance, displacement.magnitude));
+
+                Debug.Log(signedAngle);
+
+                if (Mathf.Abs(signedAngle) > maxDeviationFromForward) {
+                    // GET TO ALIGN WITH SHOOT BOUNDARY LEFT/RIGHT
+                    kickTarget = transform.position + (Quaternion.AngleAxis(Mathf.Sign(signedAngle) * maxDeviationFromForward, Vector3.up) * transform.parent.forward).normalized * kickDistance;
+                } else {
+                    kickTarget = transform.position + displacement.normalized * kickDistance;
+                }
+                
             }
             
             if (angleInput != 0f) {
