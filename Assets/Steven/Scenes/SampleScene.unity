@@ -154,8 +154,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aboveTargetOffset: 1
   defaultZoom: 10
-  maxZoomOut: 20
-  minZoomIn: 10
+  maxZoomOut: 12.5
+  minZoomIn: 7.5
   angleFromTarget: 30
   rotationSpeed: 100
   zoomSpeed: 10
