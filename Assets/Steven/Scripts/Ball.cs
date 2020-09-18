@@ -30,6 +30,7 @@ public class Ball : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision other) {
+        // Reenable drag after the first collision
         if (ballState == BallState.IN_AIR_FROM_KICK) {
             rigidBody.drag = dragSetting;
             ballState = BallState.DEFAULT_PLAY;
@@ -52,7 +53,7 @@ public class Ball : MonoBehaviour
         }
     }
 
-    public void Aim(Vector3 moveInput, Vector3 lookInput, Camera cam)
+    public void Aim(Vector3 moveInput, float angleInput, Camera cam)
     {
         if (ballState == BallState.READY_FOR_AIM) {
         
@@ -62,8 +63,8 @@ public class Ball : MonoBehaviour
                 kickTarget = kickTarget + (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward).normalized * kickTargetMoveSensitivity * Time.deltaTime;
             }
             
-            if (lookInput.magnitude > 0.1f) {
-                kickAngle = Mathf.Max(minKickAngle, Mathf.Min(maxKickAngle, kickAngle + lookInput.y * 10f * kickAngleSensitivity * Time.deltaTime));       
+            if (angleInput != 0f) {
+                kickAngle = Mathf.Max(minKickAngle, Mathf.Min(maxKickAngle, kickAngle + angleInput * 10f * kickAngleSensitivity * Time.deltaTime));       
             }
 
             kickTrajectoryRenderer.Render(transform.position, kickTarget, kickAngle);
