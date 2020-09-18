@@ -6,24 +6,9 @@ using UnityEngine.InputSystem;
 // Reference: https://www.youtube.com/watch?v=xcn7hz7J7sI
 public class FollowPlayer : MonoBehaviour
 {
-    public Transform playerTransform;
+    public CameraTarget cameraTarget;
 
     private Vector3 cameraOffset;
-
-    [Range(-10f, 10f)]
-    public float aboveTargetOffset = 1.0f;
-
-    [Range(1f, 20f)]
-    public float defaultZoom = 5f;
-
-    [Range(10f, 20f)]
-    public float maxZoomOut = 20f;
-
-    [Range(1f, 10f)]
-    public float minZoomIn = 3f;
-
-    [Range(10f, 45f)]
-    public float angleFromPlayer = 30f;
 
     [Range(0.01f, 1.0f)]
     public float smoothFactor = 1.0f;
@@ -33,12 +18,6 @@ public class FollowPlayer : MonoBehaviour
     public bool rotateAroundPlayer = true;
 
     public bool zoomInOnPlayer = true;
-
-    [Range(1.0f, 1000.0f)]
-    public float rotationSpeed = 5.0f;
-
-    [Range(1.0f, 1000.0f)]
-    public float zoomSpeed = 5.0f;
 
     public PlayerInputActions controls;
 
@@ -61,38 +40,41 @@ public class FollowPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ResetToDefaultZoom();
-    }
-
-    void ResetToDefaultZoom()
-    {
-        transform.position = playerTransform.position + (Quaternion.AngleAxis(angleFromPlayer, Vector3.forward) * Vector3.right) * defaultZoom;
-        cameraOffset = transform.position - playerTransform.position;
+        transform.position = cameraTarget.transform.position + (Quaternion.AngleAxis(cameraTarget.angleFromTarget, Vector3.forward) * Vector3.right) * cameraTarget.defaultZoom;
+        cameraOffset = transform.position - cameraTarget.transform.position;
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
         if (zoomInOnPlayer) {
-            float offsetMagnitude = Mathf.Min(maxZoomOut, Mathf.Max(minZoomIn, cameraOffset.magnitude - lookInput.y * zoomSpeed * Time.deltaTime));
+            float offsetMagnitude = Mathf.Min(cameraTarget.maxZoomOut, Mathf.Max(cameraTarget.minZoomIn, cameraOffset.magnitude - lookInput.y * cameraTarget.zoomSpeed * Time.deltaTime));
             cameraOffset = cameraOffset.normalized * offsetMagnitude;
-            transform.position = playerTransform.position + cameraOffset;
+            transform.position = cameraTarget.transform.position + cameraOffset;
         }
 
         if (rotateAroundPlayer) {
-            Quaternion camRotateAngle = Quaternion.AngleAxis(lookInput.x * rotationSpeed * Time.deltaTime, Vector3.up);
+            Quaternion camRotateAngle = Quaternion.AngleAxis(lookInput.x * cameraTarget.rotationSpeed * Time.deltaTime, Vector3.up);
 
             cameraOffset = camRotateAngle * cameraOffset;
         }
 
-        Vector3 newPosition = playerTransform.position + cameraOffset;
+        Vector3 newPosition = cameraTarget.transform.position + cameraOffset;
 
         transform.position = Vector3.Slerp(transform.position, newPosition, smoothFactor);
 
         if (lookAtPlayer) {
-            transform.rotation = Quaternion.LookRotation(playerTransform.position + new Vector3(0, aboveTargetOffset, 0) - transform.position);
+            transform.rotation = Quaternion.LookRotation(cameraTarget.transform.position + new Vector3(0, cameraTarget.aboveTargetOffset, 0) - transform.position);
         }
     }
+
+    public void SetCameraTarget(CameraTarget newCameraTarget) {
+        if (this.cameraTarget.GetInstanceID() != newCameraTarget.GetInstanceID()) 
+        {
+            this.cameraTarget = newCameraTarget;
+        }   
+    }
+
 
     private void OnEnable() {
         controls.Player.Enable();

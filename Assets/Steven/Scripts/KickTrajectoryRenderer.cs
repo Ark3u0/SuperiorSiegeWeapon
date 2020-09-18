@@ -5,6 +5,8 @@ using UnityEngine;
 // Reference: https://www.youtube.com/watch?v=iLlWirdxass
 public class KickTrajectoryRenderer : MonoBehaviour
 {
+    public CameraTarget cameraTarget;
+    public Camera cam;
     public GameObject renderTarget;
     public int resolution = 10;
     public bool rendering = false;
@@ -20,6 +22,7 @@ public class KickTrajectoryRenderer : MonoBehaviour
 
     public void Render(Vector3 start, Vector3 target, float angle)
     {
+        cam.GetComponent<FollowPlayer>().SetCameraTarget(cameraTarget);
         renderTarget.SetActive(true);
         lineRenderer.positionCount = resolution + 1;
         lineRenderer.SetPositions(CalculateArcArray(start, target, angle));
@@ -43,6 +46,8 @@ public class KickTrajectoryRenderer : MonoBehaviour
 
                 if (Physics.Raycast(arcArray[i - 1], aToB.normalized, out hit, aToB.magnitude)) {
                     PlaceTargetAt(hit);
+                    cameraTarget.UpdateTargetPosition((start + target + arcArray[i / 2]) / 3f);
+
                     lineRenderer.positionCount = i;
                     return arcArray;
                 }
@@ -53,6 +58,7 @@ public class KickTrajectoryRenderer : MonoBehaviour
         }
 
         PlaceTargetAt(target);
+        cameraTarget.UpdateTargetPosition((start + target + arcArray[lineRenderer.positionCount / 2]) / 3f);
 
         return arcArray;
     }
