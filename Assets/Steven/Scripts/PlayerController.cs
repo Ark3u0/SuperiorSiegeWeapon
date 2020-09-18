@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 // Reference: Brackey's - https://www.youtube.com/watch?v=4HpC--2iowE
 public class PlayerController : MonoBehaviour
 {
+    public CameraTarget cameraTarget;
     public CharacterController controller;
     public PlayerInputActions controls;
     public Ball ball;
@@ -31,6 +32,8 @@ public class PlayerController : MonoBehaviour
 
         controls.Player.Kick.started += AimKick;
         controls.Player.Kick.canceled += Kick;
+
+        cam.GetComponent<FollowPlayer>().SetCameraTarget(cameraTarget);
     }
 
     void AimKick(InputAction.CallbackContext context)
@@ -47,6 +50,7 @@ public class PlayerController : MonoBehaviour
         if (this.aiming) {
             this.aiming = false;
             this.ball.Kick();
+            cam.GetComponent<FollowPlayer>().SetCameraTarget(cameraTarget);
         }
     }
 
