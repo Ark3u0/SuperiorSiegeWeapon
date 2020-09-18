@@ -7,39 +7,16 @@ using UnityEngine.InputSystem;
 // Reference: Brackey's - https://www.youtube.com/watch?v=4HpC--2iowE
 public class PlayerController : MonoBehaviour
 {
-    public KickTrajectoryRenderer kickTrajectoryRenderer;
-
     public CharacterController controller;
-    
     public PlayerInputActions controls;
-
     public Ball ball;
-
-    public Transform cam;
+    public Camera cam;
     public float speed = 6.0f;
     public float gravity = 9.81f;
-
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
-
-    public float maxKickAngle = 70f;
-
-    public float minKickAngle = 30f;
-    
-    [Range(1f, 10f)]
-    public float kickTargetMoveSensitivity = 10f;
-
-     [Range(1f, 10f)]
-    public float kickAngleSensitivity = 10f;
-
-    float kickAngle = 30f;
-
-    Vector3 kickTarget;
-
     bool aiming = false;
-
     Vector2 movement;
-
     Vector2 look;
 
     void Awake() {
@@ -59,7 +36,6 @@ public class PlayerController : MonoBehaviour
         {
             this.aiming = true;
             this.ball.PlaceForKick(transform);
-            this.kickTarget = this.ball.transform.position + 3 * transform.forward.normalized;
         }
     }
 
@@ -67,13 +43,7 @@ public class PlayerController : MonoBehaviour
     {
         if (this.aiming) {
             this.aiming = false;
-            this.kickTrajectoryRenderer.rendering = false;
-
-            // Set velocity, angle, heading on ball to kick
-            // unlock freeze constraints
-
-            kickAngle = 30f;
-            kickTarget = ball.transform.position + 3 * transform.forward.normalized;
+            this.ball.Kick();
         }
     }
 
@@ -89,22 +59,10 @@ public class PlayerController : MonoBehaviour
     }
 
     public void HandleAiming() {
-        Vector3 direction = new Vector3(movement.x, 0f, movement.y).normalized;
+        Vector3 moveInput = new Vector3(movement.x, 0f, movement.y).normalized;
+        Vector3 lookInput = new Vector3(0f, look.y, 0f).normalized;
 
-        if (direction.magnitude >= 0.1f) {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            
-            kickTarget = kickTarget + (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward).normalized * kickTargetMoveSensitivity * Time.deltaTime;
-        }
-        
-        if (Mathf.Abs(look.y) > 0.1f) {
-            kickAngle = Mathf.Max(minKickAngle, Mathf.Min(maxKickAngle, kickAngle + look.y * 10f * kickAngleSensitivity * Time.deltaTime));       
-        }
-
-        kickTrajectoryRenderer.start = ball.transform.position;
-        kickTrajectoryRenderer.target = kickTarget;
-        kickTrajectoryRenderer.angle = kickAngle;
-        kickTrajectoryRenderer.rendering = true;
+        this.ball.Aim(moveInput, lookInput, cam);
     }
 
     public void HandleMovement() {
@@ -112,7 +70,7 @@ public class PlayerController : MonoBehaviour
         Vector3 toMove = new Vector3(0, 0, 0);
 
         if (direction.magnitude >= 0.1f) {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
