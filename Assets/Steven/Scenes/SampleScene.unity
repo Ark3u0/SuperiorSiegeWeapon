@@ -4005,7 +4005,7 @@ Rigidbody:
   m_GameObject: {fileID: 777280186}
   serializedVersion: 2
   m_Mass: 2.5
-  m_Drag: 0.5
+  m_Drag: 0.2
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -4366,11 +4366,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 1491613344}
-  playerYOffset: 1
+  aboveTargetOffset: 1.5
+  defaultZoom: 5
+  maxZoomOut: 20
+  minZoomIn: 3
+  angleFromPlayer: 30
   smoothFactor: 1
-  LookAtPlayer: 1
-  RotateAroundPlayer: 1
-  RotationSpeed: 250
+  lookAtPlayer: 1
+  rotateAroundPlayer: 1
+  zoomInOnPlayer: 1
+  rotationSpeed: 150
+  zoomSpeed: 5
   lookInput: {x: 0, y: 0}
 --- !u!114 &963194230
 MonoBehaviour:

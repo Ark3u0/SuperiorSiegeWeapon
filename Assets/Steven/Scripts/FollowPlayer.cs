@@ -8,20 +8,37 @@ public class FollowPlayer : MonoBehaviour
 {
     public Transform playerTransform;
 
-    private Vector3 _cameraOffset;
+    private Vector3 cameraOffset;
 
-    [Range(0.01f, 5.0f)]
-    public float playerYOffset = 0.0f;
+    [Range(-10f, 10f)]
+    public float aboveTargetOffset = 1.0f;
+
+    [Range(1f, 20f)]
+    public float defaultZoom = 5f;
+
+    [Range(10f, 20f)]
+    public float maxZoomOut = 20f;
+
+    [Range(1f, 10f)]
+    public float minZoomIn = 3f;
+
+    [Range(10f, 45f)]
+    public float angleFromPlayer = 30f;
 
     [Range(0.01f, 1.0f)]
-    public float smoothFactor = 0.5f;
+    public float smoothFactor = 1.0f;
 
-    public bool LookAtPlayer = true;
+    public bool lookAtPlayer = true;
 
-    public bool RotateAroundPlayer = true;
+    public bool rotateAroundPlayer = true;
+
+    public bool zoomInOnPlayer = true;
 
     [Range(1.0f, 1000.0f)]
-    public float RotationSpeed = 5.0f;
+    public float rotationSpeed = 5.0f;
+
+    [Range(1.0f, 1000.0f)]
+    public float zoomSpeed = 5.0f;
 
     public PlayerInputActions controls;
 
@@ -44,26 +61,37 @@ public class FollowPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _cameraOffset = transform.position - playerTransform.position;
+        ResetToDefaultZoom();
+    }
+
+    void ResetToDefaultZoom()
+    {
+        transform.position = playerTransform.position + (Quaternion.AngleAxis(angleFromPlayer, Vector3.forward) * Vector3.right) * defaultZoom;
+        cameraOffset = transform.position - playerTransform.position;
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
-        if (RotateAroundPlayer) {
-            Quaternion camRotateAngle = Quaternion.AngleAxis(lookInput.x * RotationSpeed * Time.deltaTime, Vector3.up);
-
-            _cameraOffset = camRotateAngle *_cameraOffset;
+        if (zoomInOnPlayer) {
+            float offsetMagnitude = Mathf.Min(maxZoomOut, Mathf.Max(minZoomIn, cameraOffset.magnitude - lookInput.y * zoomSpeed * Time.deltaTime));
+            cameraOffset = cameraOffset.normalized * offsetMagnitude;
+            transform.position = playerTransform.position + cameraOffset;
         }
 
-        Vector3 newPosition = playerTransform.position + _cameraOffset;
+        if (rotateAroundPlayer) {
+            Quaternion camRotateAngle = Quaternion.AngleAxis(lookInput.x * rotationSpeed * Time.deltaTime, Vector3.up);
+
+            cameraOffset = camRotateAngle * cameraOffset;
+        }
+
+        Vector3 newPosition = playerTransform.position + cameraOffset;
 
         transform.position = Vector3.Slerp(transform.position, newPosition, smoothFactor);
 
-        if (LookAtPlayer) {
-            transform.rotation = Quaternion.LookRotation(playerTransform.position + new Vector3(0, playerYOffset, 0) - transform.position);
+        if (lookAtPlayer) {
+            transform.rotation = Quaternion.LookRotation(playerTransform.position + new Vector3(0, aboveTargetOffset, 0) - transform.position);
         }
-        
     }
 
     private void OnEnable() {
