@@ -19,13 +19,16 @@ public class PlayerController : MonoBehaviour
     Vector2 movement;
     Vector2 look;
 
+    float angleKick;
+
     void Awake() {
         controls = new PlayerInputActions();
 
         controls.Player.Move.performed += ctx => movement = ctx.ReadValue<Vector2>();
         controls.Player.Move.canceled += ctx => movement = ctx.ReadValue<Vector2>();
-        controls.Player.Look.performed += ctx => look = ctx.ReadValue<Vector2>();
-        controls.Player.Look.canceled += ctx => look = ctx.ReadValue<Vector2>();
+        controls.Player.AngleKick.performed += ctx => angleKick = ctx.ReadValue<float>();
+        controls.Player.AngleKick.canceled += ctx => angleKick = 0f;
+
         controls.Player.Kick.started += AimKick;
         controls.Player.Kick.canceled += Kick;
     }
@@ -60,9 +63,9 @@ public class PlayerController : MonoBehaviour
 
     public void HandleAiming() {
         Vector3 moveInput = new Vector3(movement.x, 0f, movement.y).normalized;
-        Vector3 lookInput = new Vector3(0f, look.y, 0f).normalized;
+        float angleInput = angleKick;
 
-        this.ball.Aim(moveInput, lookInput, cam);
+        this.ball.Aim(moveInput, angleInput, cam);
     }
 
     public void HandleMovement() {

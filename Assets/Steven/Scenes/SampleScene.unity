@@ -4030,6 +4030,7 @@ MonoBehaviour:
   minKickAngle: 30
   kickTargetMoveSensitivity: 10
   kickAngleSensitivity: 10
+  ballState: 0
 --- !u!1001 &840162895
 PrefabInstance:
   m_ObjectHideFlags: 0
