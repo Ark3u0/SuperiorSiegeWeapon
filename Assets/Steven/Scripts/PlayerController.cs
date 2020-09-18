@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
         controls.Player.Kick.started += AimKick;
         controls.Player.Kick.canceled += Kick;
 
-        cam.GetComponent<FollowPlayer>().SetCameraTarget(cameraTarget);
+        cam.GetComponent<FollowCameraTarget>().SetCameraTarget(cameraTarget);
     }
 
     void AimKick(InputAction.CallbackContext context)
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
         if (this.aiming) {
             this.aiming = false;
             this.ball.Kick();
-            cam.GetComponent<FollowPlayer>().SetCameraTarget(cameraTarget);
+            cam.GetComponent<FollowCameraTarget>().SetCameraTarget(cameraTarget);
         }
     }
 

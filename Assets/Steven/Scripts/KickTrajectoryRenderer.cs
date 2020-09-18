@@ -22,7 +22,7 @@ public class KickTrajectoryRenderer : MonoBehaviour
 
     public void Render(Vector3 start, Vector3 target, float angle)
     {
-        cam.GetComponent<FollowPlayer>().SetCameraTarget(cameraTarget);
+        cam.GetComponent<FollowCameraTarget>().SetCameraTarget(cameraTarget);
         renderTarget.SetActive(true);
         lineRenderer.positionCount = resolution + 1;
         lineRenderer.SetPositions(CalculateArcArray(start, target, angle));

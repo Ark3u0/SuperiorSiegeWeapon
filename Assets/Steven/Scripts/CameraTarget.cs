@@ -25,6 +25,12 @@ public class CameraTarget : MonoBehaviour
     [Range(1.0f, 1000.0f)]
     public float zoomSpeed = 5.0f;
 
+    public bool canCameraZoom = true;
+
+    public bool canCameraRotate = true;
+
+    public bool canCameraLookAt = true;
+
     // We define zoom in/out constraints
     // look above offset
 

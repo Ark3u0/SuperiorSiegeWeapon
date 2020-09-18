@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 // Reference: https://www.youtube.com/watch?v=xcn7hz7J7sI
-public class FollowPlayer : MonoBehaviour
+public class FollowCameraTarget : MonoBehaviour
 {
     public CameraTarget cameraTarget;
 
@@ -12,12 +12,6 @@ public class FollowPlayer : MonoBehaviour
 
     [Range(0.01f, 1.0f)]
     public float smoothFactor = 1.0f;
-
-    public bool lookAtPlayer = true;
-
-    public bool rotateAroundPlayer = true;
-
-    public bool zoomInOnPlayer = true;
 
     public PlayerInputActions controls;
 
@@ -47,25 +41,34 @@ public class FollowPlayer : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (zoomInOnPlayer) {
-            float offsetMagnitude = Mathf.Min(cameraTarget.maxZoomOut, Mathf.Max(cameraTarget.minZoomIn, cameraOffset.magnitude - lookInput.y * cameraTarget.zoomSpeed * Time.deltaTime));
-            cameraOffset = cameraOffset.normalized * offsetMagnitude;
-            transform.position = cameraTarget.transform.position + cameraOffset;
+        if (cameraTarget.canCameraZoom) {
+            ZoomOnTarget();    
         }
 
-        if (rotateAroundPlayer) {
-            Quaternion camRotateAngle = Quaternion.AngleAxis(lookInput.x * cameraTarget.rotationSpeed * Time.deltaTime, Vector3.up);
-
-            cameraOffset = camRotateAngle * cameraOffset;
+        if (cameraTarget.canCameraRotate) {
+            RotateAroundTarget();
         }
 
-        Vector3 newPosition = cameraTarget.transform.position + cameraOffset;
+        transform.position = Vector3.Slerp(transform.position, cameraTarget.transform.position + cameraOffset, smoothFactor);
 
-        transform.position = Vector3.Slerp(transform.position, newPosition, smoothFactor);
-
-        if (lookAtPlayer) {
-            transform.rotation = Quaternion.LookRotation(cameraTarget.transform.position + new Vector3(0, cameraTarget.aboveTargetOffset, 0) - transform.position);
+        if (cameraTarget.canCameraLookAt) {
+            LookAtTarget();
         }
+    }
+
+    void RotateAroundTarget() {
+        Quaternion camRotateAngle = Quaternion.AngleAxis(lookInput.x * cameraTarget.rotationSpeed * Time.deltaTime, Vector3.up);
+        cameraOffset = camRotateAngle * cameraOffset;
+    }
+
+    void ZoomOnTarget() {
+        float offsetMagnitude = Mathf.Min(cameraTarget.maxZoomOut, Mathf.Max(cameraTarget.minZoomIn, cameraOffset.magnitude - lookInput.y * cameraTarget.zoomSpeed * Time.deltaTime));
+        cameraOffset = cameraOffset.normalized * offsetMagnitude;
+        transform.position = cameraTarget.transform.position + cameraOffset;
+    }
+
+    void LookAtTarget() {
+        transform.rotation = Quaternion.LookRotation(cameraTarget.transform.position + new Vector3(0, cameraTarget.aboveTargetOffset, 0) - transform.position);
     }
 
     public void SetCameraTarget(CameraTarget newCameraTarget) {
