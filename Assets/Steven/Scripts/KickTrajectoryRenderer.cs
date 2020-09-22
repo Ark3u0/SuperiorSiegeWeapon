@@ -54,7 +54,7 @@ public class KickTrajectoryRenderer : MonoBehaviour
                 RaycastHit hit;
                 Vector3 aToB = (arcPoint - arcArray[i - 1]);
 
-                if (Physics.Raycast(arcArray[i - 1], aToB.normalized, out hit, aToB.magnitude, ~LayerMask.GetMask("Ball"))) {
+                if (Physics.SphereCast(arcArray[i - 1], 0.5f, aToB.normalized, out hit, aToB.magnitude, ~LayerMask.GetMask("Ball"))) {
                     PlaceTargetAt(hit);
                     cameraTarget.UpdateTargetPosition((start + target + arcArray[i / 2]) / 3f);
 
