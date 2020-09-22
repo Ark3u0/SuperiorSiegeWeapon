@@ -94,7 +94,8 @@ public class Ball : MonoBehaviour
             float velocityMagnitude = kickTrajectoryRenderer.CalculateVelocityMagnitude(angleInRadians, transform.position, kickTarget);
             Vector3 velocityDirection = kickTrajectoryRenderer.CalculateVelocityDirection(1, angleInRadians, velocityMagnitude, transform.position, kickTarget).normalized;
             
-            // Set velocity
+            // Set velocity and remove constraints
+            rigidBody.constraints = RigidbodyConstraints.None;
             rigidBody.velocity = velocityDirection * velocityMagnitude;
 
             // Remove drag until next collision
@@ -110,18 +111,20 @@ public class Ball : MonoBehaviour
 
     public void PlaceForKick(Transform kicker) 
     {
-        // Stop movement of ball and constraint XZ
-        rigidBody.velocity = Vector3.zero;
-        rigidBody.angularVelocity = Vector3.zero;
+        if (ballState == BallState.DEFAULT_PLAY) {
+            // Stop movement of ball
+            rigidBody.velocity = Vector3.zero;
+            rigidBody.angularVelocity = Vector3.zero;
 
-        // Set position of ball in front of player and let drop
-        transform.position = new Vector3(kicker.position.x, kicker.position.y + 0.5f, kicker.position.z) + kicker.forward * 0.5f;
+            // Constrain movement of ball in XZ
+            rigidBody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
 
-        // Parent ball
-        transform.SetParent(kicker);
-
-        ResetAimData();
-        ballState = BallState.AIMING;
+            // Parent ball
+            transform.SetParent(kicker);
+            
+            ballState = BallState.AIMING;
+            ResetAimData();
+        }
     }
 
     public enum BallState
