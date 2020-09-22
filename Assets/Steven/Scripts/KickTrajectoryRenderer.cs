@@ -58,6 +58,12 @@ public class KickTrajectoryRenderer : MonoBehaviour
         }
 
         PlaceTargetAt(target);
+
+        lineRenderer.widthCurve = new AnimationCurve(
+             new Keyframe(0, 0.3f)
+             , new Keyframe(0.999f - 0.05f, 0.3f)  // neck of arrow
+             , new Keyframe(1 - 0.05f, 1.5f)  // max width of arrow head
+             , new Keyframe(1, 0f));  // tip of arrow
         cameraTarget.UpdateTargetPosition((start + target + arcArray[lineRenderer.positionCount / 2]) / 3f);
 
         return arcArray;

@@ -41,25 +41,9 @@ public class Ball : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        switch (ballState) {
-            case BallState.PLACED_FOR_KICK:
-                 // Is ball "grounded"
-                if(rigidBody.velocity.y > 0 && rigidBody.velocity.y < .1)
-                {
-                    ResetAimData();
-                    ballState = BallState.READY_FOR_AIM;
-                }
-                break;
-            default:
-                break;
-        }
-    }
-
     public void Aim(Vector3 moveInput, float angleInput, Camera cam)
     {
-        if (ballState == BallState.READY_FOR_AIM) {
+        if (ballState == BallState.AIMING) {
         
             if (moveInput.magnitude > 0.1f) {
                 float targetAngle = Mathf.Atan2(moveInput.x, moveInput.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
@@ -70,8 +54,6 @@ public class Ball : MonoBehaviour
                 float signedAngle = Vector3.SignedAngle(transform.parent.forward, displacement, Vector3.up);
                
                 float kickDistance = Mathf.Max(minKickDistance, Mathf.Min(maxKickDistance, displacement.magnitude));
-
-                Debug.Log(signedAngle);
 
                 if (Mathf.Abs(signedAngle) > maxDeviationFromForward) {
                     // GET TO ALIGN WITH SHOOT BOUNDARY LEFT/RIGHT
@@ -102,7 +84,7 @@ public class Ball : MonoBehaviour
 
     public void Kick()
     {
-        if (ballState == BallState.READY_FOR_AIM) {
+        if (ballState == BallState.AIMING) {
             // Stop renderering kick trajectory
             kickTrajectoryRenderer.StopRendering();
 
@@ -111,12 +93,8 @@ public class Ball : MonoBehaviour
 
             float velocityMagnitude = kickTrajectoryRenderer.CalculateVelocityMagnitude(angleInRadians, transform.position, kickTarget);
             Vector3 velocityDirection = kickTrajectoryRenderer.CalculateVelocityDirection(1, angleInRadians, velocityMagnitude, transform.position, kickTarget).normalized;
-
-            Debug.Log(velocityMagnitude);
-            Debug.Log(velocityDirection);
             
-            // Unfreeze constraints and set velocity
-            rigidBody.constraints = RigidbodyConstraints.None;
+            // Set velocity
             rigidBody.velocity = velocityDirection * velocityMagnitude;
 
             // Remove drag until next collision
@@ -135,7 +113,6 @@ public class Ball : MonoBehaviour
         // Stop movement of ball and constraint XZ
         rigidBody.velocity = Vector3.zero;
         rigidBody.angularVelocity = Vector3.zero;
-        rigidBody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
 
         // Set position of ball in front of player and let drop
         transform.position = new Vector3(kicker.position.x, kicker.position.y + 0.5f, kicker.position.z) + kicker.forward * 0.5f;
@@ -143,14 +120,14 @@ public class Ball : MonoBehaviour
         // Parent ball
         transform.SetParent(kicker);
 
-        ballState = BallState.PLACED_FOR_KICK;
+        ResetAimData();
+        ballState = BallState.AIMING;
     }
 
     public enum BallState
     {
         DEFAULT_PLAY,
-        PLACED_FOR_KICK,
-        READY_FOR_AIM,
+        AIMING,
         IN_AIR_FROM_KICK
     }
 }
