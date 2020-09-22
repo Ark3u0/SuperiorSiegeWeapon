@@ -1,13 +1,10 @@
 Todo:
 
-- Make target not float/line trajectory more accurate with ground
 - Handle camera obstruction
 
 - Show ball relative location when offscreen
 - Show UI buttons of kick/interaction with NPCs, etc.
 - Dialog trees and text boxes
-- (BUG) releasing right trigger before ball is ready to kick makes ball track with player
-- (BUG) fix issue where ball gets locked in unable to be kicked or detached state
 
 Optional
 - Enhance camera targeting with Slerp/Lerp transition to new position

@@ -31,12 +31,22 @@ public class KickTrajectoryRenderer : MonoBehaviour
     // Create an array of Vector3 positions
     Vector3[] CalculateArcArray(Vector3 start, Vector3 target, float angle)
     {
-        Vector3[] arcArray = new Vector3[resolution + 1];
-        float angleInRadians = Mathf.Deg2Rad * angle;
         
+        int pointsToCalculate = (int)(1.5f * resolution);
+        // Go past the target to account for drop offs
+        Vector3[] arcArray = new Vector3[pointsToCalculate];
+        float angleInRadians = Mathf.Deg2Rad * angle;
         float velocity = CalculateVelocityMagnitude(angleInRadians, start, target);
 
-        for (int i = 0; i <= resolution; i++) {
+        // Configure arrow at end
+        lineRenderer.widthCurve = new AnimationCurve(
+             new Keyframe(0, 0.3f)
+             , new Keyframe(0.999f - 0.05f, 0.3f)  // neck of arrow
+             , new Keyframe(1 - 0.05f, 1.5f)  // max width of arrow head
+             , new Keyframe(1, 0f));  // tip of arrow
+
+
+        for (int i = 0; i <= pointsToCalculate; i++) {
             Vector3 arcPoint = CalculateArcPoint(i, angleInRadians, velocity, start, target);
         
             if (i > 0) 
@@ -57,14 +67,8 @@ public class KickTrajectoryRenderer : MonoBehaviour
             arcArray[i] = arcPoint;
         }
 
-        PlaceTargetAt(target);
-
-        lineRenderer.widthCurve = new AnimationCurve(
-             new Keyframe(0, 0.3f)
-             , new Keyframe(0.999f - 0.05f, 0.3f)  // neck of arrow
-             , new Keyframe(1 - 0.05f, 1.5f)  // max width of arrow head
-             , new Keyframe(1, 0f));  // tip of arrow
-        cameraTarget.UpdateTargetPosition((start + target + arcArray[lineRenderer.positionCount / 2]) / 3f);
+        PlaceTargetAt(arcArray[pointsToCalculate - 1]);
+        cameraTarget.UpdateTargetPosition((start + arcArray[pointsToCalculate - 1] + arcArray[lineRenderer.positionCount / 2]) / 3f);
 
         return arcArray;
     }
