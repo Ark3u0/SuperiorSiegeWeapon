@@ -26,7 +26,7 @@ public class InteractableCollider : MonoBehaviour
 
         NpcController npc = other.gameObject.GetComponent<NpcController>();
         if (npc != null) {
-            controller.GetComponent<PlayerController>().Npc(npc);     
+            controller.GetComponent<PlayerController>().NoNpc();     
         }
     }
 }

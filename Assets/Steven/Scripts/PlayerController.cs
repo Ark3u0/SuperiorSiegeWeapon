@@ -124,6 +124,7 @@ public class PlayerController : MonoBehaviour
 
     public void Npc(NpcController npc)
     {
+        Debug.Log("INSIDE TALKING RANGE");
         this.npc = npc;
     }
 
@@ -133,6 +134,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void NoNpc() {
+        Debug.Log("OUTSIDE TALKING RANGE");
         if (playerState != PlayerState.TALKING) {
             this.npc = null;
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NpcController : MonoBehaviour
 {
-    public Dialogue dialogue;
+    public DialogueTree dialogueTree;
     public DialogueManager dialogueManager;
 
     public bool ContinueConversation() {
@@ -13,7 +13,7 @@ public class NpcController : MonoBehaviour
 
     public bool StartConversation(Transform player) {
         transform.LookAt(player);
-        return dialogueManager.StartDialogue(dialogue);
+        return dialogueManager.StartDialogue(dialogueTree);
     }
 
 }

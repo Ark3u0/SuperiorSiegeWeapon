@@ -300,6 +300,8 @@ MonoBehaviour:
   nameText: {fileID: 860852977}
   dialogueText: {fileID: 804852189}
   animator: {fileID: 137829978}
+  writingSentence: 0
+  fastCompleteSentence: 0
 --- !u!4 &109021466
 Transform:
   m_ObjectHideFlags: 0
@@ -516,7 +518,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: -3, y: -242.2301}
-  m_SizeDelta: {x: 512, y: 210}
+  m_SizeDelta: {x: 800, y: 210}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &137829976
 MonoBehaviour:
@@ -538,7 +540,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c39589d768bc14b43853e45abfd3e5b2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1d7937cd038ea3349b07859bb383d5cb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1316,12 +1318,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942afde5cd1de03429c1eb033e53bcca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue:
-    name: Jerry
-    sentences:
-    - Hello Matteo! How are you doing?
-    - Do you like fish?
-    - MEOOOOOW!!!
+  dialogueTree:
+    dialogue:
+      name: Jerry
+      sentences:
+      - Hey Matteo! I could really use your help with something. My grandma got mad
+        at me and threw her chancla at me.
+      - Bracing against her wrath, I swung my arm out and knocked her chancla on
+        the roof. Lets just say the other chancla was even meaner.
+      - I'd like to get her chancla back to make it up to her but I'm too short to
+        get on the roof. Could you help me get her chancla back?
+    endsWithQuestion: 0
   dialogueManager: {fileID: 109021465}
 --- !u!1 &440665302
 GameObject:
@@ -4410,9 +4417,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942afde5cd1de03429c1eb033e53bcca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue:
-    name: 
-    sentences: []
+  dialogueTree:
+    dialogue:
+      name: 
+      sentences: []
+    endsWithQuestion: 0
   dialogueManager: {fileID: 109021465}
 --- !u!1 &705507993
 GameObject:
@@ -6755,6 +6764,7 @@ GameObject:
   - component: {fileID: 1461543174}
   - component: {fileID: 1461543176}
   - component: {fileID: 1461543175}
+  - component: {fileID: 1461543177}
   m_Layer: 5
   m_Name: YesNoBox
   m_TagString: Untagged
@@ -6822,6 +6832,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1461543173}
   m_CullTransparentMesh: 0
+--- !u!95 &1461543177
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461543173}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 83283706735a420419f06b8753751570, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!43 &1466265767
 Mesh:
   m_ObjectHideFlags: 0
