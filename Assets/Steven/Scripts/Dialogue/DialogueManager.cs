@@ -9,13 +9,14 @@ public class DialogueManager : Singleton<DialogueManager>
     public Text nameText;
     public Text dialogueText;
     public Animator animator;
+    public YesNoBoxManager yesNoBoxManager;
 
-    public bool writingSentence;
-    public bool fastCompleteSentence;
+    private bool writingSentence;
+    private bool fastCompleteSentence;
 
     private Queue<string> sentences;
 
-    private DialogueTree currentNode;
+    private DialogueTree tree;
 
     // Start is called before the first frame update
     void Start()
@@ -24,21 +25,25 @@ public class DialogueManager : Singleton<DialogueManager>
     }
 
     // Returns true if dialogue is ended
-    public bool StartDialogue(DialogueTree node) 
+    public bool StartDialogue(DialogueTree tree) 
     {
-        Dialogue dialogue = node.dialogue;
 
-        currentNode = null;
+        this.tree = null;
         sentences.Clear();
+
+        if (tree == null) {
+            return true;
+        }
+
         writingSentence = false;
         fastCompleteSentence = false;
 
-        if (dialogue.sentences.Length == 0) return true;
+        if (!tree.HasSentences()) return true;
 
-        currentNode = node;
-        nameText.text = dialogue.name;
+        this.tree = tree;
+        nameText.text = tree.GetName();
 
-        foreach (string sentence in dialogue.sentences) 
+        foreach (string sentence in tree.GetSentences()) 
         {
             sentences.Enqueue(sentence);
         }
@@ -51,8 +56,32 @@ public class DialogueManager : Singleton<DialogueManager>
     // Returns true if dialogue is ended
     public bool DisplayNextSentence()
     {
+        if (tree == null) {
+            return true;
+        }
+
         if (writingSentence) {
             fastCompleteSentence = true;
+            return false;
+        }
+
+        if (yesNoBoxManager.IsOpen()) 
+        {
+            bool answer = yesNoBoxManager.GetAnswer();
+            yesNoBoxManager.EndAnswer();
+
+            if (tree.GetPath(answer) != null) {
+                tree.TakePath(answer);
+                return StartDialogue(tree);
+            }
+
+            EndDialogue();
+            return true;
+            
+        }
+
+        if (sentences.Count == 0 && tree.IsAnswerable()) {
+            yesNoBoxManager.StartAnswer();
             return false;
         }
 
@@ -66,6 +95,11 @@ public class DialogueManager : Singleton<DialogueManager>
         StartCoroutine(TypeSentence(sentence));
 
         return false;
+    }
+
+    public void SetAnswer(bool answer) 
+    {
+        yesNoBoxManager.SetAnswer(answer);
     }
 
     IEnumerator TypeSentence(string sentence)

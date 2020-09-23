@@ -13,7 +13,12 @@ public class NpcController : MonoBehaviour
 
     public bool StartConversation(Transform player) {
         transform.LookAt(player);
+        dialogueTree.ResetTree();
         return dialogueManager.StartDialogue(dialogueTree);
+    }
+
+    public void SetAnswer(bool answer) {
+        dialogueManager.SetAnswer(answer);
     }
 
 }

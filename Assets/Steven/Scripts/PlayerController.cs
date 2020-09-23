@@ -26,10 +26,13 @@ public class PlayerController : MonoBehaviour
     void Awake() {
         controls = new PlayerInputActions();
 
+        controls.Player.Move.started += ctx => movement = ctx.ReadValue<Vector2>();
         controls.Player.Move.performed += ctx => movement = ctx.ReadValue<Vector2>();
         controls.Player.Move.canceled += ctx => movement = ctx.ReadValue<Vector2>();
         controls.Player.AngleKick.performed += ctx => angleKick = ctx.ReadValue<float>();
-        controls.Player.AngleKick.canceled += ctx => angleKick = 0f;
+        controls.Player.Look.started += ctx => look = ctx.ReadValue<Vector2>();
+        controls.Player.Look.performed += ctx => look = ctx.ReadValue<Vector2>();
+        controls.Player.Look.canceled += ctx => look = ctx.ReadValue<Vector2>();
 
         controls.Player.Kick.started += Aim;
         controls.Player.Kick.canceled += Kick;
@@ -79,6 +82,14 @@ public class PlayerController : MonoBehaviour
         if (playerState == PlayerState.AIMING) HandleAiming();
 
         if (playerState == PlayerState.MOVING) HandleMovement();
+
+        if (playerState == PlayerState.TALKING) HandleTalking();
+    }
+
+    public void HandleTalking() {
+        if (Mathf.Abs(movement.y) > 0.1f) {
+            npc.SetAnswer(movement.y > 0 ? true : false);
+        }
     }
 
     public void HandleAiming() {
@@ -124,7 +135,6 @@ public class PlayerController : MonoBehaviour
 
     public void Npc(NpcController npc)
     {
-        Debug.Log("INSIDE TALKING RANGE");
         this.npc = npc;
     }
 
@@ -134,7 +144,6 @@ public class PlayerController : MonoBehaviour
     }
 
     public void NoNpc() {
-        Debug.Log("OUTSIDE TALKING RANGE");
         if (playerState != PlayerState.TALKING) {
             this.npc = null;
         }
