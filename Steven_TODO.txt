@@ -5,9 +5,8 @@ Todo:
 - Show ball relative location when offscreen
 - Show UI buttons of kick/interaction with NPCs, etc.
 - Dialog trees and text boxes
+- (BUG) Cris reported camera drifting away from player and getting stuck in kick
 
 Optional
-- Enhance camera targeting with Slerp/Lerp transition to new position
-- Enhance camera targeting with Slerp/Lerp to new zoom
 - Show constraints on where player can kick
 - (Experiment) trajectory with drag

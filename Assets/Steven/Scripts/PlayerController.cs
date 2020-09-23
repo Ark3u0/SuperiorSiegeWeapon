@@ -11,12 +11,13 @@ public class PlayerController : MonoBehaviour
     public CharacterController controller;
     public PlayerInputActions controls;
     public Ball ball;
+    public NpcController npc;
     public Camera cam;
     public float speed = 6.0f;
     public float gravity = 9.81f;
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
-    bool aiming = false;
+    public PlayerState playerState;
     Vector2 movement;
     Vector2 look;
 
@@ -30,25 +31,44 @@ public class PlayerController : MonoBehaviour
         controls.Player.AngleKick.performed += ctx => angleKick = ctx.ReadValue<float>();
         controls.Player.AngleKick.canceled += ctx => angleKick = 0f;
 
-        controls.Player.Kick.started += AimKick;
+        controls.Player.Kick.started += Aim;
         controls.Player.Kick.canceled += Kick;
+
+        controls.Player.Interact.started += Talk;
 
         cam.GetComponent<FollowCameraTarget>().SetCameraTarget(cameraTarget);
     }
 
-    void AimKick(InputAction.CallbackContext context)
+    void Aim(InputAction.CallbackContext context)
     {        
-        if (CanKick())
+        if (CanAim())
         {
-            this.aiming = true;
-            this.ball.PlaceForKick(transform);
+            playerState = PlayerState.AIMING;
+            ball.PlaceForKick(transform);
         }
+    }
+
+    void Talk(InputAction.CallbackContext context)
+    {
+        if (playerState != PlayerState.TALKING && CanTalk())
+        {
+            playerState = PlayerState.TALKING;
+            bool isEndOfConversation = npc.StartConversation(transform);
+            if (isEndOfConversation) playerState = PlayerState.MOVING;
+        } 
+        else if (playerState == PlayerState.TALKING)
+        {
+            bool isEndOfConversation = npc.ContinueConversation();
+            if (isEndOfConversation) playerState = PlayerState.MOVING;
+        }
+
+        
     }
 
     void Kick(InputAction.CallbackContext context) 
     {
-        if (this.aiming) {
-            this.aiming = false;
+        if (CanKick()) {
+            playerState = PlayerState.MOVING;
             this.ball.Kick();
             cam.GetComponent<FollowCameraTarget>().SetCameraTarget(cameraTarget);
         }
@@ -56,13 +76,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (this.aiming) {
-            HandleAiming();
-        }
+        if (playerState == PlayerState.AIMING) HandleAiming();
 
-        if (!this.aiming) {
-            HandleMovement();
-        }
+        if (playerState == PlayerState.MOVING) HandleMovement();
     }
 
     public void HandleAiming() {
@@ -93,7 +109,22 @@ public class PlayerController : MonoBehaviour
 
     public bool CanKick()
     {
-        return this.ball != null;
+        return ball != null && playerState == PlayerState.AIMING;
+    }
+
+    public bool CanAim()
+    {
+        return ball != null;
+    }
+
+    public bool CanTalk()
+    {
+        return npc != null;
+    }
+
+    public void Npc(NpcController npc)
+    {
+        this.npc = npc;
     }
 
     public void Ball(Ball ball)
@@ -101,8 +132,14 @@ public class PlayerController : MonoBehaviour
         this.ball = ball;
     }
 
+    public void NoNpc() {
+        if (playerState != PlayerState.TALKING) {
+            this.npc = null;
+        }
+    }
+ 
     public void NoBall() {
-        if (!this.aiming) {
+        if (playerState != PlayerState.AIMING) {
             this.ball = null;
         }
     }
@@ -113,5 +150,11 @@ public class PlayerController : MonoBehaviour
 
     void OnDisable() {
         controls.Player.Disable();
+    }
+
+    public enum PlayerState {
+        MOVING,
+        TALKING,
+        AIMING
     }
 }
