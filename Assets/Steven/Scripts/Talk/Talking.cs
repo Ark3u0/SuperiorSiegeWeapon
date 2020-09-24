@@ -58,7 +58,6 @@ public class Talking : Action
             isConversationEnded = player.npc.ContinueConversation();
         }
 
-        Debug.Log(movement.y);
         if (Mathf.Abs(movement.y) > 0.1f) {
             player.npc.Answer(movement.y > 0);
         }
