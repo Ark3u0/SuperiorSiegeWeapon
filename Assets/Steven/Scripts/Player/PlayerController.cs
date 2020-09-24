@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public PlayerInputActions controls;
     private ActionStateMachine actions;
     public Ball ball;
+    public Ball ballToReset;
     public NpcController npc;
     public Camera cam;
     public float speed = 6.0f;
@@ -27,7 +28,7 @@ public class PlayerController : MonoBehaviour
             { "aiming", () => new PlayerAiming(this, actions) },
             { "kicking", () => new PlayerKicking(this, actions) },
             { "talking", () => new PlayerTalking(this, actions) },
-            // { "resetingBall", () => new PlayerResetingBall(this, actions) }
+            { "resetingBall", () => new PlayerResetingBall(this, actions) }
         });
 
         CameraFollowPlayer();
@@ -52,6 +53,9 @@ public class PlayerController : MonoBehaviour
  
     public void SetBall(Ball ball) {
         if (actions.current.Name() != "aiming") {
+            if (ball != null) {
+                this.ballToReset = ball;
+            }
             this.ball = ball;
         }
     }

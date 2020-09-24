@@ -57,7 +57,7 @@ public class PlayerMoving : Action
             return true;
         }
         if (ballResetTriggerer) {
-            actions.Change("ballReseting", new Dictionary<string, object>());
+            actions.Change("resetingBall", new Dictionary<string, object>());
             return true;
         }
 

@@ -82,11 +82,6 @@ public class Ball : MonoBehaviour
         kickAngle = 30f;    
     }
 
-    public void ResetTo(PlayerController player)
-    {
-        transform.position = player.transform.position + new Vector3(0, 10f, 0);
-    }
-
     public void Kick()
     {
         if (ballState == BallState.AIMING) {
