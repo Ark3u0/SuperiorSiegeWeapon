@@ -38,11 +38,13 @@ public class Talking : Action
 
     public void PostAction()
     {
-       controls.Player.Interact.Disable();
+        controls.Player.Move.Disable();
+        controls.Player.Interact.Disable();
     }
 
     public void PreAction(Dictionary<string, object> preParams)
     {
+        controls.Player.Move.Enable();
         controls.Player.Interact.Enable();
 
         isConversationEnded = player.npc.StartConversation(player.transform);
@@ -56,6 +58,7 @@ public class Talking : Action
             isConversationEnded = player.npc.ContinueConversation();
         }
 
+        Debug.Log(movement.y);
         if (Mathf.Abs(movement.y) > 0.1f) {
             player.npc.Answer(movement.y > 0);
         }

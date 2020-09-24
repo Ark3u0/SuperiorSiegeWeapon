@@ -13,6 +13,9 @@ public class NpcController : MonoBehaviour
 
     public bool StartConversation(Transform player) {
         transform.LookAt(player);
+
+        if (dialogueTree == null) return true;
+        
         dialogueTree.ResetTree();
         return dialogueManager.StartDialogue(dialogueTree);
     }
