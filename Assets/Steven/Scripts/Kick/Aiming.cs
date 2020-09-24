@@ -23,8 +23,9 @@ public class Aiming : Action
         controls.Player.Move.performed += ctx => movement = ctx.ReadValue<Vector2>();
         controls.Player.Move.canceled += ctx => movement = ctx.ReadValue<Vector2>();
 
+        controls.Player.AngleKick.started += ctx => angleKick = ctx.ReadValue<float>();
         controls.Player.AngleKick.performed += ctx => angleKick = ctx.ReadValue<float>();
-
+        controls.Player.AngleKick.canceled += ctx => angleKick = ctx.ReadValue<float>();
     }
 
     public void PostAction()
