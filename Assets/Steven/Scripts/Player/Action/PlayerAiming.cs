@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Aiming : Action
+public class PlayerAiming : Action
 {
     public PlayerInputActions controls;
     private ActionStateMachine actions;
@@ -12,7 +12,7 @@ public class Aiming : Action
 
     private bool kickTriggered = false;
     
-    public Aiming(PlayerController player, ActionStateMachine actions) {
+    public PlayerAiming(PlayerController player, ActionStateMachine actions) {
         this.controls = new PlayerInputActions();
         this.actions = actions;
         this.player = player;

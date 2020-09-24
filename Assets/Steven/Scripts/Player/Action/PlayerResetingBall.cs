@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class BallReseting : Action
+public class PlayerResetingBall : Action
 {
     public PlayerInputActions controls;
     private ActionStateMachine actions;
     private PlayerController player;
     
-    public BallReseting(PlayerController player, ActionStateMachine actions) {
+    public PlayerResetingBall(PlayerController player, ActionStateMachine actions) {
         this.controls = new PlayerInputActions();
         this.actions = actions;
         this.player = player;
@@ -37,6 +37,6 @@ public class BallReseting : Action
 
     public string Name()
     {
-        return "ballReseting";
+        return "resetingBall";
     }
 }

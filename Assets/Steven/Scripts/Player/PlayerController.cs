@@ -23,11 +23,11 @@ public class PlayerController : MonoBehaviour
         actions = new ActionStateMachine();
 
         actions.Initialize("moving", new Dictionary<string, System.Func<Action>> {
-            { "moving", () => new Moving(this, actions) },
-            { "aiming", () => new Aiming(this, actions) },
-            { "kicking", () => new Kicking(this, actions) },
-            { "talking", () => new Talking(this, actions) },
-            // { "ballReseting", () => new BallReseting(this, actions) }
+            { "moving", () => new PlayerMoving(this, actions) },
+            { "aiming", () => new PlayerAiming(this, actions) },
+            { "kicking", () => new PlayerKicking(this, actions) },
+            { "talking", () => new PlayerTalking(this, actions) },
+            // { "resetingBall", () => new PlayerResetingBall(this, actions) }
         });
 
         CameraFollowPlayer();

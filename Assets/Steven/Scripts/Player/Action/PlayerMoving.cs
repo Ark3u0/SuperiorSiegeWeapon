@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Moving : Action
+public class PlayerMoving : Action
 {
     private ActionStateMachine actions;
     private PlayerController player;
@@ -14,7 +14,7 @@ public class Moving : Action
     private bool ballResetTriggerer = false;
 
 
-    public Moving(PlayerController player, ActionStateMachine actions)
+    public PlayerMoving(PlayerController player, ActionStateMachine actions)
     {
         this.controls = new PlayerInputActions();
         this.actions = actions;

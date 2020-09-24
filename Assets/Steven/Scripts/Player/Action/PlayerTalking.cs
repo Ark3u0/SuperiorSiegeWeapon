@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Talking : Action
+public class PlayerTalking : Action
 {
     public PlayerController player;
     private ActionStateMachine actions;
@@ -12,7 +12,7 @@ public class Talking : Action
     private bool talkTriggered = false;
     private bool isConversationEnded = false;
 
-    public Talking(PlayerController player, ActionStateMachine actions)
+    public PlayerTalking(PlayerController player, ActionStateMachine actions)
     {
         this.controls = new PlayerInputActions();
         this.actions = actions;
