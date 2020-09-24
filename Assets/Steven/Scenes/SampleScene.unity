@@ -2427,7 +2427,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23f0e0d881131df4ba2f5dc6faa02ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 1461543177}
+  boxAnimator: {fileID: 1461543177}
+  cursorAnimator: {fileID: 567779399}
 --- !u!4 &606112310
 Transform:
   m_ObjectHideFlags: 0
@@ -7131,9 +7132,8 @@ MonoBehaviour:
   npc: {fileID: 0}
   cam: {fileID: 963194227}
   speed: 6
-  gravity: 9.81
   turnSmoothTime: 0.1
-  playerState: 0
+  turnSmoothVelocity: 0
 --- !u!54 &1491613346
 Rigidbody:
   m_ObjectHideFlags: 0
