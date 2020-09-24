@@ -1,10 +1,12 @@
 Todo:
 
-- Handle camera obstruction
-
-- Show ball relative location when offscreen
+- Reset ball above player transform on
 - Show UI buttons of kick/interaction with NPCs, etc.
-- Dialog trees and text boxes
+- Animations/Sprites
+- Adding/Creating Characters
+- Conditionalizing dialogue for items
+
+- Handle camera obstruction
 - (BUG) Cris reported camera drifting away from player and getting stuck in kick
 
 Optional
