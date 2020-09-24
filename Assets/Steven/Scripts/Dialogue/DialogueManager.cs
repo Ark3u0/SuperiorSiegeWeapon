@@ -97,9 +97,9 @@ public class DialogueManager : Singleton<DialogueManager>
         return false;
     }
 
-    public void SetAnswer(bool answer) 
+    public void Answer(bool answer) 
     {
-        yesNoBoxManager.SetAnswer(answer);
+        yesNoBoxManager.Answer(answer);
     }
 
     IEnumerator TypeSentence(string sentence)

@@ -9,24 +9,24 @@ public class InteractableCollider : MonoBehaviour
     public void OnTriggerEnter(Collider other) {
         Ball ball = other.gameObject.GetComponent<Ball>();
         if (ball != null) {
-            controller.GetComponent<PlayerController>().Ball(ball);
+            controller.GetComponent<PlayerController>().SetBall(ball);
         }
 
         NpcController npc = other.gameObject.GetComponent<NpcController>();
         if (npc != null) {
-            controller.GetComponent<PlayerController>().Npc(npc);     
+            controller.GetComponent<PlayerController>().SetNpc(npc);     
         }
     }
 
     public void OnTriggerExit(Collider other) {
         Ball ball = other.gameObject.GetComponent<Ball>();
         if (ball != null) {
-            controller.GetComponent<PlayerController>().NoBall();
+            controller.GetComponent<PlayerController>().SetBall(null);
         }
 
         NpcController npc = other.gameObject.GetComponent<NpcController>();
         if (npc != null) {
-            controller.GetComponent<PlayerController>().NoNpc();     
+            controller.GetComponent<PlayerController>().SetNpc(null);     
         }
     }
 }

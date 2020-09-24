@@ -17,7 +17,7 @@ public class YesNoBoxManager : MonoBehaviour
         boxAnimator.SetBool("IsOpen", false);
     }
 
-    public void SetAnswer(bool answer)
+    public void Answer(bool answer)
     {   
         cursorAnimator.SetBool("Answer", answer);
     }

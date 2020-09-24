@@ -17,8 +17,8 @@ public class NpcController : MonoBehaviour
         return dialogueManager.StartDialogue(dialogueTree);
     }
 
-    public void SetAnswer(bool answer) {
-        dialogueManager.SetAnswer(answer);
+    public void Answer(bool answer) {
+        dialogueManager.Answer(answer);
     }
 
 }
