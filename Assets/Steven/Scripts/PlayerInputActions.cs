@@ -65,6 +65,14 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ResetBall"",
+                    ""type"": ""Button"",
+                    ""id"": ""2d288da9-7579-467b-94e5-4b060dc9f48b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -395,6 +403,28 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2d8754be-1baf-426e-b983-b31549b87d48"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ResetBall"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe55eb47-0434-408e-984b-bc2e9a777f6d"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""ResetBall"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -978,6 +1008,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_Player_Kick = m_Player.FindAction("Kick", throwIfNotFound: true);
         m_Player_AngleKick = m_Player.FindAction("AngleKick", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_ResetBall = m_Player.FindAction("ResetBall", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1045,6 +1076,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Kick;
     private readonly InputAction m_Player_AngleKick;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_ResetBall;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1055,6 +1087,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @Kick => m_Wrapper.m_Player_Kick;
         public InputAction @AngleKick => m_Wrapper.m_Player_AngleKick;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @ResetBall => m_Wrapper.m_Player_ResetBall;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1082,6 +1115,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @ResetBall.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnResetBall;
+                @ResetBall.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnResetBall;
+                @ResetBall.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnResetBall;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1104,6 +1140,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @ResetBall.started += instance.OnResetBall;
+                @ResetBall.performed += instance.OnResetBall;
+                @ResetBall.canceled += instance.OnResetBall;
             }
         }
     }
@@ -1266,6 +1305,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnKick(InputAction.CallbackContext context);
         void OnAngleKick(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnResetBall(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

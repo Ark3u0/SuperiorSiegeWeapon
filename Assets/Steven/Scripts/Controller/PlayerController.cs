@@ -26,7 +26,8 @@ public class PlayerController : MonoBehaviour
             { "moving", () => new Moving(this, actions) },
             { "aiming", () => new Aiming(this, actions) },
             { "kicking", () => new Kicking(this, actions) },
-            { "talking", () => new Talking(this, actions) }
+            { "talking", () => new Talking(this, actions) },
+            // { "ballReseting", () => new BallReseting(this, actions) }
         });
 
         CameraFollowPlayer();
