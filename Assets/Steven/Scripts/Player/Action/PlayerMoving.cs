@@ -11,6 +11,7 @@ public class PlayerMoving : Action
     public float GRAVITY = 9.81f;
     private bool aimTriggered = false;
     private bool talkTriggered = false;
+    private bool resetBallTriggered = false;
 
 
     public PlayerMoving(PlayerController player, ActionStateMachine actions)
@@ -26,6 +27,8 @@ public class PlayerMoving : Action
         controls.Player.Move.canceled += ctx => movement = ctx.ReadValue<Vector2>();
 
         controls.Player.Interact.started += ctx => talkTriggered = true;
+
+        controls.Player.ResetBall.started += ctx => resetBallTriggered = true;
     }
 
     public void PostAction()
@@ -33,6 +36,7 @@ public class PlayerMoving : Action
         controls.Player.Kick.Disable();
         controls.Player.Move.Disable();
         controls.Player.Interact.Disable();
+        controls.Player.ResetBall.Disable();
     }
 
     public void PreAction(Dictionary<string, object> changeParams)
@@ -40,6 +44,7 @@ public class PlayerMoving : Action
         controls.Player.Kick.Enable();
         controls.Player.Move.Enable();
         controls.Player.Interact.Enable();
+        controls.Player.ResetBall.Enable();
     }
 
     public bool CheckForActionChange()
@@ -52,9 +57,14 @@ public class PlayerMoving : Action
             actions.Change("talking", new Dictionary<string, object>());
             return true;
         }
+        if (resetBallTriggered) {
+            actions.Change("resetingBall", new Dictionary<string, object>());
+            return true;
+        }
 
         aimTriggered = false;
         talkTriggered = false;
+        resetBallTriggered = false;
 
         return false;
     }
