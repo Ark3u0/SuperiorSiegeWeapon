@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public CharacterController controller;
     public PlayerInputActions controls;
     private ActionStateMachine actions;
+    public InteractionBoxManager interactionBoxManager;
     public Ball ballToReset;
     public Ball ball;
     public NpcController npc;
@@ -24,8 +25,8 @@ public class PlayerController : MonoBehaviour
         actions = new ActionStateMachine();
 
         actions.Initialize("moving", new Dictionary<string, System.Func<Action>> {
-            { "moving", () => new PlayerMoving(this, actions) },
-            { "aiming", () => new PlayerAiming(this, actions) },
+            { "moving", () => new PlayerMoving(this, actions, interactionBoxManager) },
+            { "aiming", () => new PlayerAiming(this, actions, interactionBoxManager) },
             { "kicking", () => new PlayerKicking(this, actions) },
             { "talking", () => new PlayerTalking(this, actions) },
             { "resetingBall", () => new PlayerResetingBall(this, actions) }

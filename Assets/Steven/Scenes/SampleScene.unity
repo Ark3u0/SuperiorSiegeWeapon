@@ -5365,7 +5365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &887308670
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5571,6 +5571,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionBox: {fileID: 887308669}
+  aButton: {fileID: 3415806717759317341, guid: 57b36fba1d7079a45aa685923a4b705a, type: 3}
+  rightTrigger: {fileID: 2706257643446574530, guid: 57b36fba1d7079a45aa685923a4b705a, type: 3}
+  interaction: {fileID: 2100351089}
+  input: {fileID: 1542953256}
 --- !u!4 &1096157177
 Transform:
   m_ObjectHideFlags: 0
@@ -7248,6 +7252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTarget: {fileID: 14420652}
   controller: {fileID: 1491613347}
+  interactionBoxManager: {fileID: 1096157176}
   ballToReset: {fileID: 777280192}
   ball: {fileID: 0}
   npc: {fileID: 0}

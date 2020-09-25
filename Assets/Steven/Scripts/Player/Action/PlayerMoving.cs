@@ -7,6 +7,7 @@ public class PlayerMoving : Action
     private ActionStateMachine actions;
     private PlayerController player;
     private PlayerInputActions controls;
+    private InteractionBoxManager interactionBoxManager;
     private Vector2 movement;
     public float GRAVITY = 9.81f;
     private bool aimTriggered = false;
@@ -14,9 +15,10 @@ public class PlayerMoving : Action
     private bool resetBallTriggered = false;
 
 
-    public PlayerMoving(PlayerController player, ActionStateMachine actions)
+    public PlayerMoving(PlayerController player, ActionStateMachine actions, InteractionBoxManager interactionBoxManager)
     {
         this.controls = new PlayerInputActions();
+        this.interactionBoxManager = interactionBoxManager;
         this.actions = actions;
         this.player = player;
 
@@ -37,6 +39,7 @@ public class PlayerMoving : Action
         controls.Player.Move.Disable();
         controls.Player.Interact.Disable();
         controls.Player.ResetBall.Disable();
+        interactionBoxManager.HideInteraction();
     }
 
     public void PreAction(Dictionary<string, object> changeParams)
@@ -69,9 +72,23 @@ public class PlayerMoving : Action
         return false;
     }
 
+    private void CheckForInteractions()
+    {
+        if (CanAim()) {
+            interactionBoxManager.ShowInteraction("Aim");
+        } else if (CanTalk()) {
+            interactionBoxManager.ShowInteraction("Talk");
+        } else {
+            interactionBoxManager.HideInteraction();
+        }
+    
+    }
+
     public void Update()
     {
         if (CheckForActionChange()) return;
+
+        CheckForInteractions();
 
         Vector3 direction = new Vector3(movement.x, 0f, movement.y).normalized;
         Vector3 toMove = new Vector3(0, 0, 0);
@@ -93,7 +110,7 @@ public class PlayerMoving : Action
 
     private bool CanAim()
     {
-        return player.ball != null;
+        return player.ball != null && player.ball.ballState != Ball.BallState.IN_AIR_FROM_KICK;
     }
 
     private bool CanTalk()
