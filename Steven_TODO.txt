@@ -1,6 +1,5 @@
 Todo:
 
-- Reset ball above player transform on
 - Show UI buttons of kick/interaction with NPCs, etc.
 - Animations/Sprites
 - Adding/Creating Characters
