@@ -5365,7 +5365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &887308670
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5793,7 +5793,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19fc839fbdf3c8c41b8235018c8080e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionBoxManager: {fileID: 1096157176}
   controller: {fileID: 1491613347}
 --- !u!65 &1231011685
 BoxCollider:
@@ -7249,8 +7248,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTarget: {fileID: 14420652}
   controller: {fileID: 1491613347}
-  ball: {fileID: 0}
   ballToReset: {fileID: 777280192}
+  ball: {fileID: 0}
   npc: {fileID: 0}
   cam: {fileID: 963194227}
   speed: 6

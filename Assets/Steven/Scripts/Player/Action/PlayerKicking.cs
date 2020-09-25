@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Kicking : Action
+public class PlayerKicking : Action
 {
     public PlayerInputActions controls;
     private ActionStateMachine actions;
     private PlayerController player;
     
-    public Kicking(PlayerController player, ActionStateMachine actions) {
+    public PlayerKicking(PlayerController player, ActionStateMachine actions) {
         this.controls = new PlayerInputActions();
         this.actions = actions;
         this.player = player;

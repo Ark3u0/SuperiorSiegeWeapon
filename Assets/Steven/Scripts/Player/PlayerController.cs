@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public CharacterController controller;
     public PlayerInputActions controls;
     private ActionStateMachine actions;
+    public Ball ballToReset;
     public Ball ball;
     public NpcController npc;
     public Camera cam;
@@ -23,10 +24,10 @@ public class PlayerController : MonoBehaviour
         actions = new ActionStateMachine();
 
         actions.Initialize("moving", new Dictionary<string, System.Func<Action>> {
-            { "moving", () => new Moving(this, actions) },
-            { "aiming", () => new Aiming(this, actions) },
-            { "kicking", () => new Kicking(this, actions) },
-            { "talking", () => new Talking(this, actions) }
+            { "moving", () => new PlayerMoving(this, actions) },
+            { "aiming", () => new PlayerAiming(this, actions) },
+            { "kicking", () => new PlayerKicking(this, actions) },
+            { "talking", () => new PlayerTalking(this, actions) }
         });
 
         CameraFollowPlayer();
@@ -51,6 +52,9 @@ public class PlayerController : MonoBehaviour
  
     public void SetBall(Ball ball) {
         if (actions.current.Name() != "aiming") {
+            if (ball != null) {
+                ballToReset = ball;
+            }
             this.ball = ball;
         }
     }

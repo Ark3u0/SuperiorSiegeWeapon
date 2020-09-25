@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Aiming : Action
+public class PlayerAiming : Action
 {
     public PlayerInputActions controls;
     private ActionStateMachine actions;
@@ -12,7 +12,7 @@ public class Aiming : Action
 
     private bool kickTriggered = false;
     
-    public Aiming(PlayerController player, ActionStateMachine actions) {
+    public PlayerAiming(PlayerController player, ActionStateMachine actions) {
         this.controls = new PlayerInputActions();
         this.actions = actions;
         this.player = player;
@@ -23,7 +23,9 @@ public class Aiming : Action
         controls.Player.Move.performed += ctx => movement = ctx.ReadValue<Vector2>();
         controls.Player.Move.canceled += ctx => movement = ctx.ReadValue<Vector2>();
 
+        controls.Player.AngleKick.started += ctx => angleKick = ctx.ReadValue<float>();
         controls.Player.AngleKick.performed += ctx => angleKick = ctx.ReadValue<float>();
+        controls.Player.AngleKick.canceled += ctx => angleKick = ctx.ReadValue<float>();
 
     }
 
