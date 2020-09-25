@@ -7,6 +7,7 @@ Todo:
 
 - Handle camera obstruction
 - (BUG) Cris reported camera drifting away from player and getting stuck in kick
+- (BUG) Rotating sprite when character rotates, independent of player.
 
 Optional
 - Show constraints on where player can kick
