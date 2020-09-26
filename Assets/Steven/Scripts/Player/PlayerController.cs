@@ -11,11 +11,11 @@ public class PlayerController : MonoBehaviour
     public CharacterController controller;
     public PlayerInputActions controls;
     private ActionStateMachine actions;
-    public InteractionBoxManager interactionBoxManager;
-    public Ball ballToReset;
+    private InputBoxManager inputBoxManager;
+    private Ball ballToReset;
+    private Camera cam;
     public Ball ball;
     public NpcController npc;
-    public Camera cam;
     public float speed = 6.0f;
     public float turnSmoothTime = 0.1f;
     public float turnSmoothVelocity;
@@ -23,16 +23,60 @@ public class PlayerController : MonoBehaviour
     void Awake() {
         controls = new PlayerInputActions();
         actions = new ActionStateMachine();
+        inputBoxManager = FindInputBoxManagerInScene();
+        ballToReset = FindBallInScene();
+        cam = FindCameraInScene();
 
         actions.Initialize("moving", new Dictionary<string, System.Func<Action>> {
-            { "moving", () => new PlayerMoving(this, actions, interactionBoxManager) },
-            { "aiming", () => new PlayerAiming(this, actions, interactionBoxManager) },
+            { "moving", () => new PlayerMoving(this, actions, inputBoxManager, cam) },
+            { "aiming", () => new PlayerAiming(this, actions, inputBoxManager, cam) },
             { "kicking", () => new PlayerKicking(this, actions) },
             { "talking", () => new PlayerTalking(this, actions) },
             { "resetingBall", () => new PlayerResetingBall(this, actions) }
         });
 
         CameraFollowPlayer();
+    }
+
+    public Camera AttachedCamera()
+    {
+        return cam;
+    }
+
+    private Camera FindCameraInScene() {
+        Camera cam = GameObject.FindObjectOfType<Camera>();
+        if (cam == null) {
+            Debug.LogError("[PlayerController] expected Camera to exist in scene. Please add Camera and required dependencies to scene and rebuild.");
+            throw new System.Exception("[PlayerController] Missing dependency: (Camera)");
+        }
+        return cam;
+    }
+
+    private InputBoxManager FindInputBoxManagerInScene() {
+        InputBoxManager inputBoxManager = GameObject.FindObjectOfType<InputBoxManager>();
+        if (inputBoxManager == null) {
+            Debug.LogError("[PlayerController] expected inputBoxManager to exist in scene. Please add InputBoxManager and required dependencies to scene and rebuild.");
+            throw new System.Exception("[PlayerController] Missing dependency: (InputBoxManager)");
+        }
+        return inputBoxManager;
+    }
+
+    private Ball FindBallInScene() {
+        Ball ball = GameObject.FindObjectOfType<Ball>();
+        if (ball == null) {
+            Debug.LogError("[PlayerController] expected Ball to exist in scene. Please add Ball and required dependencies to scene and rebuild.");
+            throw new System.Exception("[PlayerController] Missing dependency: (Ball)");
+        }
+        return ball;
+    }
+
+    public void ResetBallToPlayer()
+    {
+        if (ballToReset != null)
+        {
+            ballToReset.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+            ballToReset.transform.position = transform.position + new Vector3(0, 5, 0);
+        }
     }
 
     public void CameraFollowPlayer()

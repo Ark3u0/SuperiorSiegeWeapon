@@ -21,11 +21,7 @@ public class PlayerResetingBall : Action
 
     public void PreAction(Dictionary<string, object> changeParams)
     {
-        if (player.ballToReset != null)
-        {
-            player.ballToReset.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-            player.ballToReset.transform.position = player.transform.position + new Vector3(0, 5, 0);
-        }
+        player.GetComponent<PlayerController>().ResetBallToPlayer();
     }
 
     public void Update()

@@ -7,7 +7,8 @@ public class PlayerMoving : Action
     private ActionStateMachine actions;
     private PlayerController player;
     private PlayerInputActions controls;
-    private InteractionBoxManager interactionBoxManager;
+    private InputBoxManager inputBoxManager;
+    private Camera cam;
     private Vector2 movement;
     public float GRAVITY = 9.81f;
     private bool aimTriggered = false;
@@ -15,10 +16,11 @@ public class PlayerMoving : Action
     private bool resetBallTriggered = false;
 
 
-    public PlayerMoving(PlayerController player, ActionStateMachine actions, InteractionBoxManager interactionBoxManager)
+    public PlayerMoving(PlayerController player, ActionStateMachine actions, InputBoxManager inputBoxManager, Camera cam)
     {
         this.controls = new PlayerInputActions();
-        this.interactionBoxManager = interactionBoxManager;
+        this.cam = cam;
+        this.inputBoxManager = inputBoxManager;
         this.actions = actions;
         this.player = player;
 
@@ -39,7 +41,7 @@ public class PlayerMoving : Action
         controls.Player.Move.Disable();
         controls.Player.Interact.Disable();
         controls.Player.ResetBall.Disable();
-        interactionBoxManager.HideInteraction();
+        inputBoxManager.HideInputs();
     }
 
     public void PreAction(Dictionary<string, object> changeParams)
@@ -72,14 +74,21 @@ public class PlayerMoving : Action
         return false;
     }
 
-    private void CheckForInteractions()
+    private void CheckForPossibleInputs()
     {
+        List<string> possibleInputs = new List<string>();
+
         if (CanAim()) {
-            interactionBoxManager.ShowInteraction("Aim");
-        } else if (CanTalk()) {
-            interactionBoxManager.ShowInteraction("Talk");
+            possibleInputs.Add("Aim");
+        }
+        if (CanTalk()) {
+            possibleInputs.Add("Talk");
+        }
+
+        if (possibleInputs.Count == 0) {
+            inputBoxManager.HideInputs();
         } else {
-            interactionBoxManager.HideInteraction();
+            inputBoxManager.ShowInputs(possibleInputs);
         }
     
     }
@@ -88,13 +97,13 @@ public class PlayerMoving : Action
     {
         if (CheckForActionChange()) return;
 
-        CheckForInteractions();
+        CheckForPossibleInputs();
 
         Vector3 direction = new Vector3(movement.x, 0f, movement.y).normalized;
         Vector3 toMove = new Vector3(0, 0, 0);
 
         if (direction.magnitude >= 0.1f) {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + player.cam.transform.eulerAngles.y;
+            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetAngle, ref player.turnSmoothVelocity, player.turnSmoothTime);
             player.transform.rotation = Quaternion.Euler(0f, angle, 0f);
 

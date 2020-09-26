@@ -7,15 +7,17 @@ public class PlayerAiming : Action
     public PlayerInputActions controls;
     private ActionStateMachine actions;
     private PlayerController player;
-    private InteractionBoxManager interactionBoxManager;
+    private Camera cam;
+    private InputBoxManager inputBoxManager;
     private Vector2 movement;
     private float angleKick;
 
     private bool kickTriggered = false;
     
-    public PlayerAiming(PlayerController player, ActionStateMachine actions, InteractionBoxManager interactionBoxManager) {
+    public PlayerAiming(PlayerController player, ActionStateMachine actions, InputBoxManager inputBoxManager, Camera cam) {
         this.controls = new PlayerInputActions();
-        this.interactionBoxManager = interactionBoxManager;
+        this.cam = cam;
+        this.inputBoxManager = inputBoxManager;
         this.actions = actions;
         this.player = player;
 
@@ -36,7 +38,7 @@ public class PlayerAiming : Action
         controls.Player.Move.Disable();
         controls.Player.Kick.Disable();
         controls.Player.AngleKick.Disable();
-        interactionBoxManager.HideInteraction();
+        inputBoxManager.HideInputs();
     }
 
    public void PreAction(Dictionary<string, object> changeParams)
@@ -46,7 +48,12 @@ public class PlayerAiming : Action
         controls.Player.AngleKick.Enable();
 
         player.ball.PlaceForKick(player.transform);
-        interactionBoxManager.ShowInteraction("Kick");
+        inputBoxManager.ShowInputs(new List<string> {
+            "Kick",
+            "Angle ↓",
+            "Angle ↑",
+            "Target"
+        });
     }
 
     public void Update()
@@ -56,7 +63,7 @@ public class PlayerAiming : Action
         player.ball.Aim(
             new Vector3(movement.x, 0f, movement.y).normalized, 
             angleKick, 
-            player.cam);
+            cam);
     }
 
     public bool CheckForActionChange()
