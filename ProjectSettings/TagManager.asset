@@ -18,8 +18,8 @@ TagManager:
   - Player
   - Ball
   - Ground
-  - 
-  - 
+  - CameraObstruction
+  - Camera
   - 
   - 
   - 
