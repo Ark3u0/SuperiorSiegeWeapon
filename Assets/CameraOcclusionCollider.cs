@@ -36,6 +36,6 @@ public class CameraOcclusionCollider : MonoBehaviour
     }
 
     void OnTriggerStay(Collider other) {
-        Debug.Log($"[Camera]Trigger Stay: {other.gameObject.name}");
+        Debug.Log($"[Camera] Trigger Stay: {other.gameObject.name}");
     }
 }

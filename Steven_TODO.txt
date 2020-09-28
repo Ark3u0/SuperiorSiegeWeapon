@@ -3,11 +3,12 @@ Todo:
 - Animations/Sprites
 - Adding/Creating Characters
 - Conditionalizing dialogue for items
-
 - Handle camera obstruction
+- (BUG) Rotating sprite when character rotates, independent of player.
+- (BUG) Fix interaction box - make wider
+
 
 Optional
 - Show constraints on where player can kick
 - (Experiment) trajectory with drag
-- (BUG) Rotating sprite when character rotates, independent of player.
 
