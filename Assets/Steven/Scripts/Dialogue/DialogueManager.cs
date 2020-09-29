@@ -16,7 +16,7 @@ public class DialogueManager : Singleton<DialogueManager>
 
     private Queue<string> sentences;
 
-    private DialogueTree tree;
+    private DialogueReader tree;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +25,7 @@ public class DialogueManager : Singleton<DialogueManager>
     }
 
     // Returns true if dialogue is ended
-    public bool StartDialogue(DialogueTree tree) 
+    public bool StartDialogue(DialogueReader tree) 
     {
 
         this.tree = null;

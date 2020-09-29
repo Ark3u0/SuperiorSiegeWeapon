@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NpcController : MonoBehaviour
 {
-    public DialogueTree dialogueTree;
+    public DialogueReader dialogueReader;
     public DialogueManager dialogueManager;
 
     public bool ContinueConversation() {
@@ -14,10 +14,10 @@ public class NpcController : MonoBehaviour
     public bool StartConversation(Transform player) {
         transform.LookAt(player);
 
-        if (dialogueTree == null) return true;
+        if (dialogueReader == null) return true;
         
-        dialogueTree.ResetTree();
-        return dialogueManager.StartDialogue(dialogueTree);
+        dialogueReader.ResetToInitial();
+        return dialogueManager.StartDialogue(dialogueReader);
     }
 
     public void Answer(bool answer) {
