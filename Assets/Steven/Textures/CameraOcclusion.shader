@@ -1,4 +1,4 @@
-﻿Shader "Custom/PerlinNoise"
+﻿Shader "Custom/CameraOcclusion"
 {
     Properties
     {
@@ -10,6 +10,12 @@
         _CellSize ("Cell Size", Range(0, 1)) = 1
         _ScrollSpeed ("Scroll Speed", Range(0, 1)) = 1
         _DissolvePercentage ("Dissolve Percentage", Range(0, 1)) = 1
+        _Radius ("Radius", Range(0, 5)) = 0.3
+        _CameraPosition ("Camera Position", Vector) = (0, 0, 0, 0)
+        _TargetPosition ("Target Position", Vector) = (0, 0, 0, 0)
+        _GradientThreshold ("Gradient Threshold", Range(0, 1)) = 0.5
+        _CenterX ("Center X", Range(0, 1)) = 0.5
+        _CenterY ("Center Y", Range(0, 1)) = 0.5
     }
     SubShader
     {
@@ -38,6 +44,12 @@
         float _CellSize;
         float _ScrollSpeed;
         float _DissolvePercentage;
+        float _Radius;
+        float _GradientThreshold;
+        float _CenterX;
+        float _CenterY;
+        float4 _CameraPosition;
+        float4 _TargetPosition;
 
         float gradientNoise3d(float3 value) {
             float3 fraction = frac(value);
@@ -104,33 +116,54 @@
             return lerp(previousCellLinePoint, nextCellLinePoint, interpolator);
         }
 
+        float circle(fixed2 screenPos, float _radius, float _gradientThreshold, float2 center) {
+            float2 dist = screenPos - center;
+            return 1.0 - smoothstep(
+                _radius - (_radius * _gradientThreshold),
+                _radius + (_radius * _gradientThreshold),
+                dot(dist, dist) * 5.0);
+        }
+
+        float quadratic(fixed2 screenPos, float _width, float _gradientThreshold, float2 origin) {
+            float xOffset = screenPos.x - origin.x;
+            float yOffset = _width * xOffset * xOffset;
+            return smoothstep(
+                yOffset - (yOffset * _gradientThreshold),
+                yOffset + (yOffset * _gradientThreshold),
+                screenPos.y - origin.y
+            );
+        }
+
+
+        float fov() {
+            float t = unity_CameraProjection._m11;
+            const float Rad2Deg = 180 / UNITY_PI;
+            float fov = atan(1.0f / t ) * 2.0 * Rad2Deg;
+            return fov;
+        }
+
         void surf(Input IN, inout SurfaceOutputStandard o) {
             float3 value = IN.worldPos.xyz / _CellSize;
             value.y += _Time.y * _ScrollSpeed;
             float noise = gradientNoise3d(value) + 0.5;
 
-            // noise = frac(noise * 6);
+            noise = frac(noise * 6);
+
+            float2 textureCoordinate = IN.screenPos.xy / IN.screenPos.w;
+            float aspect = _ScreenParams.x / _ScreenParams.y;
+            textureCoordinate.x = textureCoordinate.x * aspect;
 
 
-            // distance from .5 in x and y (center of float2)
-            // scale distance value based off ratio of [res x] : [res y]
+            float mask = circle(textureCoordinate, _Radius, _GradientThreshold, float2(_CenterX * aspect, _CenterY));
+            // float mask = quadratic(textureCoordinate, _Radius, _GradientThreshold, float2(_CenterX * aspect, _CenterY));
 
-            fixed4 c = fixed4(IN.screenPos.x, IN.screenPos.y, 0, 1);
-            // fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
-            // fixed4 r = tex2D(_MaskTex, IN.screenPos).xy;
+            float2 deltaXZFromWorldPosToCamera = IN.worldPos.xz - _CameraPosition.xz;
+            float2 deltaXZFromTargetToCamera = _TargetPosition.xz - _CameraPosition.xz;
+            float distanceDiscriminator = step(dot(deltaXZFromWorldPosToCamera, deltaXZFromWorldPosToCamera), dot(deltaXZFromTargetToCamera, deltaXZFromTargetToCamera));
+            float dissolveDiscriminator = clamp(noise, 0, .99) - mask;
+            clip(dissolveDiscriminator * distanceDiscriminator);
 
-
-
-            // fixed3 r = tex2D(_MaskTex, IN.screenPos).r /;
-            // half gradient = tex2D(_MainTex, IN.worldPos).r;
-            
-            // float pixelNoiseChange = fwidth(noise);
-            // float heightLine = smoothstep(1 - pixelNoiseChange, 1, noise);
-            // heightLine += smoothstep(pixelNoiseChange, 0, noise);
-
-            // clip(clamp(noise, 0, .99) - _DissolvePercentage);
-            // clip(1 - r);
-
+            fixed4 c = tex2D(_MainTex, IN.uv_MainTex) * _Color;
             o.Albedo = c;
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;

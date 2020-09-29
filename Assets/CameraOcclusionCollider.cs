@@ -15,27 +15,14 @@ public class CameraOcclusionCollider : MonoBehaviour
         collider.center = new Vector3(0, 0, collider.height / 2);
     }
 
-    void OnCollisionEnter(Collision other) {
-        Debug.Log($"[Camera] Collision Enter: {other.gameObject.name}");
-    }
-
-    void OnCollisionExit(Collision other) {
-        Debug.Log($"[Camera] Collision Exit: {other.gameObject.name}");
-    }
-
-    void OnCollisionStay(Collision other) {
-        Debug.Log($"[Camera] Collision Stay: {other.gameObject.name}");
-    }
-
     void OnTriggerEnter(Collider other) {
+        Renderer renderer = other.gameObject.GetComponent<Renderer>();
+        // renderer.mat
         Debug.Log($"[Camera] Trigger Enter: {other.gameObject.name}");
     }
 
     void OnTriggerExit(Collider other) {
+        Renderer renderer = other.gameObject.GetComponent<Renderer>();
         Debug.Log($"[Camera] Trigger Exit: {other.gameObject.name}");
-    }
-
-    void OnTriggerStay(Collider other) {
-        Debug.Log($"[Camera] Trigger Stay: {other.gameObject.name}");
     }
 }
