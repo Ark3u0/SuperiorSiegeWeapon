@@ -24,12 +24,6 @@ public class SCR_Well_Interact : MonoBehaviour
         CollectableSpawnPoint = transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
 
     // reads when the ball enters the collition box
     private void OnTriggerEnter(Collider other)
