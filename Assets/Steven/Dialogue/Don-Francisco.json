@@ -1,1 +1,114 @@
-{}
+{
+    "name": "Don Francisco",
+    "initial": [
+        {
+            "conditions": [],
+            "path": "beginning-0"
+        },
+        {
+            "conditions": ["don-francisco-introduced"],
+            "path": "idle-0"
+        },
+        {
+            "conditions": ["TBD"],
+            "path": "final-0"
+        },
+        {
+            "conditions": ["don-francisco-complete"],
+            "path": "idle-final-0"
+        }
+    ],
+    "entries": [
+        {
+            "key": "beginning-0",
+            "value": {
+                "sentences": [
+                    "Matteo! Como estas chico! Just in time too. We finally got those sugar skulls your abuelita has been asking for. Estas aqui to pick them up?"
+                ],
+                "select": {
+                    "yes": "beginning-1",
+                    "no": "beginning-2"
+                }
+            }
+        },
+        {
+            "key": "beginning-1",
+            "value": {
+                "sentences": [
+                    "Perfecto! Nomas que I need your help with something."
+                ],
+                "next": "beginning-3"
+            }
+        },
+        {
+            "key": "beginning-2",
+            "value": {
+                "sentences": [
+                    "No? Pues Perfecto! You can help me with something then."
+                ],
+                "next": "beginning-3"
+            }
+        },
+        {
+            "key": "beginning-3",
+            "value": {
+                "sentences": [
+                    "El otro dia, my wife Amelia, walking around the shop and saw una cucaracha crawling around. She was going to crush it with her chancla, pero it flew out of her hand when he was winding back.",
+                    "Now it’s stuck on the roof of the store. Puedes ayudar getting the chancla off of the roof?"
+                ],
+                "select": {
+                    "yes": "beginning-4",
+                    "no": "beginning-5"
+                }
+            }
+        },
+        {
+            "key": "beginning-4",
+            "value": {
+                "sentences": [
+                    "Gracias Matteo. You’re a lifesaver. No sabes how much you’re helping Amelia. Those blisters on her feet are terrible.",
+                    "I’m sure you can get it down somehow. A mejor you can kick it down with a ball or algo. Soy seguro you’ll figure it out."
+                ],
+                "condition": "don-francisco-introduced"
+            }
+        },
+        {
+            "key": "beginning-5",
+            "value": {
+                "sentences": [
+                    "No preocupes then. Cuando tienes the time."
+                ],
+                "condition": "don-francisco-introduced"
+            }
+        },
+        {
+            "key": "idle-0",
+            "value": {
+                "sentences": [
+                    "Como estas Matteo. How’s the roof chancla problema going?",
+                    "Si necesitas ayuda try hit the chancla with something. I’m sure it’ll fall off si hagas."
+                ]
+            }
+        },
+        {
+            "key": "final-0",
+            "value": {
+                "sentences": [
+                    "Matteo, que magnifico! Gracias por todo. Amilia y yo are forver grateful.",
+                    "Aqui son los sugar skulls. Make sure your abuela finds a good place for them. Que soy dicindo, I’m sure she will if it for her Oscar.",
+                    "Ayyy Oscar.  Acuerdo los dias where he would come to the store and we would just talk for hours and hours. What a good man.",
+                    "Gracias Matteo. Get those calaveras to your abuelita. I’m sure she’ll make that altar muy lindo y bonito."
+                ],
+                "condition": "don-francisco-complete"
+            }
+        },
+        {
+            "key": "idle-final-0",
+            "value": {
+                "sentences": [
+                    "Gracias por la chancla Matteo. Make sure your abuelita get her skulls!"
+                ]
+            }
+        }
+    ]
+}

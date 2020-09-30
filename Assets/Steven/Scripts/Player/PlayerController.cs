@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 6.0f;
     public float turnSmoothTime = 0.1f;
     public float turnSmoothVelocity;
+    public HashSet<string> conditionsMet;
 
     void Awake() {
         controls = new PlayerInputActions();
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
         ballToReset = FindBallInScene();
         cam = FindCameraInScene();
         spriteAnimation = FindPlayerSpriteAnimationInChildren();
+        conditionsMet = new HashSet<string>();
 
         actions.Initialize("idle", new Dictionary<string, System.Func<Action>> {
             { "idle", () => new PlayerIdle(this, actions, inputBoxManager, cam, spriteAnimation) },
