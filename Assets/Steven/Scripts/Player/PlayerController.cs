@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public PlayerInputActions controls;
     private ActionStateMachine actions;
     private InputBoxManager inputBoxManager;
+    private PlayerSpriteAnimation spriteAnimation;
     private Ball ballToReset;
     private Camera cam;
     public Ball ball;
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 6.0f;
     public float turnSmoothTime = 0.1f;
     public float turnSmoothVelocity;
+    public HashSet<string> conditionsMet;
 
     void Awake() {
         controls = new PlayerInputActions();
@@ -26,8 +28,11 @@ public class PlayerController : MonoBehaviour
         inputBoxManager = FindInputBoxManagerInScene();
         ballToReset = FindBallInScene();
         cam = FindCameraInScene();
+        spriteAnimation = FindPlayerSpriteAnimationInChildren();
+        conditionsMet = new HashSet<string>();
 
-        actions.Initialize("moving", new Dictionary<string, System.Func<Action>> {
+        actions.Initialize("idle", new Dictionary<string, System.Func<Action>> {
+            { "idle", () => new PlayerIdle(this, actions, inputBoxManager, cam) },
             { "moving", () => new PlayerMoving(this, actions, inputBoxManager, cam) },
             { "aiming", () => new PlayerAiming(this, actions, inputBoxManager, cam) },
             { "kicking", () => new PlayerKicking(this, actions) },
@@ -43,6 +48,21 @@ public class PlayerController : MonoBehaviour
         return cam;
     }
 
+    public PlayerSpriteAnimation SpriteAnimation() {
+        return spriteAnimation;
+    }
+
+    public bool AreConditionsMet(List<string> conditions) {
+        foreach (string condition in conditions) {
+            if (!conditionsMet.Contains(condition)) return false;
+        }
+        return true;
+    }
+
+    public void AddCondition(string condition) {
+        conditionsMet.Add(condition);
+    }
+
     private Camera FindCameraInScene() {
         Camera cam = GameObject.FindObjectOfType<Camera>();
         if (cam == null) {
@@ -50,6 +70,15 @@ public class PlayerController : MonoBehaviour
             throw new System.Exception("[PlayerController] Missing dependency: (Camera)");
         }
         return cam;
+    }
+
+    private PlayerSpriteAnimation FindPlayerSpriteAnimationInChildren() {
+        PlayerSpriteAnimation sa = GetComponentInChildren<PlayerSpriteAnimation>();
+        if (sa == null) {
+            Debug.LogError("[PlayerController] expected PlayerSpriteAnimation to exist in children. Please add PlayerSpriteAnimation and required dependencies to scene and rebuild.");
+            throw new System.Exception("[PlayerController] Missing dependency: (PlayerSpriteAnimation)");
+        }
+        return sa;
     }
 
     private InputBoxManager FindInputBoxManagerInScene() {

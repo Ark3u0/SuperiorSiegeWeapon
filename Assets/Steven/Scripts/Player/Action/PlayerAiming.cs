@@ -43,6 +43,8 @@ public class PlayerAiming : Action
 
    public void PreAction(Dictionary<string, object> changeParams)
     {
+        player.SpriteAnimation().SetState(SpriteState.IDLE);
+
         controls.Player.Move.Enable();
         controls.Player.Kick.Enable();
         controls.Player.AngleKick.Enable();

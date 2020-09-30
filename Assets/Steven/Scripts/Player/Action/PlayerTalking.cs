@@ -44,10 +44,12 @@ public class PlayerTalking : Action
 
     public void PreAction(Dictionary<string, object> preParams)
     {
+        player.SpriteAnimation().SetState(SpriteState.IDLE);
+
         controls.Player.Move.Enable();
         controls.Player.Interact.Enable();
 
-        isConversationEnded = player.npc.StartConversation(player.transform);
+        isConversationEnded = player.npc.StartConversation(player);
     }
 
     public void Update()
@@ -55,7 +57,7 @@ public class PlayerTalking : Action
         if (CheckForActionChange()) return;
 
         if (talkTriggered) {
-            isConversationEnded = player.npc.ContinueConversation();
+            isConversationEnded = player.npc.ContinueConversation(player);
         }
 
         if (Mathf.Abs(movement.y) > 0.1f) {

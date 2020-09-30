@@ -6,14 +6,15 @@ using UnityEngine;
 [Serializable]
 public class Dialogue
 {
-    public string name;
     public List<string> sentences;
-    public List<DialogueOption> options;
+    public DialogueSelect select;
+    public string next;
+    public string condition;
 
     public override string ToString() 
     {
         string sentencesSerialized = sentences == null ? "<Empty>" : String.Join(", ", sentences);
-        string optionsSerialized = options == null ? "<Empty>" : String.Join(", ", options.ConvertAll<string>(opt => opt.ToString())); 
+        string optionsSerialized = select == null ? "<Empty>" : select.ToString(); 
         return $"{{sentences: {sentencesSerialized}, options: {optionsSerialized}}}";
     }
 }

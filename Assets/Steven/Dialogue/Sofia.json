@@ -1,0 +1,133 @@
+{
+    "name": "Sofia",
+    "initial": [
+        {
+            "conditions": ["sofia-complete"],
+            "path": "idle-final-0"
+        },
+        {
+            "conditions": ["sofia-mimi-rescued", "sofia-mimi-hit"],
+            "path": "final-mimi-hurt-0"
+        },
+        {
+            "conditions": ["sofia-mimi-rescued"],
+            "path": "final-mimi-safe-0"
+        },
+        {
+            "conditions": ["sofia-introduced"],
+            "path": "idle-0"
+        },
+        {
+            "conditions": [],
+            "path": "beginning-0"
+        }
+    ],
+    "entries": [
+        {
+            "key": "beginning-0",
+            "value": {
+                "sentences": [
+                    "Holla Matteeeeeeo, como esta-aaassss. Que estas haciendo aqui? Looking for some cool bottles to kick?"
+                ],
+                "select": {
+                    "yes": "beginning-1",
+                    "no": "beginning-2"
+                }
+            }
+        },
+        {
+            "key": "beginning-1",
+            "value": {
+                "sentences": [
+                    "Ha, I knew it! Well no hay unos aqui. I'm keeping this school clean y lindo."
+                ],
+                "next": "beginning-3"
+            }
+        },
+        {
+            "key": "beginning-2",
+            "value": {
+                "sentences": [
+                    "No? Pues perfecto! You can help me with something then."
+                ],
+                "next": "beginning-3"
+            }
+        },
+        {
+            "key": "beginning-3",
+            "value": {
+                "sentences": [
+                    "Oh, your here for the papel picado? Sorry for thinking you'd just be here for trouble. I got all the papel right here. Nomas, there's just one thing.",
+                    "My gato, Mimi, is stuck on a tree. I keep on calling her but she doesn't get off. Es como she's stuck up there... pobrecita...",
+                    "Matteo, could you help me get her off the tree. What if she's stuck there forever. I'm worried."
+                ],
+                "select": {
+                    "yes": "beginning-4",
+                    "no": "beginning-5"
+                }
+            }
+        },
+        {
+            "key": "beginning-4",
+            "value": {
+                "sentences": [
+                    "Gracias Matteo! Maybe if you shake the tree you can get her off. Just don't hit her! Mimi is a special kitty and she deserves to be treated like mi princesa!"
+                ],
+                "condition": "sofia-introduced"
+            }
+        },
+        {
+            "key": "beginning-5",
+            "value": {
+                "sentences": [
+                    "Matteeooo, that's not nice. She's gonna be there forever!"
+                ],
+                "condition": "sofia-introduced"
+            }
+        },
+        {
+            "key": "idle-0",
+            "value": {
+                "sentences": [
+                    "Matteo can you get Mimi off the tree? What if she never leaves it? What if she turns into a leaf!"
+                ]
+            }
+        },
+        {
+            "key": "final-mimi-safe-0",
+            "value": {
+                "sentences": [
+                    "Matteo you got her! Gracias Matteo! If Mimi ever has babies I'll name one after you. Matteo for a boy... and... Margarita for a girl! You'll be eternalized como una princesa tambien!"
+                ],
+                "next": "final-1"
+            }
+        },
+        {
+            "key": "final-mimi-hurt-0",
+            "value": {
+                "sentences": [
+                    "Matteo!!! Why did you hit her!! At least she's out of the tree. But I guess you can no longer pet her. Ya know what they say... when cat's hate you if you press on the beans you get the means!"
+                ],
+                "next": "final-1"
+            }
+        },
+        {
+            "key": "final-1",
+            "value": {
+                "sentences": [
+                    "Aqui es el papel picado. Thanks for letting me make your altar look prettier and nicer.",
+                    "Your abuelito would really like it. I remember one time he let me paint one of the school cafeteria murals with him. It was really inspiring! Your abuelito painted the world in color and color en mi corazon."
+                ],
+                "condition": "sofia-complete"
+            }
+        },
+        {
+            "key": "idle-final-0",
+            "value": {
+                "sentences": [
+                    "Thanks for helping Mimi, Matteo. Nomas I have to just find him again, hopefully never in a tree."
+                ]
+            }
+        }
+    ]
+}

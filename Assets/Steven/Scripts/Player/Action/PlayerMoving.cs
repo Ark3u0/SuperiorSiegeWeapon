@@ -46,6 +46,8 @@ public class PlayerMoving : Action
 
     public void PreAction(Dictionary<string, object> changeParams)
     {
+        player.SpriteAnimation().SetState(SpriteState.WALK);
+
         controls.Player.Kick.Enable();
         controls.Player.Move.Enable();
         controls.Player.Interact.Enable();
@@ -54,6 +56,8 @@ public class PlayerMoving : Action
 
     public bool CheckForActionChange()
     {
+        Vector3 direction = new Vector3(movement.x, 0f, movement.y).normalized;
+
         if (aimTriggered && CanAim()) {
             actions.Change("aiming", new Dictionary<string, object>());
             return true;
@@ -64,6 +68,10 @@ public class PlayerMoving : Action
         }
         if (resetBallTriggered) {
             actions.Change("resetingBall", new Dictionary<string, object>());
+            return true;
+        }
+        if (direction.magnitude < 0.1f) {
+            actions.Change("idle", new Dictionary<string, object>());
             return true;
         }
 

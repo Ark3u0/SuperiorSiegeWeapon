@@ -1,0 +1,115 @@
+{
+    "name": "Flaco",
+    "initial": [
+        {
+            "conditions": ["flaco-complete"],
+            "path": "idle-final-0"
+        },
+        {
+            "conditions": ["flaco-abuelita-awake"],
+            "path": "final-0"
+        },
+        {
+            "conditions": ["flaco-introduced"],
+            "path": "idle-0"
+        },
+        {
+            "conditions": [],
+            "path": "beginning-0"
+        }
+    ],
+    "entries": [
+        {
+            "key": "beginning-0",
+            "value": {
+                "sentences": [
+                    "Hey Matteo, como estas? Pretty lovely day we're having ayy litttle man?"
+                ],
+                "select": {
+                    "yes": "beginning-1",
+                    "no": "beginning-2"
+                }
+            }
+        },
+        {
+            "key": "beginning-1",
+            "value": {
+                "sentences": [
+                    "Right! It's a perfect day to watch all the little pajaros flying around making their little cheeps."
+                ],
+                "next": "beginning-3"
+            }
+        },
+        {
+            "key": "beginning-2",
+            "value": {
+                "sentences": [
+                    "Oh, pues I guess you're right. It cound be better. At least here aren't no abejas flying around. Those things freak me out."
+                ],
+                "next": "beginning-3"
+            }
+        },
+        {
+            "key": "beginning-3",
+            "value": {
+                "sentences": [
+                    "Anyways, I'm guessing you're here for your abuelita's candles. I got them but could you help me a little before grab them?"
+                ],
+                "select": {
+                    "yes": "beginning-4",
+                    "no": "beginning-5"
+                }
+            }
+        },
+        {
+            "key": "beginning-4",
+            "value": {
+                "sentences": [
+                    "Gracias Matteo! Okay so I need to take my abuelita to the doctors but she isn't opening the door. She usually take a nap around this time but it take FOREVER to wake her up.",
+                    "Could you kick the ball at her door at the end of street? I woke her up once like that pero she told me if I did that again she'd get la chancla.",
+                    "I'm sure you'll be okay tho."
+                ],
+                "condition": "flaco-introduced"
+            }
+        },
+        {
+            "key": "beginning-5",
+            "value": {
+                "sentences": [
+                    "Oh. Okay... Let me know when you've got time then. I guess I'll just keep the candles for a little longer."
+                ],
+                "condition": "flaco-introduced"
+            }
+        },
+        {
+            "key": "idle-0",
+            "value": {
+                "sentences": [
+                    "Hey little man, don't forget to wake up my Abuelita. She's as the end of the street with the (ADD COLOR HERE) door",
+                    "Just don't kick it too hard. You might scare the little pajaros away."
+                ]
+            }
+        },
+        {
+            "key": "final-0",
+            "value": {
+                "sentences": [
+                    "Oh wow, I heard her from here! Thanks Matteo. If she gets angry or anything I'll the the blame. No precupes.",
+                    "Here's the candles little man. Again gracias por todo.",
+                    "They're for your abuelito Oscar no? I remember him. He was a cool guy. Siempre mire when he was painting the town and everything",
+                    "Acuerdo one time where he saw one of the pictures I took of a pajaro and he really liked it. Dijo que I should keep it up. Even said I can do it for a living. That was nice to hear. Maybe I will...",
+                    "No yeah gracias again Matteo. Have a good one."
+                ],
+                "condition": "flaco-complete"
+            }
+        },
+        {
+            "key": "idle-final-0",
+            "value": {
+                "sentences": [
+                    "Thanks again Matteo. If you see any cool birds around digame."
+                ]
+            }
+        }
+    ]
+}

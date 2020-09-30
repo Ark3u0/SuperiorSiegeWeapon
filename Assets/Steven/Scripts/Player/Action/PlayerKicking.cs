@@ -21,6 +21,8 @@ public class PlayerKicking : Action
 
     public void PreAction(Dictionary<string, object> changeParams)
     {
+        player.SpriteAnimation().SetState(SpriteState.KICK);
+
         player.ball.Kick();
         player.CameraFollowPlayer();
     }

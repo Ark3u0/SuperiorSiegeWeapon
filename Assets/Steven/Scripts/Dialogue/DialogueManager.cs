@@ -16,7 +16,7 @@ public class DialogueManager : Singleton<DialogueManager>
 
     private Queue<string> sentences;
 
-    private DialogueTree tree;
+    private DialogueReader reader;
 
     // Start is called before the first frame update
     void Start()
@@ -25,38 +25,38 @@ public class DialogueManager : Singleton<DialogueManager>
     }
 
     // Returns true if dialogue is ended
-    public bool StartDialogue(DialogueTree tree) 
+    public bool StartDialogue(PlayerController player, DialogueReader reader) 
     {
 
-        this.tree = null;
+        this.reader = null;
         sentences.Clear();
 
-        if (tree == null) {
+        if (reader == null) {
             return true;
         }
 
         writingSentence = false;
         fastCompleteSentence = false;
 
-        if (!tree.HasSentences()) return true;
+        if (!reader.HasSentences()) return true;
 
-        this.tree = tree;
-        nameText.text = tree.GetName();
+        this.reader = reader;
+        nameText.text = reader.GetName();
 
-        foreach (string sentence in tree.GetSentences()) 
+        foreach (string sentence in reader.GetSentences()) 
         {
             sentences.Enqueue(sentence);
         }
 
         animator.SetBool("IsOpen", true);
 
-        return DisplayNextSentence();
+        return DisplayNextSentence(player);
     }
  
     // Returns true if dialogue is ended
-    public bool DisplayNextSentence()
+    public bool DisplayNextSentence(PlayerController player)
     {
-        if (tree == null) {
+        if (reader == null) {
             return true;
         }
 
@@ -70,9 +70,9 @@ public class DialogueManager : Singleton<DialogueManager>
             bool answer = yesNoBoxManager.GetAnswer();
             yesNoBoxManager.EndAnswer();
 
-            if (tree.GetPath(answer) != null) {
-                tree.TakePath(answer);
-                return StartDialogue(tree);
+            if (reader.GetPath(answer) != null) {
+                reader.TakePath(answer);
+                return StartDialogue(player, reader);
             }
 
             EndDialogue();
@@ -80,15 +80,27 @@ public class DialogueManager : Singleton<DialogueManager>
             
         }
 
-        if (sentences.Count == 0 && tree.IsAnswerable()) {
+        if (sentences.Count == 0 && reader.IsAnswerable()) {
             yesNoBoxManager.StartAnswer();
             return false;
         }
 
         if (sentences.Count == 0) 
         {
-            EndDialogue();
-            return true;
+            if (reader.CheckForConditionGain()) {
+                reader.GainCondition(player);
+            }
+
+            if (reader.CheckForNextDialogue()) {
+                reader.NextDialogue();
+                foreach (string sentenceToQueue in reader.GetSentences()) 
+                {
+                    sentences.Enqueue(sentenceToQueue);
+                }
+            } else {
+                EndDialogue();
+                return true;
+            }
         }
 
         string sentence = sentences.Dequeue();

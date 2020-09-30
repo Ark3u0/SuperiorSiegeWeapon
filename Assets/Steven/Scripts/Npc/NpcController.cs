@@ -4,20 +4,36 @@ using UnityEngine;
 
 public class NpcController : MonoBehaviour
 {
-    public DialogueTree dialogueTree;
-    public DialogueManager dialogueManager;
+    public TextAsset dialogueJson;
+    private DialogueReader dialogueReader;
+    private DialogueManager dialogueManager;
 
-    public bool ContinueConversation() {
-        return dialogueManager.DisplayNextSentence();
+    void Awake() {
+        dialogueManager = FindDialogueManagerInScene();
+        dialogueReader = new DialogueReader(dialogueJson);
     }
 
-    public bool StartConversation(Transform player) {
-        transform.LookAt(player);
+    private DialogueManager FindDialogueManagerInScene() {
+        DialogueManager dm = GameObject.FindObjectOfType<DialogueManager>();
+        if (dm == null) {
+            Debug.LogError("[NpcController] expected DialogueManager to exist in scene. Please add DialogueManager and required dependencies to scene and rebuild.");
+            throw new System.Exception("[NpcController] Missing dependency: (DialogueManager)");
+        }
+        return dm;
+    }
 
-        if (dialogueTree == null) return true;
+    public bool ContinueConversation(PlayerController player) {
+        return dialogueManager.DisplayNextSentence(player);
+    }
+
+    public bool StartConversation(PlayerController player) {
+        Vector3 playerPosition = player.transform.position;
+        transform.LookAt(new Vector3(playerPosition.x, transform.position.y, playerPosition.z));
+
+        if (dialogueReader == null) return true;
         
-        dialogueTree.ResetTree();
-        return dialogueManager.StartDialogue(dialogueTree);
+        dialogueReader.ResetToInitial(player);
+        return dialogueManager.StartDialogue(player, dialogueReader);
     }
 
     public void Answer(bool answer) {
