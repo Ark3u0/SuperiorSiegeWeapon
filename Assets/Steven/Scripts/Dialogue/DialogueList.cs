@@ -7,7 +7,7 @@ using UnityEngine;
 public class DialogueList
 {
     public string name;
-    public string initial;
+    public List<InitialConditionsPath> initial;
     public List<Entry> entries;
 
     public override string ToString() 

@@ -14,14 +14,31 @@ public class DialogueReader
         DialogueList list = JsonUtility.FromJson<DialogueList>(asset.text);
         
         root = new DialogueMap(list);
-        current = root.map[root.initial];
+        current = root.Initialize();
     }
 
-
-
-    public void ResetToInitial()
+    public bool CheckForConditionGain()
     {
-        current = root.map[root.initial];
+        return current.condition != null;
+    }
+
+    public void GainCondition(PlayerController player)
+    {
+        player.AddCondition(current.condition);
+    }
+
+    public bool CheckForNextDialogue()
+    {
+        return current.next != null;
+    }
+
+    public void NextDialogue() {
+        current = root.map[current.next];
+    }
+
+    public void ResetToInitial(PlayerController player)
+    {
+        current = root.Initialize(player);
     }
 
     public void TakePath(bool answer) {

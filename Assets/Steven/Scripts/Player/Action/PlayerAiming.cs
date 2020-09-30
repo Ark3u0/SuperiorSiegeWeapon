@@ -7,7 +7,6 @@ public class PlayerAiming : Action
     public PlayerInputActions controls;
     private ActionStateMachine actions;
     private PlayerController player;
-    private PlayerSpriteAnimation spriteAnimation;
     private Camera cam;
     private InputBoxManager inputBoxManager;
     private Vector2 movement;
@@ -15,13 +14,12 @@ public class PlayerAiming : Action
 
     private bool kickTriggered = false;
     
-    public PlayerAiming(PlayerController player, ActionStateMachine actions, InputBoxManager inputBoxManager, Camera cam, PlayerSpriteAnimation spriteAnimation) {
+    public PlayerAiming(PlayerController player, ActionStateMachine actions, InputBoxManager inputBoxManager, Camera cam) {
         this.controls = new PlayerInputActions();
         this.cam = cam;
         this.inputBoxManager = inputBoxManager;
         this.actions = actions;
         this.player = player;
-        this.spriteAnimation = spriteAnimation;
 
         controls.Player.Kick.canceled += ctx => kickTriggered = true;
 
@@ -45,7 +43,7 @@ public class PlayerAiming : Action
 
    public void PreAction(Dictionary<string, object> changeParams)
     {
-        spriteAnimation.SetState(SpriteState.IDLE);
+        player.SpriteAnimation().SetState(SpriteState.IDLE);
 
         controls.Player.Move.Enable();
         controls.Player.Kick.Enable();

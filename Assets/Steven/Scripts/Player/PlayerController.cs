@@ -32,11 +32,11 @@ public class PlayerController : MonoBehaviour
         conditionsMet = new HashSet<string>();
 
         actions.Initialize("idle", new Dictionary<string, System.Func<Action>> {
-            { "idle", () => new PlayerIdle(this, actions, inputBoxManager, cam, spriteAnimation) },
-            { "moving", () => new PlayerMoving(this, actions, inputBoxManager, cam, spriteAnimation) },
-            { "aiming", () => new PlayerAiming(this, actions, inputBoxManager, cam, spriteAnimation) },
-            { "kicking", () => new PlayerKicking(this, actions, spriteAnimation) },
-            { "talking", () => new PlayerTalking(this, actions, spriteAnimation) },
+            { "idle", () => new PlayerIdle(this, actions, inputBoxManager, cam) },
+            { "moving", () => new PlayerMoving(this, actions, inputBoxManager, cam) },
+            { "aiming", () => new PlayerAiming(this, actions, inputBoxManager, cam) },
+            { "kicking", () => new PlayerKicking(this, actions) },
+            { "talking", () => new PlayerTalking(this, actions) },
             { "resetingBall", () => new PlayerResetingBall(this, actions) }
         });
 
@@ -46,6 +46,21 @@ public class PlayerController : MonoBehaviour
     public Camera AttachedCamera()
     {
         return cam;
+    }
+
+    public PlayerSpriteAnimation SpriteAnimation() {
+        return spriteAnimation;
+    }
+
+    public bool AreConditionsMet(List<string> conditions) {
+        foreach (string condition in conditions) {
+            if (!conditionsMet.Contains(condition)) return false;
+        }
+        return true;
+    }
+
+    public void AddCondition(string condition) {
+        conditionsMet.Add(condition);
     }
 
     private Camera FindCameraInScene() {

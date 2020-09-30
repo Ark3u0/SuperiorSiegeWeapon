@@ -8,6 +8,8 @@ public class Dialogue
 {
     public List<string> sentences;
     public DialogueSelect select;
+    public string next;
+    public string condition;
 
     public override string ToString() 
     {

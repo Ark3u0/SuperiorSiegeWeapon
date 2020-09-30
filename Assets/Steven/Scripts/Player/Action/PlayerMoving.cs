@@ -8,7 +8,6 @@ public class PlayerMoving : Action
     private PlayerController player;
     private PlayerInputActions controls;
     private InputBoxManager inputBoxManager;
-    private PlayerSpriteAnimation spriteAnimation;
     private Camera cam;
     private Vector2 movement;
     public float GRAVITY = 9.81f;
@@ -17,14 +16,13 @@ public class PlayerMoving : Action
     private bool resetBallTriggered = false;
 
 
-    public PlayerMoving(PlayerController player, ActionStateMachine actions, InputBoxManager inputBoxManager, Camera cam, PlayerSpriteAnimation spriteAnimation)
+    public PlayerMoving(PlayerController player, ActionStateMachine actions, InputBoxManager inputBoxManager, Camera cam)
     {
         this.controls = new PlayerInputActions();
         this.cam = cam;
         this.inputBoxManager = inputBoxManager;
         this.actions = actions;
         this.player = player;
-        this.spriteAnimation = spriteAnimation;
 
         controls.Player.Kick.started += ctx => aimTriggered = true;
 
@@ -48,7 +46,7 @@ public class PlayerMoving : Action
 
     public void PreAction(Dictionary<string, object> changeParams)
     {
-        spriteAnimation.SetState(SpriteState.WALK);
+        player.SpriteAnimation().SetState(SpriteState.WALK);
 
         controls.Player.Kick.Enable();
         controls.Player.Move.Enable();

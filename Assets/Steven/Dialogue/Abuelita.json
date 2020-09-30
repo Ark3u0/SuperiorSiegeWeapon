@@ -2,16 +2,16 @@
     "name": "Abuelita",
     "initial": [
         {
-            "conditions": [],
-            "path": "beginning-0"
+            "conditions": ["flaco-complete", "don-francisco-complete", "sofia-complete"],
+            "path": "final-0"
         },
         {
             "conditions": ["abuelita-introduced"],
             "path": "idle-0"
         },
         {
-            "conditions": ["TBD"],
-            "path": "final-0"
+            "conditions": [],
+            "path": "beginning-0"
         }
     ],
     "entries": [

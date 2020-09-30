@@ -2,20 +2,20 @@
     "name": "Don Francisco",
     "initial": [
         {
-            "conditions": [],
-            "path": "beginning-0"
+            "conditions": ["don-francisco-complete"],
+            "path": "idle-final-0"
+        },
+        {
+            "conditions": ["don-francisco-chancla-retrieved"],
+            "path": "final-0"
         },
         {
             "conditions": ["don-francisco-introduced"],
             "path": "idle-0"
         },
         {
-            "conditions": ["TBD"],
-            "path": "final-0"
-        },
-        {
-            "conditions": ["don-francisco-complete"],
-            "path": "idle-final-0"
+            "conditions": [],
+            "path": "beginning-0"
         }
     ],
     "entries": [

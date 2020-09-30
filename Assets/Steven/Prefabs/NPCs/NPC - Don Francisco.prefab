@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942afde5cd1de03429c1eb033e53bcca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueJson: {fileID: 0}
+  dialogueJson: {fileID: 4900000, guid: 6d2c3d37babf25d46854bbef18310a61, type: 3}
 --- !u!1 &8809166354342574802
 GameObject:
   m_ObjectHideFlags: 0

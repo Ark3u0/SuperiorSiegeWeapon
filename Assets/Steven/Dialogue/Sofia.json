@@ -2,24 +2,24 @@
     "name": "Sofia",
     "initial": [
         {
-            "conditions": [],
-            "path": "beginning-0"
+            "conditions": ["sofia-complete"],
+            "path": "idle-final-0"
+        },
+        {
+            "conditions": ["sofia-mimi-rescued", "sofia-mimi-hit"],
+            "path": "final-mimi-hurt-0"
+        },
+        {
+            "conditions": ["sofia-mimi-rescued"],
+            "path": "final-mimi-safe-0"
         },
         {
             "conditions": ["sofia-introduced"],
-            "value": "idle-0"
+            "path": "idle-0"
         },
         {
-            "conditions": ["TBD"],
-            "value": "final-mimi-safe-0"
-        },
-        {
-            "conditions": ["TBD"],
-            "value": "final-mimi-hurt-0"
-        },
-        {
-            "conditions": ["sofia-complete"],
-            "value": "idle-final-0"
+            "conditions": [],
+            "path": "beginning-0"
         }
     ],
     "entries": [

@@ -2,20 +2,20 @@
     "name": "Flaco",
     "initial": [
         {
-            "conditions": [],
-            "path": "beginning-0"
+            "conditions": ["flaco-complete"],
+            "path": "idle-final-0"
+        },
+        {
+            "conditions": ["flaco-abuelita-awake"],
+            "path": "final-0"
         },
         {
             "conditions": ["flaco-introduced"],
             "path": "idle-0"
         },
         {
-            "conditions": ["TBD"],
-            "path": "final-0"
-        },
-        {
-            "conditions": ["flaco-complete"],
-            "path": "idle-final-0"
+            "conditions": [],
+            "path": "beginning-0"
         }
     ],
     "entries": [

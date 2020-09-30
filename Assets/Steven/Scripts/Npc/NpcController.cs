@@ -22,17 +22,18 @@ public class NpcController : MonoBehaviour
         return dm;
     }
 
-    public bool ContinueConversation() {
-        return dialogueManager.DisplayNextSentence();
+    public bool ContinueConversation(PlayerController player) {
+        return dialogueManager.DisplayNextSentence(player);
     }
 
-    public bool StartConversation(Transform player) {
-        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+    public bool StartConversation(PlayerController player) {
+        Vector3 playerPosition = player.transform.position;
+        transform.LookAt(new Vector3(playerPosition.x, transform.position.y, playerPosition.z));
 
         if (dialogueReader == null) return true;
         
-        dialogueReader.ResetToInitial();
-        return dialogueManager.StartDialogue(dialogueReader);
+        dialogueReader.ResetToInitial(player);
+        return dialogueManager.StartDialogue(player, dialogueReader);
     }
 
     public void Answer(bool answer) {
