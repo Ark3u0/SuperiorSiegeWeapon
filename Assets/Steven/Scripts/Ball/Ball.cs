@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    public KickTrajectoryRenderer kickTrajectoryRenderer;
+    private KickTrajectoryRenderer kickTrajectoryRenderer;
     public Vector3 kickTarget;
 
     public float maxKickDistance = 12f;
@@ -30,6 +30,7 @@ public class Ball : MonoBehaviour
     void Start() 
     {
         rigidBody = GetComponent<Rigidbody>();
+        kickTrajectoryRenderer = FindKickTrajectoryRendererInChildren();
         dragSetting = rigidBody.drag;
     }
 
@@ -39,6 +40,16 @@ public class Ball : MonoBehaviour
             rigidBody.drag = dragSetting;
             ballState = BallState.DEFAULT_PLAY;
         }
+    }
+
+    private KickTrajectoryRenderer FindKickTrajectoryRendererInChildren()
+    {
+        KickTrajectoryRenderer ktr = GetComponentInChildren<KickTrajectoryRenderer>();
+        if (ktr == null) {
+            Debug.LogError("[Ball] expected KickTrajectoryRenderer to exist in children. Please add KickTrajectoryRenderer and required dependencies to scene and rebuild.");
+            throw new System.Exception("[Ball] Missing dependency: (KickTrajectoryRenderer)");
+        }
+        return ktr;
     }
 
     public void Aim(Vector3 moveInput, float angleInput, Camera cam)
