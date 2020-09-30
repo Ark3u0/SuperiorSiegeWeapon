@@ -17,12 +17,12 @@ public class KickTrajectoryRenderer : MonoBehaviour
     void Awake() 
     {
         lineRenderer = GetComponent<LineRenderer>();
-        cam = FindCameraInScene();
+        cam = FindMainCameraInScene();
         gravity = Mathf.Abs(Physics2D.gravity.y);
     }
 
-    private Camera FindCameraInScene() {
-        Camera cam = GameObject.FindObjectOfType<Camera>();
+    private Camera FindMainCameraInScene() {
+        Camera cam = Camera.main;
         if (cam == null) {
             Debug.LogError("[KickTrajectoryRenderer] expected Camera to exist in scene. Please add Camera and required dependencies to scene and rebuild.");
             throw new System.Exception("[KickTrajectoryRenderer] Missing dependency: (Camera)");

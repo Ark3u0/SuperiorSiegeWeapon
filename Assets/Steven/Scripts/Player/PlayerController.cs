@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
         actions = new ActionStateMachine();
         inputBoxManager = FindInputBoxManagerInScene();
         ballToReset = FindBallInScene();
-        cam = FindCameraInScene();
+        cam = FindMainCameraInScene();
         spriteAnimation = FindPlayerSpriteAnimationInChildren();
         conditionsMet = new HashSet<string>();
 
@@ -63,11 +63,11 @@ public class PlayerController : MonoBehaviour
         conditionsMet.Add(condition);
     }
 
-    private Camera FindCameraInScene() {
-        Camera cam = GameObject.FindObjectOfType<Camera>();
+    private Camera FindMainCameraInScene() {
+        Camera cam = Camera.main;
         if (cam == null) {
-            Debug.LogError("[PlayerController] expected Camera to exist in scene. Please add Camera and required dependencies to scene and rebuild.");
-            throw new System.Exception("[PlayerController] Missing dependency: (Camera)");
+            Debug.LogError("[PlayerController] expected MainCamera to exist in scene. Please add MainCamera to scene, tag with 'MainCamera' and rebuild.");
+            throw new System.Exception("[PlayerController] Missing dependency: (MainCamera)");
         }
         return cam;
     }
