@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public PlayerInputActions controls;
     private ActionStateMachine actions;
     private InputBoxManager inputBoxManager;
+    private PlayerSpriteAnimation spriteAnimation;
     private Ball ballToReset;
     private Camera cam;
     public Ball ball;
@@ -26,12 +27,14 @@ public class PlayerController : MonoBehaviour
         inputBoxManager = FindInputBoxManagerInScene();
         ballToReset = FindBallInScene();
         cam = FindCameraInScene();
+        spriteAnimation = FindPlayerSpriteAnimationInChildren();
 
-        actions.Initialize("moving", new Dictionary<string, System.Func<Action>> {
-            { "moving", () => new PlayerMoving(this, actions, inputBoxManager, cam) },
-            { "aiming", () => new PlayerAiming(this, actions, inputBoxManager, cam) },
-            { "kicking", () => new PlayerKicking(this, actions) },
-            { "talking", () => new PlayerTalking(this, actions) },
+        actions.Initialize("idle", new Dictionary<string, System.Func<Action>> {
+            { "idle", () => new PlayerIdle(this, actions, inputBoxManager, cam, spriteAnimation) },
+            { "moving", () => new PlayerMoving(this, actions, inputBoxManager, cam, spriteAnimation) },
+            { "aiming", () => new PlayerAiming(this, actions, inputBoxManager, cam, spriteAnimation) },
+            { "kicking", () => new PlayerKicking(this, actions, spriteAnimation) },
+            { "talking", () => new PlayerTalking(this, actions, spriteAnimation) },
             { "resetingBall", () => new PlayerResetingBall(this, actions) }
         });
 
@@ -50,6 +53,15 @@ public class PlayerController : MonoBehaviour
             throw new System.Exception("[PlayerController] Missing dependency: (Camera)");
         }
         return cam;
+    }
+
+    private PlayerSpriteAnimation FindPlayerSpriteAnimationInChildren() {
+        PlayerSpriteAnimation sa = GetComponentInChildren<PlayerSpriteAnimation>();
+        if (sa == null) {
+            Debug.LogError("[PlayerController] expected PlayerSpriteAnimation to exist in children. Please add PlayerSpriteAnimation and required dependencies to scene and rebuild.");
+            throw new System.Exception("[PlayerController] Missing dependency: (PlayerSpriteAnimation)");
+        }
+        return sa;
     }
 
     private InputBoxManager FindInputBoxManagerInScene() {

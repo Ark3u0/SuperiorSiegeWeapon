@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoving : Action
+public class PlayerIdle : Action
 {
     private ActionStateMachine actions;
     private PlayerController player;
@@ -17,7 +17,7 @@ public class PlayerMoving : Action
     private bool resetBallTriggered = false;
 
 
-    public PlayerMoving(PlayerController player, ActionStateMachine actions, InputBoxManager inputBoxManager, Camera cam, PlayerSpriteAnimation spriteAnimation)
+    public PlayerIdle(PlayerController player, ActionStateMachine actions, InputBoxManager inputBoxManager, Camera cam, PlayerSpriteAnimation spriteAnimation)
     {
         this.controls = new PlayerInputActions();
         this.cam = cam;
@@ -48,7 +48,7 @@ public class PlayerMoving : Action
 
     public void PreAction(Dictionary<string, object> changeParams)
     {
-        spriteAnimation.SetState(SpriteState.WALK);
+        spriteAnimation.SetState(SpriteState.IDLE);
 
         controls.Player.Kick.Enable();
         controls.Player.Move.Enable();
@@ -72,8 +72,8 @@ public class PlayerMoving : Action
             actions.Change("resetingBall", new Dictionary<string, object>());
             return true;
         }
-        if (direction.magnitude < 0.1f) {
-            actions.Change("idle", new Dictionary<string, object>());
+        if (direction.magnitude >= 0.1f) {
+            actions.Change("moving", new Dictionary<string, object>());
             return true;
         }
 
@@ -108,23 +108,6 @@ public class PlayerMoving : Action
         if (CheckForActionChange()) return;
 
         CheckForPossibleInputs();
-
-        Vector3 direction = new Vector3(movement.x, 0f, movement.y).normalized;
-        Vector3 toMove = new Vector3(0, 0, 0);
-
-        if (direction.magnitude >= 0.1f) {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.transform.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(player.transform.eulerAngles.y, targetAngle, ref player.turnSmoothVelocity, player.turnSmoothTime);
-            player.transform.rotation = Quaternion.Euler(0f, angle, 0f);
-
-            toMove = (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward).normalized * player.speed * Time.deltaTime;
-        }
-
-        if (!player.controller.isGrounded) {
-            toMove.y -= GRAVITY * Time.deltaTime;
-        }
-
-        player.controller.Move(toMove);
     }
 
     private bool CanAim()
@@ -139,6 +122,6 @@ public class PlayerMoving : Action
 
     public string Name()
     {
-        return "moving";
+        return "idle";
     }
 }

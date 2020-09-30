@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class NpcController : MonoBehaviour
 {
-    public DialogueReader dialogueReader;
-    public DialogueManager dialogueManager;
+    public TextAsset dialogueJson;
+    private DialogueReader dialogueReader;
+    private DialogueManager dialogueManager;
+
+    void Awake() {
+        dialogueManager = FindDialogueManagerInScene();
+        dialogueReader = new DialogueReader(dialogueJson);
+    }
+
+    private DialogueManager FindDialogueManagerInScene() {
+        DialogueManager dm = GameObject.FindObjectOfType<DialogueManager>();
+        if (dm == null) {
+            Debug.LogError("[NpcController] expected DialogueManager to exist in scene. Please add DialogueManager and required dependencies to scene and rebuild.");
+            throw new System.Exception("[NpcController] Missing dependency: (DialogueManager)");
+        }
+        return dm;
+    }
 
     public bool ContinueConversation() {
         return dialogueManager.DisplayNextSentence();
     }
 
     public bool StartConversation(Transform player) {
-        transform.LookAt(player);
+        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
 
         if (dialogueReader == null) return true;
         

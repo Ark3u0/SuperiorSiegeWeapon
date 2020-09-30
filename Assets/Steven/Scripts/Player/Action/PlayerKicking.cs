@@ -7,12 +7,14 @@ public class PlayerKicking : Action
 {
     public PlayerInputActions controls;
     private ActionStateMachine actions;
+    private PlayerSpriteAnimation spriteAnimation;
     private PlayerController player;
     
-    public PlayerKicking(PlayerController player, ActionStateMachine actions) {
+    public PlayerKicking(PlayerController player, ActionStateMachine actions, PlayerSpriteAnimation spriteAnimation) {
         this.controls = new PlayerInputActions();
         this.actions = actions;
         this.player = player;
+        this.spriteAnimation = spriteAnimation;
     }
 
     public void PostAction()
@@ -21,6 +23,8 @@ public class PlayerKicking : Action
 
     public void PreAction(Dictionary<string, object> changeParams)
     {
+        spriteAnimation.SetState(SpriteState.KICK);
+
         player.ball.Kick();
         player.CameraFollowPlayer();
     }

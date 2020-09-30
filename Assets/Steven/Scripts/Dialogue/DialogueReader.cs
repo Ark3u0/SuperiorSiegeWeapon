@@ -4,21 +4,20 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-public class DialogueReader : MonoBehaviour
+public class DialogueReader
 {
-    
-    public TextAsset dialogueJson;
     private DialogueMap root;
     private Dialogue current;
 
-    public void Awake()
+    public DialogueReader(TextAsset asset)
     {
-        Debug.Log(dialogueJson.text);
-        DialogueList list = JsonUtility.FromJson<DialogueList>(dialogueJson.text);
-        Debug.Log(list.ToString());
+        DialogueList list = JsonUtility.FromJson<DialogueList>(asset.text);
+        
         root = new DialogueMap(list);
         current = root.map[root.initial];
     }
+
+
 
     public void ResetToInitial()
     {

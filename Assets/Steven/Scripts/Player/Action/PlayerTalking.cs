@@ -8,15 +8,17 @@ public class PlayerTalking : Action
     public PlayerController player;
     private ActionStateMachine actions;
     private PlayerInputActions controls;
+    private PlayerSpriteAnimation spriteAnimation;
     private Vector2 movement;
     private bool talkTriggered = false;
     private bool isConversationEnded = false;
 
-    public PlayerTalking(PlayerController player, ActionStateMachine actions)
+    public PlayerTalking(PlayerController player, ActionStateMachine actions, PlayerSpriteAnimation spriteAnimation)
     {
         this.controls = new PlayerInputActions();
         this.actions = actions;
         this.player = player;
+        this.spriteAnimation = spriteAnimation;
 
         controls.Player.Move.started += ctx => movement = ctx.ReadValue<Vector2>();
         controls.Player.Move.performed += ctx => movement = ctx.ReadValue<Vector2>();
@@ -44,6 +46,8 @@ public class PlayerTalking : Action
 
     public void PreAction(Dictionary<string, object> preParams)
     {
+        spriteAnimation.SetState(SpriteState.IDLE);
+
         controls.Player.Move.Enable();
         controls.Player.Interact.Enable();
 
