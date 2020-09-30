@@ -1,18 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SCR_MainMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    //https://www.youtube.com/watch?v=-GWjA6dixV4
+
+    public void Playgame()
     {
-        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void LoadMainMenue()
     {
-        
+        SceneManager.LoadScene("CG_PrototypeLevel_MainMenue");
+    }
+
+    public void LoadEndScreen()
+    {
+      //  SceneManager.LoadScene("Final_EndScren");
+    }
+
+    public void LoadCredits()
+    {
+       // SceneManager.LoadScene("Final_Credits");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

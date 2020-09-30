@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Cristian/Scenes/CG_PrototypeLevel_MainMenu.unity
+    guid: 31c5a85d7ed42c349906f69e504cee29
+  - enabled: 1
+    path: Assets/Cristian/Scenes/CG_PrototypePuzzles.unity
+    guid: 5c8178b84fd78664b9290957ee78592e
   m_configObjects: {}
