@@ -2,7 +2,7 @@
     "name": "Abuelita",
     "initial": [
         {
-            "conditions": ["flaco-complete", "don-francisco-complete", "sofia-complete"],
+            "conditions": ["abuelita-introduced", "flaco-complete", "don-francisco-complete", "sofia-complete"],
             "path": "final-0"
         },
         {

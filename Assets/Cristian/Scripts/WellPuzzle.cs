@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCR_Well_Interact : MonoBehaviour
+public class WellPuzzle : Puzzle
 {
 
     /// <summary>
     /// These variables are made for the ball launch and a spawn of collectabless
     /// </summary>
-    [SerializeField] public float launchForce; 
-    [SerializeField] ParticleSystem wellEffect = null;
-    [SerializeField] public GameObject collectable;
-    [SerializeField] public GameObject CollectableSpawnLocation;
-
-
+    public float launchForce; 
+    public ParticleSystem wellEffect = null;
+    public GameObject collectable;
+    public GameObject CollectableSpawnLocation;
     private Vector3 CollectableSpawnPoint; 
 
 
@@ -63,6 +61,7 @@ public class SCR_Well_Interact : MonoBehaviour
 
         Prize.GetComponent<Rigidbody>().AddForce(CollectableSpawnLocation.transform.up * launchForce );
 
+        AddCondition("well-puzzle-complete");
     }
 
 

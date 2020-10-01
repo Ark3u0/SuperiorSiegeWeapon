@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCR_YardColilsion : MonoBehaviour
+public class YardCollision : MonoBehaviour
 {
 
-    [SerializeField] public bool TargetHit = false;
-    [SerializeField] public Material HitColor;
+    public bool TargetHit = false;
+    public Material HitColor;
 
     private void OnCollisionEnter(Collision collision)
     {

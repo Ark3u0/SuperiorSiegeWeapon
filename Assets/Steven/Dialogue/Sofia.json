@@ -6,11 +6,7 @@
             "path": "idle-final-0"
         },
         {
-            "conditions": ["sofia-mimi-rescued", "sofia-mimi-hit"],
-            "path": "final-mimi-hurt-0"
-        },
-        {
-            "conditions": ["sofia-mimi-rescued"],
+            "conditions": ["sofia-introduced", "tree-puzzle-complete"],
             "path": "final-mimi-safe-0"
         },
         {

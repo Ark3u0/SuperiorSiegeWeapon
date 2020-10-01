@@ -9,13 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 724323004893253438}
-  - component: {fileID: 71850517695523325}
   - component: {fileID: 4620741079720633763}
   - component: {fileID: 5032002802346536485}
   - component: {fileID: 1702302822137959560}
   - component: {fileID: 801334055}
   m_Layer: 0
-  m_Name: Ball in well Behavior
+  m_Name: Ball in Well Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,19 +34,6 @@ Transform:
   m_Father: {fileID: 5523229402631628901}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
---- !u!135 &71850517695523325
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1114400924815486711}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4620741079720633763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,7 +49,7 @@ MonoBehaviour:
   launchForce: 2000
   wellEffect: {fileID: 5032002802346536485}
   collectable: {fileID: 3783166796478030343, guid: b342f334428bbe747906a523e8a4a63f, type: 3}
-  CollectableSpawnVector: {fileID: 9067084820704446573}
+  CollectableSpawnLocation: {fileID: 0}
 --- !u!198 &5032002802346536485
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4866,9 +4852,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5523229402631628901}
-  - component: {fileID: 7809056281883402553}
   m_Layer: 0
-  m_Name: Puzzle Colider Parent
+  m_Name: Well Puzzle
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -4890,18 +4875,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7809056281883402553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3396825434854228411}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68482d71bc92c5c41b52e0f98530e1d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &9067084820704446573
 GameObject:
   m_ObjectHideFlags: 0

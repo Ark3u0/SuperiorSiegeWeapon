@@ -6,7 +6,7 @@
             "path": "idle-final-0"
         },
         {
-            "conditions": ["don-francisco-chancla-retrieved"],
+            "conditions": ["don-francisco-introduced", "well-puzzle-complete"],
             "path": "final-0"
         },
         {

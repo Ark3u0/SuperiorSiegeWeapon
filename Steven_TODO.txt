@@ -1,10 +1,8 @@
 Todo:
 
-
-- Integrate puzzles with condition set (Pair Cris tomorrow)
 - Write Title screen tune, game tune, and ending tune. (target to be a minute and loop) 
+
 - Handle camera obstruction (Stencil approach)
-- Pixelated appearance
 - (BUG) Rotating sprite when character rotates, independent of player.
 - (BUG) Fix Animation left right swap
 

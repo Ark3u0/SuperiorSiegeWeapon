@@ -6,7 +6,7 @@
             "path": "idle-final-0"
         },
         {
-            "conditions": ["flaco-abuelita-awake"],
+            "conditions": ["flaco-introduced", "school-puzzle-complete"],
             "path": "final-0"
         },
         {

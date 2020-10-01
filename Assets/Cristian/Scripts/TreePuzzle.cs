@@ -2,31 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCR_Tree_Interact : MonoBehaviour
+public class TreePuzzle : Puzzle
 {
-    [SerializeField] public bool HasCollectable = false;
-
-    [SerializeField] public float launchForce;
-    [SerializeField] ParticleSystem treeEffect = null;
-    [SerializeField] public GameObject collectable;
-    [SerializeField] public GameObject collectableSpawnPoint;
-
-
+    public bool HasCollectable = false;
+    public float launchForce;
+    public ParticleSystem treeEffect = null;
+    public GameObject collectable;
+    public GameObject collectableSpawnPoint;
     private Vector3 CollectableSpawnPoint;
 
 
     private Vector3 bounceVector;
+
     // Start is called before the first frame update
     void Start()
     {
         CollectableSpawnPoint = transform.position;
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -35,20 +26,19 @@ public class SCR_Tree_Interact : MonoBehaviour
         {
             if (HasCollectable)
             {
-                StartCoroutine(CollectabelEffect());
+                AddCondition("tree-puzzle-complete");
+                StartCoroutine(CollectableEffect());
             }
             bounceVector.x = collision.contacts[0].normal.x;
             bounceVector.y = collision.contacts[0].normal.y;
             bounceVector.z = collision.contacts[0].normal.z;
 
-            Debug.Log("Ball in well");
-            //BallInWellEffect(other.gameObject);
-            //StartCoroutine(BallInWellEffect(collision.gameObject));
+            Debug.Log("Ball in tree");
             HitTreeEffect(collision.gameObject);
         }
         else
         {
-            Debug.Log("Ball not in well");
+            Debug.Log("Ball not in tree");
         }
     }
 
@@ -62,7 +52,7 @@ public class SCR_Tree_Interact : MonoBehaviour
         Debug.Log("Ball bounce");
     }
 
-    private IEnumerator CollectabelEffect()
+    private IEnumerator CollectableEffect()
     {
         yield return new WaitForSeconds(3f);
         // spawn the collectable 

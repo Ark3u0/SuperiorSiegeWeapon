@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour
 
     public void AddCondition(string condition) {
         conditionsMet.Add(condition);
+        Debug.Log($"CONDITIONS: {string.Join(",", conditionsMet)}");
     }
 
     private Camera FindMainCameraInScene() {
