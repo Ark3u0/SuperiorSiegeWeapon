@@ -31,11 +31,11 @@ public class RotateSprites : MonoBehaviour
                 npcSpriteAnimation.SetDirection(SpriteDirection.UP);
             } else {
                 if (rightAngleInDegrees < 45f) {
-                    // Sprite face left
-                    npcSpriteAnimation.SetDirection(SpriteDirection.LEFT);
-                } else {
                     // Sprite face right
                     npcSpriteAnimation.SetDirection(SpriteDirection.RIGHT);
+                } else {
+                    // Sprite face left
+                    npcSpriteAnimation.SetDirection(SpriteDirection.LEFT);
                 }
             }
         }
@@ -60,13 +60,11 @@ public class RotateSprites : MonoBehaviour
                 playerSpriteAnimation.SetDirection(SpriteDirection.UP);
             } else {
                 if (rightAngleInDegrees < 45f) {
-                    // Sprite face left
-                    // playerSpriteAnimation.SetDirection(SpriteDirection.LEFT);
+                    // Sprite face right
                     playerSpriteAnimation.SetDirection(SpriteDirection.RIGHT);
                     
                 } else {
-                    // Sprite face right
-                    // playerSpriteAnimation.SetDirection(SpriteDirection.RIGHT);
+                    // Sprite face left
                     playerSpriteAnimation.SetDirection(SpriteDirection.LEFT);
                 }
             }

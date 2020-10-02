@@ -4,7 +4,6 @@ Todo:
 
 - Handle camera obstruction (Stencil approach)
 - (BUG) Rotating sprite when character rotates, independent of player.
-- (BUG) Fix Animation left right swap
 
 
 Optional
