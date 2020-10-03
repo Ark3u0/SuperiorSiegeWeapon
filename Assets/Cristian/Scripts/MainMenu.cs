@@ -8,8 +8,19 @@ public class MainMenu : MonoBehaviour
 
     //https://www.youtube.com/watch?v=-GWjA6dixV4
 
+
+    public float timeDelay = 2f;
+    private FadeToBlack Fader;
+
+    private void Start()
+    {
+        Fader = GetComponent<FadeToBlack>();
+    }
+
     public void Playgame()
     {
+        //fade in
+        Fader.FadeIn();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
@@ -32,4 +43,12 @@ public class MainMenu : MonoBehaviour
     {
         Application.Quit();
     }
+
+    private IEnumerator PulsingTree()
+    {
+        yield return new WaitForSeconds(timeDelay);
+        SceneManager.LoadScene("CG_PrototypePuzzles");
+
+    }
+
 }
