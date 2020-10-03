@@ -13,12 +13,41 @@ public class TreePuzzle : Puzzle
 
 
     private Vector3 bounceVector;
+    private AudioSource AudioPlayer;
+    private AudioClip BallCollision;
+    private AudioClip CatSounds;
+
+    private float CatTimer;
 
     // Start is called before the first frame update
     void Start()
     {
         CollectableSpawnPoint = transform.position;
+        AudioPlayer = GetComponent<AudioSource>();
+        CatSounds = Resources.Load<AudioClip>("SoundCatMeowCute");
+        BallCollision = Resources.Load<AudioClip>("Sound-Ball-Grass");
+
+
     }
+
+    private void FixedUpdate()
+    {
+        CatTimer += Time.fixedDeltaTime;    
+        if (CatTimer >= 15f && HasCollectable)
+        {
+            //play the audio of the Cat here 
+            AudioPlayer.PlayOneShot(CatSounds,0.4f);
+            Debug.Log("Cat audio playing");
+            CatTimer = 0;
+        }
+
+    }
+
+
+
+
+
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -40,6 +69,7 @@ public class TreePuzzle : Puzzle
         {
             Debug.Log("Ball not in tree");
         }
+
     }
 
     private void HitTreeEffect(GameObject Ball)
@@ -49,7 +79,9 @@ public class TreePuzzle : Puzzle
         //need to play audio
         Ball.GetComponent<Rigidbody>().AddForce(bounceVector * launchForce);
 
+        AudioPlayer.PlayOneShot(BallCollision, 0.7f);
         Debug.Log("Ball bounce");
+        HasCollectable = false;
     }
 
     private IEnumerator CollectableEffect()
@@ -60,6 +92,8 @@ public class TreePuzzle : Puzzle
         GameObject treeDrop = Instantiate(collectable);
         treeDrop.transform.position = new Vector3(collectableSpawnPoint.transform.position.x,
             collectableSpawnPoint.transform.position.y, collectableSpawnPoint.transform.position.z);
+        AudioPlayer.PlayOneShot(CatSounds, 0.4f);
+
 
     }
 

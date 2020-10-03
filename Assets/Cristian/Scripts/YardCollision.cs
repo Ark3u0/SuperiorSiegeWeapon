@@ -8,6 +8,16 @@ public class YardCollision : MonoBehaviour
     public bool TargetHit = false;
     public Material HitColor;
 
+    private AudioSource AudioPlayer;
+    private AudioClip PreSolvedSound;
+    private AudioClip SolvedSound;
+
+    private void Start()
+    {
+        AudioPlayer = GetComponent<AudioSource>();
+        SolvedSound = Resources.Load<AudioClip>("Sound-Generator-Fixed");
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer == 9f)// 9 is the ball layer
@@ -16,6 +26,10 @@ public class YardCollision : MonoBehaviour
             //Target is hit true
             TargetHit = true;
             GetComponent<MeshRenderer>().sharedMaterial = HitColor;
+            AudioPlayer.Stop();
+           AudioPlayer.clip = SolvedSound;
+
+           AudioPlayer.Play();
         }
         else
         {
