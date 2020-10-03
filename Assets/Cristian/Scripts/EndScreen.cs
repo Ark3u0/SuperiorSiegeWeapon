@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class EndScreen : MonoBehaviour
 {
+    public float MoveRate;
     public GameObject BackGroundImage;
     private bool Movebackground;
 
@@ -27,7 +28,7 @@ public class EndScreen : MonoBehaviour
     public void MoveImage()
     {
         BackGroundImage.transform.position = new Vector3(BackGroundImage.transform.position.x,
-    BackGroundImage.transform.position.y - 0.5f, BackGroundImage.transform.position.z);
+    BackGroundImage.transform.position.y + MoveRate, BackGroundImage.transform.position.z);
 
         Debug.Log("Y Value of the image " + BackGroundImage.transform.position.y);
         
@@ -50,7 +51,9 @@ public class EndScreen : MonoBehaviour
         Debug.Log("load to credits " );
 
         //now load the credits screen 
-        LoadCredits();
+        SceneManager.LoadScene("CG_PrototypeLevel_Credits");
+
+
     }
 
     public void LoadCredits()

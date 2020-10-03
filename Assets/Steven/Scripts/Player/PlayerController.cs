@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 
 // Reference: Brackey's - https://www.youtube.com/watch?v=4HpC--2iowE
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
     public float turnSmoothTime = 0.1f;
     public float turnSmoothVelocity;
     public HashSet<string> conditionsMet;
+    public AudioClip AudioKick;
 
     void Awake() {
         controls = new PlayerInputActions();
@@ -62,6 +64,11 @@ public class PlayerController : MonoBehaviour
     public void AddCondition(string condition) {
         conditionsMet.Add(condition);
         Debug.Log($"CONDITIONS: {string.Join(",", conditionsMet)}");
+        if (condition == "GameEnd")
+        {
+            // fade to black then load
+            SceneManager.LoadScene("CG_PrototypeLevel_EndScreen");
+        }
     }
 
     private Camera FindMainCameraInScene() {
@@ -133,5 +140,10 @@ public class PlayerController : MonoBehaviour
             }
             this.ball = ball;
         }
+    }
+
+    public void PlayAudio()
+    {
+       // AudioKick
     }
 }

@@ -40,4 +40,6 @@ public class NpcController : MonoBehaviour
         dialogueManager.Answer(answer);
     }
 
+    // need a check for the end of the game with abuelita 
+
 }

@@ -12,9 +12,9 @@ public class WellPuzzle : Puzzle
     public ParticleSystem wellEffect = null;
     public GameObject collectable;
     public GameObject CollectableSpawnLocation;
-    private Vector3 CollectableSpawnPoint; 
+    private Vector3 CollectableSpawnPoint;
 
-
+    private bool DoOnce = true;
     
     // Start is called before the first frame update
     void Start()
@@ -26,11 +26,12 @@ public class WellPuzzle : Puzzle
     // reads when the ball enters the collition box
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 9f)// 9 is the ball layer
+        if (other.gameObject.layer == 9f && DoOnce)// 9 is the ball layer
         {
             Debug.Log("Ball in well");
             //BallInWellEffect(other.gameObject);
             StartCoroutine(BallInWellEffect(other.gameObject));
+            DoOnce = false;
         }
         else
         {
@@ -49,17 +50,17 @@ public class WellPuzzle : Puzzle
 
 
         // ball audio effect 
-        ball.GetComponent<Rigidbody>().AddForce(Vector3.up * launchForce);
+        ball.GetComponent<Rigidbody>().AddForce(CollectableSpawnLocation.transform.up * launchForce);
         wellEffect.Play();
 
 
         // insted of ball get the collectable
-        GameObject Prize = Instantiate(collectable);
+        //GameObject Prize = Instantiate(collectable);
 
-        Prize.transform.position = new Vector3(CollectableSpawnPoint.x, 
-            CollectableSpawnPoint.y, CollectableSpawnPoint.z);
+       // Prize.transform.position = new Vector3(CollectableSpawnPoint.x, 
+        //    CollectableSpawnPoint.y, CollectableSpawnPoint.z);
 
-        Prize.GetComponent<Rigidbody>().AddForce(CollectableSpawnLocation.transform.up * launchForce );
+        //Prize.GetComponent<Rigidbody>().AddForce(CollectableSpawnLocation.transform.up * launchForce );
 
         AddCondition("well-puzzle-complete");
     }

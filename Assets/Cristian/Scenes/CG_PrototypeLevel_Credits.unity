@@ -483,7 +483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -537,7 +537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d94545592f25046ab267806aab55c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveRate: -1
+  MoveRate: 2
   BackGroundImage: {fileID: 1145305736}
 --- !u!4 &1562201693
 Transform:

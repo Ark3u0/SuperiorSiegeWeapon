@@ -62,9 +62,13 @@ public class SchoolPuzzle : Puzzle
 
     private void EndPuzzleResult()
     {
-        Debug.Log("Puzzle is over");
-        GameObject Prize = Instantiate(Collectable);
-        Prize.transform.position = new Vector3(transform.position.x,
-            transform.position.y, transform.position.z);
+        Debug.Log("OOOOOOOOOOOOOPuzzle is over OOOOOOOOOOOOOOO");
+        //GameObject Prize = Instantiate(Collectable);
+        // Prize.transform.position = new Vector3(transform.position.x,
+        //  transform.position.y, transform.position.z);
+
+        //add audio effect for the win
+        //change the lights and turn thme on
+
     }
 }

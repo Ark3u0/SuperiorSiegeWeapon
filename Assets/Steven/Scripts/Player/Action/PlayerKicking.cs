@@ -25,6 +25,9 @@ public class PlayerKicking : Action
 
         player.ball.Kick();
         player.CameraFollowPlayer();
+
+        //trigger kick audio
+        //player.PlayAudio("kick");
     }
 
     public void Update()

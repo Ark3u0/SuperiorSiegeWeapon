@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Cristian/Scenes/CG_PrototypePuzzles.unity
     guid: 5c8178b84fd78664b9290957ee78592e
+  - enabled: 1
+    path: Assets/Cristian/Scenes/CG_PrototypeLevel_Credits.unity
+    guid: 12fca2ad128b1434291e8e86959f9141
+  - enabled: 1
+    path: Assets/Cristian/Scenes/CG_PrototypeLevel_EndScreen.unity
+    guid: abe48f1139e608949aed2e994a6c5c27
   m_configObjects: {}
