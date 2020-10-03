@@ -14,12 +14,14 @@ public class WellPuzzle : Puzzle
     public GameObject CollectableSpawnLocation;
     private Vector3 CollectableSpawnPoint;
 
+    private AudioSource FountainAudio;
     private bool DoOnce = true;
     
     // Start is called before the first frame update
     void Start()
     {
         CollectableSpawnPoint = transform.position;
+        FountainAudio = GetComponent<AudioSource>();
     }
 
 
@@ -45,10 +47,10 @@ public class WellPuzzle : Puzzle
     private IEnumerator BallInWellEffect(GameObject ball)
     {
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         // audio effect
 
-
+        FountainAudio.PlayDelayed(1f);
         // ball audio effect 
         ball.GetComponent<Rigidbody>().AddForce(CollectableSpawnLocation.transform.up * launchForce);
         wellEffect.Play();
