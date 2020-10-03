@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SCR_MainMenu : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
 
     //https://www.youtube.com/watch?v=-GWjA6dixV4
