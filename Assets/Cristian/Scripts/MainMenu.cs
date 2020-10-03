@@ -3,52 +3,91 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class MainMenu : MonoBehaviour, Fadeable
 {
 
-    //https://www.youtube.com/watch?v=-GWjA6dixV4
+    private PlayerInputActions controls;
+    private Vector2 movement;
+    private bool selectTriggered;
+    private AudioSource menuAudio;
+    public Animator playQuitBoxAnimator;
+    public FadeOutManager fadeOutManager;
+    public AudioClip _changeSelection;
+    public AudioClip _select;
 
+    void Awake() {
+        controls = new PlayerInputActions();
+        
+        controls.Player.Move.started += ctx => movement = ctx.ReadValue<Vector2>();
+        controls.Player.Move.performed += ctx => movement = ctx.ReadValue<Vector2>();
+        controls.Player.Move.canceled += ctx => movement = ctx.ReadValue<Vector2>();
 
-    public float timeDelay = 2f;
-    private FadeToBlack Fader;
+        controls.Player.Interact.started += ctx => selectTriggered = true;
 
-    private void Start()
-    {
-        Fader = GetComponent<FadeToBlack>();
+        menuAudio = GetComponent<AudioSource>();
     }
 
-    public void Playgame()
-    {
-        //fade in
-        Fader.FadeIn();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    void Update() {
+        Vector2 moveInput = new Vector2(movement.x, movement.y).normalized;
+
+        if (Mathf.Abs(moveInput.y) > 0.8f) {
+            bool selection = moveInput.y > 0.8f;
+
+            Debug.Log(selection);
+            if (playQuitBoxAnimator.GetBool("IsPlay") != selection) {
+                // Play sound for toggle
+                menuAudio.clip = _changeSelection;
+                menuAudio.Play();
+                playQuitBoxAnimator.SetBool("IsPlay", selection);
+            }
+        }
+
+        if (selectTriggered) {
+            bool isPlay = playQuitBoxAnimator.GetBool("IsPlay");
+
+            
+
+            if (isPlay) {
+                OnDisable();
+
+                menuAudio.clip = _select;
+                menuAudio.Play();    
+
+                fadeOutManager.FadeOut(this);
+            } else {
+                Debug.Log("Quitting...");
+                
+                Application.Quit();
+            }
+        }
+
+        selectTriggered = false;
     }
 
-    public void LoadMainMenue()
-    {
-        SceneManager.LoadScene("CG_PrototypeLevel_MainMenue");
+    public void RunPostFade() {
+        StartCoroutine(LoadPlay());
     }
 
-    public void LoadEndScreen()
-    {
-      //  SceneManager.LoadScene("Final_EndScren");
-    }
+    private IEnumerator LoadPlay() {
+        GameObject menuMusic = GameObject.Find("MenuMusic");
+        if (menuMusic) {
+            AudioSource music = menuMusic.GetComponent<AudioSource>();
+            music.loop = false;
+            while (music.isPlaying) {
+                yield return null;
+            }
+        }
 
-    public void LoadCredits()
-    {
-       // SceneManager.LoadScene("Final_Credits");
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
-
-    private IEnumerator PulsingTree()
-    {
-        yield return new WaitForSeconds(timeDelay);
         SceneManager.LoadScene("CG_PrototypePuzzles");
-
     }
 
+    private void OnEnable() {
+        controls.Player.Move.Enable();
+        controls.Player.Interact.Enable();
+    }
+
+    private void OnDisable() {
+        controls.Player.Move.Disable();
+        controls.Player.Interact.Disable();
+    }
 }
