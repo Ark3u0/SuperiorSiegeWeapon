@@ -709,7 +709,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b59352841c3a14cd8a62830df096b7dd, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.808
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -848,7 +848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d94545592f25046ab267806aab55c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveRate: -1
+  MoveRate: -0.1
   BackGroundImage: {fileID: 1145305736}
   fadeOutManager: {fileID: 482704833}
 --- !u!4 &1562201693

@@ -37,39 +37,7 @@
             "key": "beginning-1",
             "value": {
                 "sentences": [
-                    "Perfecto! Nomas que I need your help with something."
-                ],
-                "next": "beginning-3"
-            }
-        },
-        {
-            "key": "beginning-2",
-            "value": {
-                "sentences": [
-                    "No? Pues Perfecto! You can help me with something then."
-                ],
-                "next": "beginning-3"
-            }
-        },
-        {
-            "key": "beginning-3",
-            "value": {
-                "sentences": [
-                    "The water from that fountain stopped running this morning.. I’d fix it pero mi amor said I should doing so many physical cosas. Could you help me?",
-                    "Now it’s stuck on the roof of the store. Puedes ayudar getting the chancla off of the roof?"
-                ],
-                "select": {
-                    "yes": "beginning-4",
-                    "no": "beginning-5"
-                }
-            }
-        },
-        {
-            "key": "beginning-4",
-            "value": {
-                "sentences": [
-                    "Gracias Matteo. You’re a lifesaver. No sabes how much you’re helping Amelia. Those blisters on her feet are terrible.",
-                    "I’m sure you can get it down somehow. A mejor you can kick it down with a ball or algo. Soy seguro you’ll figure it out."
+                    "Gracias Mateo. Your Abuelito and I helped make this back in the day. He was the one to fix it last time. Maybe you have some of his fixing magico."
                 ],
                 "condition": "don-francisco-introduced"
             }
