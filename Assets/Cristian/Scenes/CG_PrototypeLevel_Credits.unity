@@ -452,7 +452,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: 0
   m_CullingMask:
@@ -793,6 +793,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4dc361e65c68984ca08d663328771f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playQuitBoxAnimator: {fileID: 0}
+  fadeOutManager: {fileID: 0}
+  _changeSelection: {fileID: 0}
+  _select: {fileID: 0}
 --- !u!1 &1910106833
 GameObject:
   m_ObjectHideFlags: 0
