@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class EndScreen : MonoBehaviour
+public class EndScreen : MonoBehaviour, Fadeable
 {
     public float MoveRate;
     public GameObject BackGroundImage;
+    public FadeOutManager fadeOutManager;
     private bool Movebackground;
 
     // Start is called before the first frame update
@@ -49,15 +50,10 @@ public class EndScreen : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         Debug.Log("load to credits " );
-
-        //now load the credits screen 
-        SceneManager.LoadScene("CG_PrototypeLevel_Credits");
-
-
+        fadeOutManager.FadeOut(this);
     }
 
-    public void LoadCredits()
-    {
-       // SceneManager.LoadScene("CG_PrototypeLevel_MainMenue");
+    public void RunPostFade() {
+        SceneManager.LoadScene("CG_PrototypeLevel_Credits");
     }
 }

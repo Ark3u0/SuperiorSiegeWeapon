@@ -23,7 +23,9 @@
             "key": "beginning-0",
             "value": {
                 "sentences": [
-                    "Matteo! Como estas chico! Just in time too. We finally got those sugar skulls your abuelita has been asking for. Estas aqui to pick them up?"
+                    "Mateo! Como estas chico! Just in time too. We finally got those sugar skulls your abuelita has been asking for. Estas aqui to pick them up?",
+                    "Ah I see. Well if you scratch my back then I'll scratch your hombre, eh?",
+                    "You see the water from the fountain stopped running this morning... I’d fix it pero mi amor said I should stop doing so much physical labor. Could you help me?"
                 ],
                 "select": {
                     "yes": "beginning-1",
@@ -73,10 +75,10 @@
             }
         },
         {
-            "key": "beginning-5",
+            "key": "beginning-2",
             "value": {
                 "sentences": [
-                    "No preocupes then. Cuando tienes the time."
+                    "No preocupes then. Cuando tienes tiempo."
                 ],
                 "condition": "don-francisco-introduced"
             }
@@ -85,8 +87,8 @@
             "key": "idle-0",
             "value": {
                 "sentences": [
-                    "Como estas Matteo. How’s the roof chancla problema going?",
-                    "Si necesitas ayuda try hit the chancla with something. I’m sure it’ll fall off si hagas."
+                    "Como estas Mateo. How's the fountain problema going?",
+                    "Si necesitas ayuda? Try hitting the fountain. I’m sure it’ll fall off si hagas."
                 ]
             }
         },
@@ -94,10 +96,10 @@
             "key": "final-0",
             "value": {
                 "sentences": [
-                    "Matteo, que magnifico! Gracias por todo. Amilia y yo are forver grateful.",
-                    "Aqui son los sugar skulls. Make sure your abuela finds a good place for them. Que soy dicindo, I’m sure she will if it for her Oscar.",
-                    "Ayyy Oscar.  Acuerdo los dias where he would come to the store and we would just talk for hours and hours. What a good man.",
-                    "Gracias Matteo. Get those calaveras to your abuelita. I’m sure she’ll make that altar muy lindo y bonito."
+                    "Mateo, que magnifico! Gracias por todo. Se mira lindo!",
+                    "Aqui son los sugar skulls. Make sure they find a good place with your abuela. What am I saying, I’m sure she will if it’s for her Oscar.",
+                    "Ayyy Oscar.  Recuerdo los dias cuando we were just kids running around town for horas y horas. Ja we would go around kicking balones around seeing whatever we could break. You remind me a lot like him little Mateo.",
+                    "Gracias Mijo. Get those calaveras to your sweet abuelita."
                 ],
                 "condition": "don-francisco-complete"
             }
@@ -106,7 +108,7 @@
             "key": "idle-final-0",
             "value": {
                 "sentences": [
-                    "Gracias por la chancla Matteo. Make sure your abuelita get her skulls!"
+                    "Gracias Mateo... make sure your abuelita get her skulls."
                 ]
             }
         }
