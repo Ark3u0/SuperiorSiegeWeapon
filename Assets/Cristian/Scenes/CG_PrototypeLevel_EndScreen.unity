@@ -689,8 +689,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1385929938}
   - component: {fileID: 1385929937}
+  - component: {fileID: 1385929939}
   m_Layer: 0
-  m_Name: Audio Source
+  m_Name: EndingMusic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -806,6 +807,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1385929939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385929936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 643c0afb2555c4c8088ebeb731ad8302, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1562201691
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,8 +848,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d94545592f25046ab267806aab55c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveRate: -0.2
+  MoveRate: -1
   BackGroundImage: {fileID: 1145305736}
+  fadeOutManager: {fileID: 482704833}
 --- !u!4 &1562201693
 Transform:
   m_ObjectHideFlags: 0
