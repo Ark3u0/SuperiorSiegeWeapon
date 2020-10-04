@@ -10,6 +10,10 @@
             "path": "final-0"
         },
         {
+            "conditions": ["school-puzzle-complete"],
+            "path": "final-1"
+        },
+        {
             "conditions": ["flaco-introduced"],
             "path": "idle-0"
         },
@@ -65,6 +69,20 @@
             "value": {
                 "sentences": [
                     "Oh wow Mateo, you just hit them and they were all fixed? Queee rico!!",
+                    "Gracias por todo. I remember when I was little I would help your abuelito with stuff too. One time I had to get a paint brush out of the garbage can after a dog stole it and was sitting near the trash. Ha, wild.",
+                    "Hey I guess for helping me, you can have this. It’s one of your Abuelito’s paint brushes. It’s the one from the trash, but it’s clean. You can give it to you’re abuelita as a little thank you for the lunch too.",
+                    "No yeah pero gracias again Mateo. Have a good one."
+                ],
+                "condition": "flaco-complete"
+            }
+        },
+        {
+            "key": "final-1",
+            "value": {
+                "sentences": [
+                    "Hey Mateo. Did your abuelita send you here to give me lunch, Gracias little man. That lady is a saint.",
+                    "Just got a call to fix the AC generators up there for the school but I forgot to bring my ladder. Dumb move on my part.",
+                    "They seem sound okay now though. I saw you kicking a ball up near the roof - were you able to fix it with a few kicks amigo? Queee rico!!",
                     "Gracias por todo. I remember when I was little I would help your abuelito with stuff too. One time I had to get a paint brush out of the garbage can after a dog stole it and was sitting near the trash. Ha, wild.",
                     "Hey I guess for helping me, you can have this. It’s one of your Abuelito’s paint brushes. It’s the one from the trash, but it’s clean. You can give it to you’re abuelita as a little thank you for the lunch too.",
                     "No yeah pero gracias again Mateo. Have a good one."

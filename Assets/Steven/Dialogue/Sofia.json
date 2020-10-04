@@ -10,6 +10,10 @@
             "path": "final-mimi-safe-0"
         },
         {
+            "conditions": ["tree-puzzle-complete"],
+            "path": "final-1"
+        },
+        {
             "conditions": ["sofia-introduced"],
             "path": "idle-0"
         },
@@ -90,28 +94,24 @@
             }
         },
         {
-            "key": "final-mimi-safe-0",
+            "key": "final-0",
             "value": {
                 "sentences": [
-                    "Mateo you got her! Gracias Matteo! If Mimi ever has babies I'll name one after you. Matteo for a boy... and... Margarita for a girl? You'll be eternalized como una princesa tambien!"
+                    "Mateo you got her! Gracias Matteo! If Mimi ever has babies I'll name one after you. Matteo for a boy... and... Margarita for a girl? You'll be eternalized como una princesa tambien!",
+                    "Aqui es el papel picado. Thanks for letting me make your altar look pretty. Your abuelito would really like it. I remember one time he let me paint one of the walls with him. It was really cool! And your abuelita gave me cookies! Your abuelitos are really cool!",
+                    "Your abuelito would really like it. I remember one time he let me paint one of the school cafeteria murals with him. It was really inspiring! Your abuelito painted the world in color and color en mi corazon."
                 ],
-                "next": "final-1"
-            }
-        },
-        {
-            "key": "final-mimi-hurt-0",
-            "value": {
-                "sentences": [
-                    "Mateo!!! Why did you hit her!!! At least she’s okay now. But that wasn’t nice."
-                ],
-                "next": "final-1"
+                "condition": "sofia-complete"
             }
         },
         {
             "key": "final-1",
             "value": {
                 "sentences": [
-                    "Aqui es el papel picado. Thanks for letting me make your altar look pretty. Your abuelito would really like it. I remember one time he let me paint one of the walls with him. It was really cool! And your abuelita gave me cookies! Your abuelitos are really cool!",
+                    "Holla Matteeeeeeo, como esta-aaassss. Que estas haciendo aqui? Are you here for el papel picado?",
+                    "I got all the papel right here. Nomas, there’s just one thing. Mi gato, Mimi, is stuck on a tree. I keep on calling her but she...",
+                    "Oh there she is! Did you get her down from the tree for mi Mateo? Awwww gracias Mateo!",
+                    "Aqui es el papel picado. Thanks for letting me make your altar look pretty and for helping me in the process. Your abuelito would really like it. I remember one time he let me paint one of the walls with him. It was really cool! And your abuelita gave me cookies! Your abuelitos are really cool!",
                     "Your abuelito would really like it. I remember one time he let me paint one of the school cafeteria murals with him. It was really inspiring! Your abuelito painted the world in color and color en mi corazon."
                 ],
                 "condition": "sofia-complete"

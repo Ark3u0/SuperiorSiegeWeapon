@@ -10,6 +10,10 @@
             "path": "final-0"
         },
         {
+            "conditions": ["well-puzzle-complete"],
+            "path": "final-1"
+        },
+        {
             "conditions": ["don-francisco-introduced"],
             "path": "idle-0"
         },
@@ -65,6 +69,21 @@
             "value": {
                 "sentences": [
                     "Mateo, que magnifico! Gracias por todo. Se mira lindo!",
+                    "Aqui son los sugar skulls. Make sure they find a good place with your abuela. What am I saying, I’m sure she will if it’s for her Oscar.",
+                    "Ayyy Oscar.  Recuerdo los dias cuando we were just kids running around town for horas y horas. Ja we would go around kicking balones around seeing whatever we could break. You remind me a lot like him little Mateo.",
+                    "Gracias Mijo. Get those calaveras to your sweet abuelita."
+                ],
+                "condition": "don-francisco-complete"
+            }
+        },
+        {
+            "key": "final-1",
+            "value": {
+                "sentences": [
+                    "Mateo! Como estas chico! Just in time too. We finally got those sugar skulls your abuelita has been asking for. Estas aqui to pick them up?",
+                    "Ah I see. Well if you scratch my back then I'll scratch your hombre, eh?",
+                    "You see the water from the fountain stopped running this morning...",
+                    "Oh! It's running again! You helped me out before I could even ask! Que magnifico!",
                     "Aqui son los sugar skulls. Make sure they find a good place with your abuela. What am I saying, I’m sure she will if it’s for her Oscar.",
                     "Ayyy Oscar.  Recuerdo los dias cuando we were just kids running around town for horas y horas. Ja we would go around kicking balones around seeing whatever we could break. You remind me a lot like him little Mateo.",
                     "Gracias Mijo. Get those calaveras to your sweet abuelita."
