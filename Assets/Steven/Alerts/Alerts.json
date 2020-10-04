@@ -3,7 +3,7 @@
         {
             "condition": "abuelita-introduced",
             "alert": {
-                "triggers": ["don-francisco", "sofia", "flaco"]
+                "triggers": ["don francisco", "sofia", "flaco"]
             }
         },
         {
@@ -18,14 +18,14 @@
         {
             "condition": "don-francisco-complete",
             "alert": {
-                "composite": ["flaco-complete", "sofia-complete", "don-francisco"],
+                "composite": ["flaco-complete", "sofia-complete", "don-francisco-complete"],
                 "triggers": ["abuelita"]
             }
         },
         {
             "condition": "sofia-complete",
             "alert": {
-                "composite": ["flaco-complete", "sofia-complete", "don-francisco"],
+                "composite": ["flaco-complete", "sofia-complete", "don-francisco-complete"],
                 "triggers": ["abuelita"]
             }
     
@@ -33,14 +33,14 @@
         {
             "condition": "flaco-complete",
             "alert": {
-                "composite": ["flaco-complete", "sofia-complete", "don-francisco"],
+                "composite": ["flaco-complete", "sofia-complete", "don-francisco-complete"],
                 "triggers": ["abuelita"]
             }
         },
         {
             "condition": "well-puzzle-complete",
             "alert": {
-                "triggers": ["don-francisco"]
+                "triggers": ["don francisco"]
             }
         },
         {

@@ -22,9 +22,11 @@ public class DialogueReader
         return current.condition != null;
     }
 
-    public void GainCondition(PlayerController player)
+    public void GainCondition(PlayerController player, NpcAlertManager npcAlertManager)
     {
         player.AddCondition(current.condition);
+        Debug.Log(current.condition);
+        npcAlertManager.TriggerAlerts(current.condition);
     }
 
     public bool CheckForNextDialogue()

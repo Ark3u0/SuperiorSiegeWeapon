@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 // https://www.youtube.com/watch?v=_nRzoTzeyxU
-public class DialogueManager : Singleton<DialogueManager>
+public class DialogueManager : MonoBehaviour
 {
     public Text nameText;
     public Text dialogueText;
@@ -13,10 +13,15 @@ public class DialogueManager : Singleton<DialogueManager>
 
     private bool writingSentence;
     private bool fastCompleteSentence;
+    private NpcAlertManager npcAlertManager;
 
     private Queue<string> sentences;
 
     private DialogueReader reader;
+
+    void Awake() {
+        npcAlertManager = FindObjectOfType<NpcAlertManager>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -88,7 +93,7 @@ public class DialogueManager : Singleton<DialogueManager>
         if (sentences.Count == 0) 
         {
             if (reader.CheckForConditionGain()) {
-                reader.GainCondition(player);
+                reader.GainCondition(player, npcAlertManager);
             }
 
             if (reader.CheckForNextDialogue()) {
