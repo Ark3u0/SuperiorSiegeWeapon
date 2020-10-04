@@ -17,8 +17,6 @@ Optional
 - Concrete texture of buildings?
 
 Steven/Cris - Replace all buildings with ProBuilder (!!!)
-Steven - Exclamation marks above NPCs when they are done with puzzle but yet talked to (!!!)
-Steven - Dialogue Tree - finish the puzzle beforehand (!!!)
 Cris - Replace invisible walls with brick walls (!!!)
 Cris - Make the ofrenda; Build table next to abuelita (!!!)
 Steven - Sound effects on the character (!!)
