@@ -6,6 +6,10 @@
             "path": "final-0"
         },
         {
+            "conditions": ["flaco-complete", "don-francisco-complete", "sofia-complete"],
+            "path": "final-1"
+        },
+        {
             "conditions": ["abuelita-introduced"],
             "path": "idle-0"
         },
@@ -19,8 +23,9 @@
             "key": "beginning-0",
             "value": {
                 "sentences": [
-                    "Matteo, mijito de mi vida, thank you for helping you poor abuelita with this community Altar for Dias de los Muerto! I’m so happy that you’re here.",
-                    "We’re almost done with the decorations and festivities. Ohh I’m so excited. Matteo, mijo, can you help your abuelita get the final pieces of the altar?"
+                    "Mateo, mijito de mi vida, thank you for helping you poor abuelita with this community Altar for Dias de los Muerto. I’m so happy that you’re here.",
+                    "We’re almost done with the decorations and festivities. Ohh I’m so excited.",
+                    "Matteo, mijo, can you help your abuelita get the final pieces of the altar?"
                 ],
                 "select": {
                     "yes": "beginning-1",
@@ -32,7 +37,7 @@
             "key": "beginning-1",
             "value": {
                 "sentences": [
-                    "Que? Como que no vas a aydar! Matteo! Don’t make me get my chancal!"
+                    "Que? Como que no vas a ayudar! Matteo! Don’t make me get my chancal!"
                 ],
                 "next": "beginning-2"
             }
@@ -42,10 +47,10 @@
             "value": {
                 "sentences": [
                     "Gracias mijito. Now I need you to go around town to get the last of the decorations.",
-                    "Don Fransisco has the last sugar skulls we need. Go to his store to see if he finally has them.  El Don said he’d help for the past 2 days but this man has done nothing!",
-                    "El Flaco, Felipe, has some candles for the Altar too. Last I saw him he was in the plaza watching los pajaritos.",
-                    "Little Sofia made some little papel picado for the Altar too. I remember she would always help Oscar with painting the town so I’m sure she would love to help the altar.",
-                    "Vangas patrace when you have everything mijo. You can keep playing with the ball mijo, but don’t get too distracted jugando."
+                    "Ok, Don Fransisco has the last sugar skulls we need. Go to his store to see if he finally has them.  El Don said he’d help for the past 2 days but this man had done nothing but stare at that fountain all day!",
+                    "Ohh, I saw El Flaco come to town over by the school. He always forgets his lunch so I made a little lunch for him. Make sure he eats all of it this time.",
+                    "I almost forgot, Little Sofia made some little papel picado for the Altar too. I remember she would always help Oscar with painting the town so I’m sure she would love to help the altar.",
+                    "Vangas patrace when you have everything mijo. You can keep playing with the ball Mateo, but don’t get too distracted jugando."
                 ],
                 "condition": "abuelita-introduced"
             }
@@ -54,7 +59,7 @@
             "key": "idle-0",
             "value": {
                 "sentences": [
-                    "Hola mijito, did you get all the decorations?"
+                    "Hola mijito, hope you’re having fun with the decorations. Did you get them all?"
                 ],
                 "select": {
                     "yes": "idle-1",
@@ -67,7 +72,7 @@
             "value": {
                 "sentences": [
                     "Oh that's great. Why don't you...",
-                    "Mijo, it looks like you’re still missing a couple of decorations. Porque estas mentirando to your abuelita? Vas a ver Matteo!"
+                    "Mijo, it looks like you’re still missing a couple of decorations . Porque estas mentirando to your abuelita? Vas a ver Mateo!"
                 ],
                 "next": "idle-3"
             }
@@ -85,10 +90,10 @@
             "key": "idle-3",
             "value": {
                 "sentences": [
-                    "Go check the store to see if Don Fransisco has the rest of the sugar skulls for the Altar.",
-                    "Felipe said he has some spare candles to give. Check la plaza to see if he actually does or not.",
-                    "Sofia also has some papel picado for the altar too. Va a la escuela to find her.",
-                    "Come back when you have everything Mijo. Gracias y me amo!"
+                    "Go check the store to see if Don Fransisco has the rest of the sugar skulls for the Altar. I always see him looking at that fountain confused. Even now he doesn’t know how to fix it.",
+                    "Mire el Flaco Felipe over by the school too. See if he has anything he can contribute to the altar. I know he’s doesn’t look too bright but he’s a good kid.",
+                    "That hermosa Sofia also has some papel picado for the altar too. Look for her to go and pick it up.",
+                    "Come back when you have everything Mijo. Gracias y mi amo!"
                 ]
             }
         },
@@ -97,9 +102,23 @@
             "value": {
                 "sentences": [
                     "Hola mijito, did you get all the decorations?",
-                    "Candy, Candles, papel. Mijo that’s everything!",
-                    "Aww I’m so happy Matteo. Soy muy muy muy feliz. Tu Abuelito would be so proud of you mijito. I can just imagine it now, his espiritue just smiling down on you.",
-                    "Gracias Matteo. Now let’s get everyone the celebrate este Dia De Los Muetros con everyone."
+                    "Calavera? Perfeco. Papel picado? Perfecto! What’s this? One of your abuelito’s brushes? Dios mio Mateo this is wonderful! Thank you so much!",
+                    "Aww I’m so happy Mateo. Soy muy muy muy feliz. Tu Abuelito would be so proud of you mijito. I can just imagine it now, his espiritue just smiling down on you.",
+                    "Gracias Matteo. Now let’s get everyone to celebrate este Dia De Los Muetros!"
+                ],
+                "condition": "game-end"
+            }
+        },
+        {
+            "key": "final-1",
+            "value": {
+                "sentences": [
+                    "Mateo, mijito de mi vida, thank you for helping you poor abuelita with this community Altar for Dias de los Muerto. I’m so happy that you’re here.",
+                    "We’re almost done with the decorations and festivities. Ohh I’m so excited.",
+                    "Matteo, mijo, can you help your abuelita get the final pieces... Oh! Did you already go and pick things up for me my dear?",
+                    "Oh you are so lovely! Taking after your abuelito, my dear. He would show his love through action and I would never have to even ask for his help.",
+                    "Aww I’m so happy Mateo. Soy muy muy muy feliz. Tu Abuelito would be so proud of you mijito. I can just imagine it now, his espiritue just smiling down on you.",
+                    "Gracias Matteo. Now let’s get everyone to celebrate este Dia De Los Muetros!"
                 ],
                 "condition": "game-end"
             }

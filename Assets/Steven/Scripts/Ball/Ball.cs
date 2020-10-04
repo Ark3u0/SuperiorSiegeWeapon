@@ -95,7 +95,7 @@ public class Ball : MonoBehaviour
 
     public void Kick()
     {
-        if (ballState == BallState.AIMING) {
+        // if (ballState == BallState.AIMING) {
             // Stop renderering kick trajectory
             kickTrajectoryRenderer.StopRendering();
 
@@ -116,7 +116,7 @@ public class Ball : MonoBehaviour
             // Reset aim data
             ResetAimData();
             transform.SetParent(null);
-        }
+        // }
         
     }
 

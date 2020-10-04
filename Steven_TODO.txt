@@ -10,3 +10,25 @@ Optional
 - Show constraints on where player can kick
 - (Experiment) trajectory with drag
 
+
+
+
+
+- Concrete texture of buildings?
+
+Steven/Cris - Replace all buildings with ProBuilder (!!!)
+Cris - Replace invisible walls with brick walls (!!!)
+Cris - Make the ofrenda; Build table next to abuelita (!!!)
+Steven - Sound effects on the character (!!)
+Steven - Add flags to scene around puzzles (!)
+Steven - Sound effects on the NPCs dialogue (!)
+Steven - Create sprite flowers (!)
+Steven - Fountain sound (!)
+
+3PM CHECK IN
+
+
+6PM MANDATORY START WORKING ON:
+- Type up itch.io page (!!!)
+- Add ourselves, references, etc. to Credits (!!!)
+- Credit scene (!!!)

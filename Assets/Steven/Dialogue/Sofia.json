@@ -10,6 +10,10 @@
             "path": "final-mimi-safe-0"
         },
         {
+            "conditions": ["tree-puzzle-complete"],
+            "path": "final-1"
+        },
+        {
             "conditions": ["sofia-introduced"],
             "path": "idle-0"
         },
@@ -23,7 +27,7 @@
             "key": "beginning-0",
             "value": {
                 "sentences": [
-                    "Holla Matteeeeeeo, como esta-aaassss. Que estas haciendo aqui? Looking for some cool bottles to kick?"
+                    "Holla Matteeeeeeo, como esta-aaassss. Que estas haciendo aqui? Looking for some cool bottles to kick at?"
                 ],
                 "select": {
                     "yes": "beginning-1",
@@ -35,7 +39,7 @@
             "key": "beginning-1",
             "value": {
                 "sentences": [
-                    "Ha, I knew it! Well no hay unos aqui. I'm keeping this school clean y lindo."
+                    "Ha, I knew it. Well no hay unos aqui. I’m keeping this school clean y lindo."
                 ],
                 "next": "beginning-3"
             }
@@ -44,7 +48,7 @@
             "key": "beginning-2",
             "value": {
                 "sentences": [
-                    "No? Pues perfecto! You can help me with something then."
+                    "No? Pues Perfecto! You can help me with something then."
                 ],
                 "next": "beginning-3"
             }
@@ -53,9 +57,9 @@
             "key": "beginning-3",
             "value": {
                 "sentences": [
-                    "Oh, your here for the papel picado? Sorry for thinking you'd just be here for trouble. I got all the papel right here. Nomas, there's just one thing.",
-                    "My gato, Mimi, is stuck on a tree. I keep on calling her but she doesn't get off. Es como she's stuck up there... pobrecita...",
-                    "Matteo, could you help me get her off the tree. What if she's stuck there forever. I'm worried."
+                    "Oh, you're here for the papel picado! Sorry for thinking you’d just be here for trouble. I got all the papel right here. Nomas, there’s just one thing.",
+                    "Mi gato, Mimi, is stuck on a tree. I keep on calling her but she doesn't get off. Es como she’s stuck up there. Pobrecita.",
+                    "Mateo could you help me get her off the tree. What if she’s stuck there. I’m worried..."
                 ],
                 "select": {
                     "yes": "beginning-4",
@@ -67,7 +71,7 @@
             "key": "beginning-4",
             "value": {
                 "sentences": [
-                    "Gracias Matteo! Maybe if you shake the tree you can get her off. Just don't hit her! Mimi is a special kitty and she deserves to be treated like mi princesa!"
+                    "Gracias Mateo. Maybe if you shake the tree you can get her off. Just don’t hit her. Mimi is a special kitty and I don’t want her to get hurt."
                 ],
                 "condition": "sofia-introduced"
             }
@@ -76,7 +80,7 @@
             "key": "beginning-5",
             "value": {
                 "sentences": [
-                    "Matteeooo, that's not nice. She's gonna be there forever!"
+                    "Mateeooo, that’s not nice. She’s gonna be there forever!"
                 ],
                 "condition": "sofia-introduced"
             }
@@ -90,28 +94,24 @@
             }
         },
         {
-            "key": "final-mimi-safe-0",
+            "key": "final-0",
             "value": {
                 "sentences": [
-                    "Matteo you got her! Gracias Matteo! If Mimi ever has babies I'll name one after you. Matteo for a boy... and... Margarita for a girl! You'll be eternalized como una princesa tambien!"
+                    "Mateo you got her! Gracias Matteo! If Mimi ever has babies I'll name one after you. Matteo for a boy... and... Margarita for a girl? You'll be eternalized como una princesa tambien!",
+                    "Aqui es el papel picado. Thanks for letting me make your altar look pretty. Your abuelito would really like it. I remember one time he let me paint one of the walls with him. It was really cool! And your abuelita gave me cookies! Your abuelitos are really cool!",
+                    "Your abuelito would really like it. I remember one time he let me paint one of the school cafeteria murals with him. It was really inspiring! Your abuelito painted the world in color and color en mi corazon."
                 ],
-                "next": "final-1"
-            }
-        },
-        {
-            "key": "final-mimi-hurt-0",
-            "value": {
-                "sentences": [
-                    "Matteo!!! Why did you hit her!! At least she's out of the tree. But I guess you can no longer pet her. Ya know what they say... when cat's hate you if you press on the beans you get the means!"
-                ],
-                "next": "final-1"
+                "condition": "sofia-complete"
             }
         },
         {
             "key": "final-1",
             "value": {
                 "sentences": [
-                    "Aqui es el papel picado. Thanks for letting me make your altar look prettier and nicer.",
+                    "Holla Matteeeeeeo, como esta-aaassss. Que estas haciendo aqui? Are you here for el papel picado?",
+                    "I got all the papel right here. Nomas, there’s just one thing. Mi gato, Mimi, is stuck on a tree. I keep on calling her but she...",
+                    "Oh there she is! Did you get her down from the tree for mi Mateo? Awwww gracias Mateo!",
+                    "Aqui es el papel picado. Thanks for letting me make your altar look pretty and for helping me in the process. Your abuelito would really like it. I remember one time he let me paint one of the walls with him. It was really cool! And your abuelita gave me cookies! Your abuelitos are really cool!",
                     "Your abuelito would really like it. I remember one time he let me paint one of the school cafeteria murals with him. It was really inspiring! Your abuelito painted the world in color and color en mi corazon."
                 ],
                 "condition": "sofia-complete"

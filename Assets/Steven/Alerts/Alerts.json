@@ -1,0 +1,62 @@
+{
+    "alerts": [
+        {
+            "condition": "abuelita-introduced",
+            "alert": {
+                "triggers": ["don francisco", "sofia", "flaco"]
+            }
+        },
+        {
+            "condition": "flaco-introduced"
+        },
+        {
+            "condition": "don-francisco-introduced"
+        },
+        {
+            "condition": "sofia-introduced"
+        },
+        {
+            "condition": "don-francisco-complete",
+            "alert": {
+                "composite": ["flaco-complete", "sofia-complete", "don-francisco-complete"],
+                "triggers": ["abuelita"]
+            }
+        },
+        {
+            "condition": "sofia-complete",
+            "alert": {
+                "composite": ["flaco-complete", "sofia-complete", "don-francisco-complete"],
+                "triggers": ["abuelita"]
+            }
+    
+        },
+        {
+            "condition": "flaco-complete",
+            "alert": {
+                "composite": ["flaco-complete", "sofia-complete", "don-francisco-complete"],
+                "triggers": ["abuelita"]
+            }
+        },
+        {
+            "condition": "well-puzzle-complete",
+            "alert": {
+                "triggers": ["don francisco"]
+            }
+        },
+        {
+            "condition": "tree-puzzle-complete",
+            "alert": {
+                "triggers": ["sofia"]
+            }
+        },
+        {
+            "condition": "school-puzzle-complete",
+            "alert": {
+                "triggers": ["flaco"]
+            }
+        },
+        {
+            "condition": "game-end"
+        }
+    ]
+}
