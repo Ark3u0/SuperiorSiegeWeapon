@@ -21,11 +21,9 @@ Steven - Exclamation marks above NPCs when they are done with puzzle but yet tal
 Steven - Dialogue Tree - finish the puzzle beforehand (!!!)
 Cris - Replace invisible walls with brick walls (!!!)
 Cris - Make the ofrenda; Build table next to abuelita (!!!)
-Steven - Rotate cat with camera and grass with camera (!!)
 Steven - Sound effects on the character (!!)
 Steven - Add flags to scene around puzzles (!)
 Steven - Sound effects on the NPCs dialogue (!)
-Steven - Create sprite grass (3 variants) (!)
 Steven - Create sprite flowers (!)
 Steven - Fountain sound (!)
 

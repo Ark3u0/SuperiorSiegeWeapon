@@ -1039,6 +1039,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d9a19a84d23124da1436e2d69a3145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcAskingForHelp: {fileID: 1792632365}
   HasCollectable: 0
   launchForce: 5000
   treeEffect: {fileID: 1367029434}
@@ -13306,6 +13307,17 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &120677997 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4088370795661400766, guid: 2949bb9842d2f1b459004f219ea84f57, type: 3}
+  m_PrefabInstance: {fileID: 1589110258}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 942afde5cd1de03429c1eb033e53bcca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &129475654
 GameObject:
   m_ObjectHideFlags: 0
@@ -25068,6 +25080,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d9a19a84d23124da1436e2d69a3145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcAskingForHelp: {fileID: 1792632365}
   HasCollectable: 0
   launchForce: 5000
   treeEffect: {fileID: 521690810}
@@ -41054,6 +41067,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d9a19a84d23124da1436e2d69a3145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcAskingForHelp: {fileID: 1792632365}
   HasCollectable: 0
   launchForce: 5000
   treeEffect: {fileID: 2086541907}
@@ -53818,6 +53832,10 @@ PrefabInstance:
       propertyPath: fadeOutManager
       value: 
       objectReference: {fileID: 813912392}
+    - target: {fileID: 851981657735573775, guid: a83f680e5b0cd9146a2ec6f21115ca9c, type: 3}
+      propertyPath: abuela
+      value: 
+      objectReference: {fileID: 970265176}
     - target: {fileID: 851981657735573809, guid: a83f680e5b0cd9146a2ec6f21115ca9c, type: 3}
       propertyPath: m_Name
       value: ThirdPersonPlayer
@@ -54861,6 +54879,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 851981657735573774, guid: a83f680e5b0cd9146a2ec6f21115ca9c, type: 3}
   m_PrefabInstance: {fileID: 865627691}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &970265176 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1739216981430115071, guid: f166527405680fe459bff58d15138201, type: 3}
+  m_PrefabInstance: {fileID: 2101709322}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 942afde5cd1de03429c1eb033e53bcca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &971609362
 Mesh:
   m_ObjectHideFlags: 0
@@ -57974,6 +58003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d9a19a84d23124da1436e2d69a3145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcAskingForHelp: {fileID: 1792632365}
   HasCollectable: 1
   launchForce: 5000
   treeEffect: {fileID: 153496631}
@@ -78501,6 +78531,17 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &1564905134 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7277531023366143859, guid: 15ffe493dfa094f4097cef30b3b9f8c4, type: 3}
+  m_PrefabInstance: {fileID: 1132304904}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 942afde5cd1de03429c1eb033e53bcca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1585499150
 GameObject:
   m_ObjectHideFlags: 0
@@ -79768,6 +79809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047b4f84e14a9104aafeb95daedb532e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcAskingForHelp: {fileID: 1564905134}
   Generator1: {fileID: 1046842261}
   Generator2: {fileID: 1367221097}
   Generator3: {fileID: 783167057}
@@ -81311,6 +81353,17 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!114 &1792632365 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5415675558058208436, guid: bb2cb4c10295327449dbfe707046d9f5, type: 3}
+  m_PrefabInstance: {fileID: 389073652}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 942afde5cd1de03429c1eb033e53bcca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1795744864
 Mesh:
   m_ObjectHideFlags: 0
@@ -89271,6 +89324,10 @@ PrefabInstance:
       propertyPath: wellEffect
       value: 
       objectReference: {fileID: 771070806}
+    - target: {fileID: 4620741079720633763, guid: e0201280d4d9981498bf81b7241a366f, type: 3}
+      propertyPath: npcAskingForHelp
+      value: 
+      objectReference: {fileID: 120677997}
     - target: {fileID: 5032002802346536485, guid: e0201280d4d9981498bf81b7241a366f, type: 3}
       propertyPath: startDelay.scalar
       value: 0

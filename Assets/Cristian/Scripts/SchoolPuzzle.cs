@@ -34,6 +34,7 @@ public class SchoolPuzzle : Puzzle
         {
             AddCondition("school-puzzle-complete");
             EndPuzzleResult();
+            TriggerNpcExclamationMark();
             Stop = false;
         }
         else

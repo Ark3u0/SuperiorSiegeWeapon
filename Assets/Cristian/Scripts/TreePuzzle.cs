@@ -90,7 +90,7 @@ public class TreePuzzle : Puzzle
         collectable.GetComponent<CatController>().TurnOnGravity();
         AudioPlayer.PlayOneShot(CatSounds, 0.4f);
 
-
+        TriggerNpcExclamationMark();
     }
 
     private IEnumerator PulsingTree()

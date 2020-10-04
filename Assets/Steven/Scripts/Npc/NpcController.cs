@@ -7,10 +7,14 @@ public class NpcController : MonoBehaviour
     public TextAsset dialogueJson;
     private DialogueReader dialogueReader;
     private DialogueManager dialogueManager;
+    private EnvironmentSpriteAnimation exclamationSprite;
 
     void Awake() {
         dialogueManager = FindDialogueManagerInScene();
         dialogueReader = new DialogueReader(dialogueJson);
+        exclamationSprite = GetComponentInChildren<EnvironmentSpriteAnimation>();
+
+        HideExclamationMark();
     }
 
     private DialogueManager FindDialogueManagerInScene() {
@@ -26,7 +30,17 @@ public class NpcController : MonoBehaviour
         return dialogueManager.DisplayNextSentence(player);
     }
 
+    public void ShowExclamationMark() {
+        exclamationSprite.transform.localScale = new Vector3(1, 1, 1);
+    }
+
+    public void HideExclamationMark() {
+        exclamationSprite.transform.localScale = new Vector3(0, 0, 0);
+    }
+
     public bool StartConversation(PlayerController player) {
+        HideExclamationMark();
+
         Vector3 playerPosition = player.transform.position;
         transform.LookAt(new Vector3(playerPosition.x, transform.position.y, playerPosition.z));
 

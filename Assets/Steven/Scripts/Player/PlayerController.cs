@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour, Fadeable
     private Ball ballToReset;
     private Camera cam;
     public Ball ball;
+    public NpcController abuela;
     public NpcController npc;
     public float speed = 6.0f;
     public float turnSmoothTime = 0.1f;
@@ -65,6 +66,10 @@ public class PlayerController : MonoBehaviour, Fadeable
     public void AddCondition(string condition) {
         conditionsMet.Add(condition);
         Debug.Log($"CONDITIONS: {string.Join(",", conditionsMet)}");
+        if (AreConditionsMet(new List<string> { "don-francisco-complete", "flaco-complete", "sofia-complete" }))
+        {
+            abuela.ShowExclamationMark();
+        }
         if (condition == "game-end")
         {
             fadeOutManager.FadeOut(this);
