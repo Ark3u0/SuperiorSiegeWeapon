@@ -65,7 +65,7 @@ public class WellPuzzle : Puzzle
         //Prize.GetComponent<Rigidbody>().AddForce(CollectableSpawnLocation.transform.up * launchForce );
 
         AddCondition("well-puzzle-complete");
-        TriggerNpcExclamationMark();
+        TriggerAlerts("well-puzzle-complete");
     }
 
 

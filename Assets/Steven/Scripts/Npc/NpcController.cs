@@ -4,17 +4,23 @@ using UnityEngine;
 
 public class NpcController : MonoBehaviour
 {
+    public string npcName;
     public TextAsset dialogueJson;
     private DialogueReader dialogueReader;
     private DialogueManager dialogueManager;
     private EnvironmentSpriteAnimation exclamationSprite;
+    public bool startWithAlert = false;
 
     void Awake() {
         dialogueManager = FindDialogueManagerInScene();
         dialogueReader = new DialogueReader(dialogueJson);
         exclamationSprite = GetComponentInChildren<EnvironmentSpriteAnimation>();
 
-        HideExclamationMark();
+        if (startWithAlert) {
+            ShowExclamationMark();
+        } else {
+            HideExclamationMark();
+        }
     }
 
     private DialogueManager FindDialogueManagerInScene() {

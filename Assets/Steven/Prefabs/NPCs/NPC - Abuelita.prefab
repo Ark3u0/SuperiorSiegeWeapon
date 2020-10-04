@@ -189,7 +189,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942afde5cd1de03429c1eb033e53bcca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  npcName: Abuelita
   dialogueJson: {fileID: 4900000, guid: 87e7df49adf0d8941b799cb0f2fac373, type: 3}
+  startWithAlert: 1
 --- !u!1 &8495911710386852803
 GameObject:
   m_ObjectHideFlags: 0

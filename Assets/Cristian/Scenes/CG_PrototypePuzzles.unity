@@ -1039,7 +1039,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d9a19a84d23124da1436e2d69a3145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcAskingForHelp: {fileID: 1792632365}
   HasCollectable: 0
   launchForce: 5000
   treeEffect: {fileID: 1367029434}
@@ -25080,7 +25079,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d9a19a84d23124da1436e2d69a3145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcAskingForHelp: {fileID: 1792632365}
   HasCollectable: 0
   launchForce: 5000
   treeEffect: {fileID: 521690810}
@@ -41067,7 +41065,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d9a19a84d23124da1436e2d69a3145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcAskingForHelp: {fileID: 1792632365}
   HasCollectable: 0
   launchForce: 5000
   treeEffect: {fileID: 2086541907}
@@ -53514,6 +53511,50 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &831456014
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 831456016}
+  - component: {fileID: 831456015}
+  m_Layer: 0
+  m_Name: NpcAlertManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &831456015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831456014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f0392ebeb1557e4ab2c7100a569f0c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alertsJson: {fileID: 4900000, guid: 75ba1ba1a699de5469ff5c9f3e30e972, type: 3}
+--- !u!4 &831456016
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831456014}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 46.743427, y: 5.689707, z: 49.611088}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 26
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &859641046
 GameObject:
   m_ObjectHideFlags: 0
@@ -58003,7 +58044,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d9a19a84d23124da1436e2d69a3145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcAskingForHelp: {fileID: 1792632365}
   HasCollectable: 1
   launchForce: 5000
   treeEffect: {fileID: 153496631}
@@ -78531,17 +78571,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!114 &1564905134 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7277531023366143859, guid: 15ffe493dfa094f4097cef30b3b9f8c4, type: 3}
-  m_PrefabInstance: {fileID: 1132304904}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 942afde5cd1de03429c1eb033e53bcca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1585499150
 GameObject:
   m_ObjectHideFlags: 0
@@ -79809,7 +79838,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047b4f84e14a9104aafeb95daedb532e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcAskingForHelp: {fileID: 1564905134}
   Generator1: {fileID: 1046842261}
   Generator2: {fileID: 1367221097}
   Generator3: {fileID: 783167057}
@@ -81353,17 +81381,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!114 &1792632365 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5415675558058208436, guid: bb2cb4c10295327449dbfe707046d9f5, type: 3}
-  m_PrefabInstance: {fileID: 389073652}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 942afde5cd1de03429c1eb033e53bcca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!43 &1795744864
 Mesh:
   m_ObjectHideFlags: 0

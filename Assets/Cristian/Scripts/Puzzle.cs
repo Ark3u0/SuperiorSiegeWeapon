@@ -7,9 +7,12 @@ public abstract class Puzzle : MonoBehaviour
 {
     private Action<string> addCondition;
     private Func<List<string>, bool> areConditionsMet;
+    private NpcAlertManager npcAlertManager;
 
-    public NpcController npcAskingForHelp;
-
+    void Awake() {
+        npcAlertManager = FindObjectOfType<NpcAlertManager>();
+    }
+    
     public void SetAddConditionCallback(Action<string> addConditionCallback) {
         addCondition = addConditionCallback;
     }
@@ -18,8 +21,8 @@ public abstract class Puzzle : MonoBehaviour
         areConditionsMet = areConditionsMetCallback;
     }
 
-    protected void TriggerNpcExclamationMark() {
-        npcAskingForHelp.ShowExclamationMark();
+    protected void TriggerAlerts(string condition) {
+        npcAlertManager.TriggerAlerts(condition);
     }
 
     protected void AddCondition(string condition) {
