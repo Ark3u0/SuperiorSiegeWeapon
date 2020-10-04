@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class EndScreen : MonoBehaviour, Fadeable
 {
     public float MoveRate;
-    public GameObject BackGroundImage;
+    public Image BackGroundImage;
     public FadeOutManager fadeOutManager;
     private bool Movebackground;
 
@@ -29,11 +30,11 @@ public class EndScreen : MonoBehaviour, Fadeable
     public void MoveImage()
     {
         BackGroundImage.transform.position = new Vector3(BackGroundImage.transform.position.x,
-    BackGroundImage.transform.position.y + MoveRate, BackGroundImage.transform.position.z);
+        BackGroundImage.transform.position.y + MoveRate, BackGroundImage.transform.position.z);
 
         Debug.Log("Y Value of the image " + BackGroundImage.transform.position.y);
         
-        if (BackGroundImage.transform.position.y < -75f)
+        if (BackGroundImage.transform.position.y < 5f)
         {
             Movebackground = false;
             StartCoroutine(EndMovingBackground());

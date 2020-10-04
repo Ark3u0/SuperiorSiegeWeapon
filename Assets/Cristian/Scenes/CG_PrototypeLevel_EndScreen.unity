@@ -563,7 +563,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 650}
+  m_AnchoredPosition: {x: 0, y: 550}
   m_SizeDelta: {x: 1920, y: 2400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1145305738
@@ -849,7 +849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveRate: -0.1
-  BackGroundImage: {fileID: 1145305736}
+  BackGroundImage: {fileID: 1145305738}
   fadeOutManager: {fileID: 482704833}
 --- !u!4 &1562201693
 Transform:
@@ -979,3 +979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4dc361e65c68984ca08d663328771f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playQuitBoxAnimator: {fileID: 0}
+  fadeOutManager: {fileID: 0}
+  _changeSelection: {fileID: 0}
+  _select: {fileID: 0}
