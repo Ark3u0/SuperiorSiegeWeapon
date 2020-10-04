@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour, Fadeable
     public float turnSmoothTime = 0.1f;
     public float turnSmoothVelocity;
     public HashSet<string> conditionsMet;
+
+    private AudioSource AudioPlayer;
     public AudioClip AudioKick;
 
     void Awake() {
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviour, Fadeable
         cam = FindMainCameraInScene();
         spriteAnimation = FindPlayerSpriteAnimationInChildren();
         conditionsMet = new HashSet<string>();
+        AudioPlayer = GetComponent<AudioSource>();
 
         actions.Initialize("idle", new Dictionary<string, System.Func<Action>> {
             { "idle", () => new PlayerIdle(this, actions, inputBoxManager, cam) },
@@ -147,8 +150,9 @@ public class PlayerController : MonoBehaviour, Fadeable
         }
     }
 
-    public void PlayAudio()
+    public void PlayClipAudio(string ClipName)
     {
+    //    AudioPlayer.PlayOneShot(ClipName,0.7f);
        // AudioKick
     }
 }
