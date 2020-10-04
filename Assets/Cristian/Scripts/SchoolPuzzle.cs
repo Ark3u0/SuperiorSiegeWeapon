@@ -48,7 +48,6 @@ public class SchoolPuzzle : Puzzle
         Activated2 = Generator2.GetComponent<YardCollision>().TargetHit;
         Activated3 = Generator3.GetComponent<YardCollision>().TargetHit;
         
-        Debug.Log("CHECK GENERATOR");
         if (Activated1) {
             AddCondition("school-puzzle-1-partial");
         }

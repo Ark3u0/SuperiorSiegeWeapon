@@ -16,13 +16,10 @@ Optional
 
 - Concrete texture of buildings?
 
-Cris - Link the game end scene and game intro (!!!) 
-Cris - Fade in and out of scenes (!!!)
-Steven - Add end game music (!!!)
 Steven/Cris - Replace all buildings with ProBuilder (!!!)
 Steven - Exclamation marks above NPCs when they are done with puzzle but yet talked to (!!!)
+Steven - Dialogue Tree - finish the puzzle beforehand (!!!)
 Cris - Replace invisible walls with brick walls (!!!)
-Steven - Edit music to allow looping / intro (!!!)
 Cris - Make the ofrenda; Build table next to abuelita (!!!)
 Steven - Rotate cat with camera and grass with camera (!!)
 Steven - Sound effects on the character (!!)

@@ -6,11 +6,12 @@ using UnityEngine.SceneManagement;
 
 
 // Reference: Brackey's - https://www.youtube.com/watch?v=4HpC--2iowE
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, Fadeable
 {
     public CameraTarget cameraTarget;
     public CharacterController controller;
     public PlayerInputActions controls;
+    public FadeOutManager fadeOutManager;
     private ActionStateMachine actions;
     private InputBoxManager inputBoxManager;
     private PlayerSpriteAnimation spriteAnimation;
@@ -64,11 +65,15 @@ public class PlayerController : MonoBehaviour
     public void AddCondition(string condition) {
         conditionsMet.Add(condition);
         Debug.Log($"CONDITIONS: {string.Join(",", conditionsMet)}");
-        if (condition == "GameEnd")
+        if (condition == "game-end")
         {
-            // fade to black then load
-            SceneManager.LoadScene("CG_PrototypeLevel_EndScreen");
+            fadeOutManager.FadeOut(this);
         }
+    }
+
+    public void RunPostFade() {
+        Debug.Log("LOADING END SCREEN");
+        SceneManager.LoadScene("CG_PrototypeLevel_EndScreen");
     }
 
     private Camera FindMainCameraInScene() {
