@@ -43,12 +43,6 @@ public class TreePuzzle : Puzzle
 
     }
 
-
-
-
-
-
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer == 9f)// 9 is the ball layer
@@ -87,11 +81,13 @@ public class TreePuzzle : Puzzle
     private IEnumerator CollectableEffect()
     {
         yield return new WaitForSeconds(3f);
+
+       
+
         // spawn the collectable 
-        Debug.Log("Spawn Collectable");
-        GameObject treeDrop = Instantiate(collectable);
-        treeDrop.transform.position = new Vector3(collectableSpawnPoint.transform.position.x,
+        collectable.transform.position = new Vector3(collectableSpawnPoint.transform.position.x,
             collectableSpawnPoint.transform.position.y, collectableSpawnPoint.transform.position.z);
+        collectable.GetComponent<CatController>().TurnOnGravity();
         AudioPlayer.PlayOneShot(CatSounds, 0.4f);
 
 

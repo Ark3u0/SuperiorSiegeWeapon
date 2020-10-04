@@ -6,10 +6,22 @@ public class RotateSprites : MonoBehaviour
 {
     private NpcSpriteAnimation[] npcSpriteAnimations;
     private PlayerSpriteAnimation[] playerSpriteAnimations;
+    private EnvironmentSpriteAnimation[] environmentSpriteAnimations;
 
     void Awake() {
         npcSpriteAnimations = FindObjectsOfType<NpcSpriteAnimation>();
         playerSpriteAnimations = FindObjectsOfType<PlayerSpriteAnimation>();
+        environmentSpriteAnimations = FindObjectsOfType<EnvironmentSpriteAnimation>();
+    }
+
+     private void RotateEnvironmentObjects() {
+        foreach (EnvironmentSpriteAnimation environmentSpriteAnimation in environmentSpriteAnimations) {
+            // Camera position in X-Z axis and Y-aligned to sprite
+            Vector3 camPositionXZ = new Vector3(transform.position.x, environmentSpriteAnimation.transform.position.y, transform.position.z);
+
+            // Lock sprite to look at camera
+            environmentSpriteAnimation.transform.rotation = Quaternion.LookRotation(camPositionXZ - environmentSpriteAnimation.transform.position);
+        }
     }
 
     private void RotateNpcs() {
@@ -76,5 +88,6 @@ public class RotateSprites : MonoBehaviour
     {
        RotateNpcs();
        RotatePlayers();
+       RotateEnvironmentObjects();
     }
 }

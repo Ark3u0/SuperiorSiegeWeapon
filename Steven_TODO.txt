@@ -18,6 +18,7 @@ Optional
 
 Steven/Cris - Replace all buildings with ProBuilder (!!!)
 Steven - Exclamation marks above NPCs when they are done with puzzle but yet talked to (!!!)
+Steven - Dialogue Tree - finish the puzzle beforehand (!!!)
 Cris - Replace invisible walls with brick walls (!!!)
 Cris - Make the ofrenda; Build table next to abuelita (!!!)
 Steven - Rotate cat with camera and grass with camera (!!)
