@@ -359,8 +359,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -4650}
-  m_SizeDelta: {x: 0, y: 9300}
+  m_AnchoredPosition: {x: 0, y: -2500}
+  m_SizeDelta: {x: 0, y: 5000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1002728110
 MonoBehaviour:
@@ -601,10 +601,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df0f6823afa2b4478a0c9b7b9d6f387b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveRate: 0.2
+  MoveRate: 0.4
   BackGroundImage: {fileID: 1002728110}
   fadeOutManager: {fileID: 452811870}
-  scrollTo: 797
+  scrollTo: 1600
 --- !u!1 &1725809773
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,7 +692,6 @@ GameObject:
   - component: {fileID: 1801217558}
   - component: {fileID: 1801217557}
   - component: {fileID: 1801217556}
-  - component: {fileID: 1801217560}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -781,22 +780,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1801217560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1801217555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4dc361e65c68984ca08d663328771f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playQuitBoxAnimator: {fileID: 0}
-  fadeOutManager: {fileID: 0}
-  _changeSelection: {fileID: 0}
-  _select: {fileID: 0}
 --- !u!1 &1910106833
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,7 +814,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -4250}
+  m_AnchoredPosition: {x: 0, y: -3500}
   m_SizeDelta: {x: 0, y: 5000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1910106835
@@ -872,22 +855,17 @@ MonoBehaviour:
 
 
 
-
-
-
-
-
     GAME DESIGNERS
 
 
     Steven Garcia
 
 
-    Cristian
+    Cristian Guzman
+
+
+    Alejandro
     Guzman
-
-
-    Alejandro Guzman
 
 
     Anna
@@ -895,18 +873,17 @@ MonoBehaviour:
 
 
 
-
     SPECIAL THANKS
 
 
-    Yessi
-    Hernandez
+    Yessi Hernandez
 
 
     Mumu
 
 
-    Carlos Garcia (L05)
+    Carlos
+    Garcia (L05)
 
 
 
@@ -919,8 +896,8 @@ MonoBehaviour:
 
 
 
-    THANK YOU FOR
-    PLAYING!!
+
+    THANK YOU FOR PLAYING!!
 
 
 
