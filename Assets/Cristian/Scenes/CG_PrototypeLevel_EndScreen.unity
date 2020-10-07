@@ -848,7 +848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d94545592f25046ab267806aab55c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveRate: -0.1
+  MoveRate: -1
   BackGroundImage: {fileID: 1145305738}
   fadeOutManager: {fileID: 482704833}
 --- !u!4 &1562201693

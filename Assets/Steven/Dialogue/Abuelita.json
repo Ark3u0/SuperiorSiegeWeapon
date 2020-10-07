@@ -34,16 +34,16 @@
             }
         },
         {
-            "key": "beginning-1",
+            "key": "beginning-2",
             "value": {
                 "sentences": [
                     "Que? Como que no vas a ayudar! Matteo! Don’t make me get my chancal!"
                 ],
-                "next": "beginning-2"
+                "next": "beginning-1"
             }
         },
         {
-            "key": "beginning-2",
+            "key": "beginning-1",
             "value": {
                 "sentences": [
                     "Gracias mijito. Now I need you to go around town to get the last of the decorations.",

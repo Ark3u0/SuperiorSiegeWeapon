@@ -49,7 +49,8 @@ public class TreePuzzle : Puzzle
         {
             if (HasCollectable)
             {
-                AddCondition("tree-puzzle-complete");
+                HasCollectable = false;
+                // AddCondition("tree-puzzle-complete");
                 StartCoroutine(CollectableEffect());
             }
             bounceVector.x = collision.contacts[0].normal.x;
@@ -75,7 +76,7 @@ public class TreePuzzle : Puzzle
 
         AudioPlayer.PlayOneShot(BallCollision, 0.7f);
         Debug.Log("Ball bounce");
-        HasCollectable = false;
+       // HasCollectable = false;
     }
 
     private IEnumerator CollectableEffect()
@@ -90,7 +91,10 @@ public class TreePuzzle : Puzzle
         collectable.GetComponent<CatController>().TurnOnGravity();
         AudioPlayer.PlayOneShot(CatSounds, 0.4f);
 
+        AddCondition("tree-puzzle-complete");
+
         TriggerAlerts("tree-puzzle-complete");
+        //"tree-puzzle-complete"
     }
 
     private IEnumerator PulsingTree()

@@ -6,12 +6,8 @@
             "path": "idle-final-0"
         },
         {
-            "conditions": ["sofia-introduced", "tree-puzzle-complete"],
-            "path": "final-mimi-safe-0"
-        },
-        {
             "conditions": ["tree-puzzle-complete"],
-            "path": "final-1"
+            "path": "final-0"
         },
         {
             "conditions": ["sofia-introduced"],
